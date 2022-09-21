@@ -24,17 +24,18 @@ EXPOSE 3000
 # Start the app in debug mode so we can attach the debugger
 CMD ["npm", "start"]
 
+## PRODUCTION isn't working yet...
 ## Production ##################################################################
 # Also define a production target which doesn't use devDeps
-FROM base as production
-WORKDIR /home/node/app
-COPY --chown=node:node --from=development /home/node/app/node_modules /home/node/app/node_modules
+#FROM base as production
+#WORKDIR /home/node/app
+#COPY --chown=node:node --from=development /home/node/app/node_modules /home/node/app/node_modules
 # Build the Docusaurus app
-RUN npm run build
+#RUN npm run build
 
 ## Deploy ######################################################################
 # Use a stable nginx image
-FROM nginx:stable-alpine as deploy
-WORKDIR /home/node/app
+#FROM nginx:stable-alpine as deploy
+#WORKDIR /home/node/app
 # Copy what we've installed/built from production
-COPY --chown=node:node --from=production /home/node/app/build /usr/share/nginx/html/
+#COPY --chown=node:node --from=production /home/node/app/build /usr/share/nginx/html/
