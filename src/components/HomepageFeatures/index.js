@@ -5,7 +5,7 @@ import styles from './styles.module.css';
 const FeatureList = [
   {
     title: 'User-centered',
-    Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
+    Svg: require('@site/static/img/undraw_mountain_learning.svg').default,
     description: (
       <>
         Designed with respect to students' and current industry needs.
@@ -14,7 +14,7 @@ const FeatureList = [
   },
   {
     title: 'Focus on What Matters',
-    Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
+    Svg: require('@site/static/img/undraw_tree_learning.svg').default,
     description: (
       <>
        Weekly outlines are provided in detail.
@@ -23,7 +23,7 @@ const FeatureList = [
   },
   {
     title: 'Learning by doing',
-    Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
+    Svg: require('@site/static/img/undraw_react_learning.svg').default,
     description: (
       <>
         Practical assignments to experience the scenario in real life.
