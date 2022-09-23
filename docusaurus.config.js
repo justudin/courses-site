@@ -8,11 +8,11 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const config = {
   title: 'Courses',
   tagline: 'Learning together with Muhammad Syafrudin',
-  url: 'https://learning.muhammadsyafrudin.com',
-  baseUrl: '/courses/',
+  url: 'https://courses.muhammadsyafrudin.com',
+  baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
-  favicon: 'https://i.ibb.co/crrktpP/favicon.png',
+  favicon: '/img/favicon.png',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
@@ -33,7 +33,7 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
-          routeBasePath: '/learn/',
+          routeBasePath: '/learn',
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
@@ -54,8 +54,8 @@ const config = {
         title: '',
         logo: {
           alt: 'Learning together with Muhammad Syafrudin',
-          src: 'https://i.ibb.co/Bcn6YMt/learning-v2.png',
-          srcDark: 'https://i.ibb.co/CWGJbDn/learning-dark-v2.png',
+          src: '/img/courses.svg',
+          srcDark: '/img/courses-dark.svg',
         },
         items: [
           {
@@ -70,9 +70,14 @@ const config = {
             label: 'About',
           },
           {
-            href: 'https://learning.muhammadsyafrudin.com/',
+            href: 'https://muhammadsyafrudin.com/learning',
             position: 'right',
             label: 'Learning Hub',
+          },
+          {
+            href: 'https://muhammadsyafrudin.com/research',
+            position: 'right',
+            label: 'Research',
           },
           {
             href: 'https://github.com/justudin/courses-site',
@@ -83,7 +88,7 @@ const config = {
       },
       footer: {
         style: 'dark',
-        copyright: `Copyright © ${new Date().getFullYear()} Learning together with <a href="https://muhammadsyafrudin.com/" style="color:white"target="_blank">Muhammad Syafrudin</a>. Built with Docusaurus.`,
+        copyright: `Copyright © ${new Date().getFullYear()} Courses by <a href="https://muhammadsyafrudin.com/" style="color:white"target="_blank">Muhammad Syafrudin</a>. Built with Docusaurus.`,
       },
       prism: {
         theme: lightCodeTheme,
