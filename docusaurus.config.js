@@ -65,6 +65,11 @@ const config = {
             label: 'All Courses',
           },
           {
+            to: 'reviews',
+            position: 'right',
+            label: 'Reviews',
+          },
+          {
             to: 'about',
             position: 'right',
             label: 'About',
