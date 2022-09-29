@@ -65,22 +65,22 @@ const config = {
             label: 'All Courses',
           },
           {
-            to: 'reviews',
-            position: 'right',
-            label: 'Reviews',
-          },
-          {
             to: 'about',
             position: 'right',
             label: 'About',
           },
           {
-            href: 'https://muhammadsyafrudin.com/learning',
+            to: 'reviews',
+            position: 'right',
+            label: 'Reviews',
+          },
+          {
+            href: 'https://learning.muhammadsyafrudin.com',
             position: 'right',
             label: 'Learning Hub',
           },
           {
-            href: 'https://muhammadsyafrudin.com/research',
+            href: 'https://research.muhammadsyafrudin.com',
             position: 'right',
             label: 'Research',
           },

@@ -4,7 +4,7 @@ title: About
 
 # About
 
-### We do believe...*
+### We do believe...[1]
 
 - Universities are **educational** institutes rather than research ones.
 - Hence, teaching and **learning** is more important than **research**.
@@ -32,4 +32,4 @@ Muhammad Syafrudin is a member of the Oracle Academy Program, and the Learning H
 <img src="/img/sejong.jpg" width="350"/>
 </center>
 
-* In memory of Professor Yong-Han Lee ()
+[1] In memory of Professor Yong-Han Lee (1965–2017)
