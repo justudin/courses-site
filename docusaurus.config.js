@@ -64,15 +64,21 @@ const config = {
             position: 'left',
             label: 'All Courses',
           },
+
+          {
+            to: 'reviews',
+            position: 'left',
+            label: 'Reviews',
+          },
           {
             to: 'about',
-            position: 'right',
+            position: 'left',
             label: 'About',
           },
           {
-            to: 'reviews',
+            to: 'https://research.muhammadsyafrudin.com/contact',
             position: 'right',
-            label: 'Reviews',
+            label: 'Contact',
           },
           {
             href: 'https://learning.muhammadsyafrudin.com',
