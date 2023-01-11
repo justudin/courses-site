@@ -80,11 +80,13 @@ const config = {
             position: 'right',
             label: 'Contact',
           },
+          /**
           {
             href: 'https://learning.muhammadsyafrudin.com',
             position: 'right',
             label: 'Learning Hub',
           },
+          */
           {
             href: 'https://research.muhammadsyafrudin.com',
             position: 'right',
