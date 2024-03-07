@@ -113,24 +113,24 @@ We give a strong emphasis to Academic Honesty. As a student your best guidelines
 
 ## Formed Group Projects
 
-1. teaMatch: 임**동
-2. Soobak: 이**혁 (TL), 김**원
-3. DAP: 이**아 (TL), 홍**오, 조**희 
-4. S Plate: 김**겸 (TL), 최**빈, 김**선
-5. Webflix: 한**현 (TL), 이**우, 박**은 
-6. Counting Stars: 전**현 (TL), 김**구, 조**영, 송**선
-7. MOA: 류**빈 (TL), 안**찬, 허**정
-8. AIDoctor: 유**식 (TL), 구**모, 하**호
-9. AAA Batteries: 박**연 (TL) 권**영, 김**우
-10. TravelLens: 윤**라 (TL), 박**선
-11. Look At Me!: 강**들 (TL), 이**빈
-12. MSE: 이**현 (TL), 박**진, 김**정
-13. analysts: 강**수 (TL), 안**한
-14. PTSD: 노**호 (TL), 전**성
-15. hello world!: 박**준
-16. Play: 구**혁
-17. 황**희
-18. 이**서
+1. teaMatch: 임--동
+2. Soobak: 이--혁 (TL), 김--원
+3. DAP: 이--아 (TL), 홍--오, 조--희 
+4. S Plate: 김--겸 (TL), 최--빈, 김--선
+5. Webflix: 한--현 (TL), 이--우, 박--은 
+6. Counting Stars: 전--현 (TL), 김--구, 조--영, 송--선
+7. MOA: 류--빈 (TL), 안--찬, 허--정
+8. AIDoctor: 유--식 (TL), 구--모, 하--호
+9. AAA Batteries: 박--연 (TL) 권--영, 김--우
+10. TravelLens: 윤--라 (TL), 박--선
+11. Look At Me!: 강--들 (TL), 이--빈
+12. MSE: 이--현 (TL), 박--진, 김--정
+13. analysts: 강--수 (TL), 안--한
+14. PTSD: 노--호 (TL), 전--성
+15. hello world!: 박--준
+16. Play: 구--혁
+17. 황--희
+18. 이--서
 
 
 *Note: TL -> Team Leader.*
