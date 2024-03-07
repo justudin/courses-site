@@ -61,9 +61,9 @@ Schedule
 | 6 |Introduction to Flask, an open-source backend framework based on the Python programming | 강의+실습 (Lecture + Practice)|
 | 7 |Web programming with Flask I |  강의+실습 (Lecture + Practice)|
 | 8 |Mid exam | 시험 (Exam)|
-| 9 |Web programming with Flask II |  강의+실습 (Lecture + Practice)|
-| 10  |Web programming with Flask III |  강의+실습 (Lecture + Practice)|
-| 11  |Integration with Database |  강의+실습 (Lecture + Practice)|
+| 9 |Integration with Database (MongoDB) |  강의+실습 (Lecture + Practice)|
+| 10  |Web programming with Flask II |  강의+실습 (Lecture + Practice)|
+| 11  |Web programming with Flask III |  강의+실습 (Lecture + Practice)|
 | 12  |Project example I (WebApp for prediction or classification) | 강의+실습 (Lecture + Practice)|
 | 13  |Project example II (WebApp using Application Programming Interface (API)) |  강의+실습 (Lecture + Practice)|
 | 14  |Group project discussion and development |  강의+실습 (Lecture + Practice)|
