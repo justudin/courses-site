@@ -2,19 +2,19 @@
 sidebar_position: 1
 ---
 
-# Fall 2023
+# Spring 2024
 
-## Topics in Machine Learning (기계학습특론) - Graduate Course
+## Introduction to Deep Learning (딥러닝개론) - Graduate Course
 
 Instructor: [Dr. Muhammad Syafrudin](https://muhammadsyafrudin.com/)
 
 ### Course information
 
-The objectives of this course are to explore different topics in machine learning, such as Regression, Deep Learning, Convolutional Neural Networks and Self-Attention, Transformers, Generative Models, Explainable AI, Lifelong Learning, and Meta Learning. Through this class, students will gain new insights into recent developments in machine learning, allowing them to deepen their knowledge in areas of interest. Additionally, the course aims to foster research exchange and facilitate discussions among students.
+This course will introduce deep learning using Python and Keras, and is loaded with insights. You’ll learn practical techniques that can be applied to the real world, and important theory for perfecting neural networks. As you progress through each week, you’ll build your understanding through explanations and practical examples. You are expected to acquire the skills you need to start developing deep learning applications.
 
 ### Lecture
 
-Tue at 15:00‐18:00 am KST at *광925*
+Monday 화15:00-18:00 KST / Daeyang AI Center 센535
 
 ### Office hours
 
@@ -63,22 +63,22 @@ Schedule
 
 | 주차(Week)| 강의내용(Class Topic & Contents)| 강의활동유형(Class Type)|
 | ------------- | ------------- | ------------- |
-| 1 |Course introduction (9/5) | Lecture and discussion |
-| 2 |Intro to ML - regression (9/12) | Lecture and discussion |
-| 3 |Deep Learning (9/19) |   Lecture and discussion |
-| 4 |Convolutional Neural Networks & Self-Attention (9/26) |   Lecture and discussion  |
-| 5 |No class -- Public holiday: National Foundation Day (10/3) |  No class  |
-| 6 |Transformer (10/10) |  Lecture and discussion  |
-| 7 |Paper presentation - round one: 4 students (10/17) | Student presentation and discussion |
-| 8 |Midterm exam (10/24) | 시험 (Exam) |
-| 9 |Paper presentation - round one: 4 students (10/31) | Student presentation and discussion |
-| 10  |Generative Model  (11/7) |   Lecture and discussion |
-| 11  |Explainable AI (11/14) |   Lecture and discussion |
-| 12  |Lifelong Learning (11/21) |  Lecture and discussion |
-| 13  |Meta Learning (11/28) | Lecture and discussion |
-| 14  |Paper presentation - round two: 4 students (12/5) | Student presentation and discussion |
-| 15  |Paper presentation - round two: 4 students  (12/12) | Student presentation and discussion |
-| 16  |Final exam (12/19) | 시험 (Exam) |
+| 1 |Course overview (3/4) | Lecture and discussion |
+| 2 |What is deep learning?, The mathematical building blocks of neural networks (3/11) | Lecture and discussion |
+| 3 |Introduction to Keras and TensorFlow, Getting started with neural networks: Classification and regression (3/18) |   Lecture and discussion |
+| 4 |Fundamentals of machine learning, The universal workflow of machine learning (3/25) |   Lecture and discussion  |
+| 5 |Working with Keras: A deep dive (4/1) |  Lecture and discussion  |
+| 6 |Introduction to deep learning for computer vision (4/8) |  Lecture and discussion  |
+| 7 | Deep learning for timeseries (4/15) | Lecture and discussion |
+| 8 |Midterm exam  (4/15) | 시험 (Exam) |
+| 9 | Deep learning for text (4/29) | Lecture and discussion |
+| 10  |No class -- Public holiday (5/6) |   No class |
+| 11  |Paper with code presentation: ELSTOHY M. A. G. A., GAZA HAIFA (5/13) |   Student presentation and discussion  |
+| 12  |Paper with code presentation: SRIWIJAYA Y. R., JORDAN D. J.(5/20) |  Student presentation and discussion  |
+| 13  |Paper with code presentation: LE T. L., ABBAS REZK (5/27) | Student presentation and discussion  |
+| 14  |Paper with code presentation: ABDALLA AHMED, ABDULKHALEK ALFAKIH (6/3) | Student presentation and discussion |
+| 15  |Paper with code presentation: AHMED S. A. E. M., SAID SALEM (6/10) | Student presentation and discussion |
+| 16  |Paper with code presentation: 우수한 (6/17) | Student presentation and discussion  |
 
 
 ### Grading
@@ -87,10 +87,9 @@ The final grade will be calculated using the following weights:
 
 | # | Final Grade Weight |
 | ------------- | ------------- |
-| Attendance | 10% |
-| Assignment(quiz/homework/weekly assignment) | 30% |
-| Mid exam | 30% |
-| Final exam | 30% |
+| Attendance | 15% |
+| Assignment(quiz/homework/weekly assignment) & presentations | 45% |
+| Mid exam | 40% |
 | **Total** | **100%** |
 
 ### Assignment
