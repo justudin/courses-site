@@ -114,3 +114,19 @@ Class announcements will be through ecampus. All homework and quizzes will be po
 ### Academic honesty
 
 We give a strong emphasis to Academic Honesty. As a student your best guidelines are to be reasonable and fair. We encourage teamwork for problem sets, but you should not split the homework and you should work on all the problems together.
+
+## Formed Group Projects
+
+1. GOAT: 함--진 (TL), 방--원, 김--현, F. FLO--AN
+2. 지호 해조: 국--호(TL), 이--성, 김--현, 조--주
+3. Spiders: 이--원(TL), 강--성, 이--찬, 김--린
+4. ABB (아몬드봉봉): 강--빈(TL), 이--윤, 김--우
+5. 김지민조: 정--우(TL), 김--민, 설--언, 김--연
+6. Dream Catcher: 최--지(TL), 최--연,박--연, 이--우
+7. 이름없조: 김--우(TL), 구--교, 김--원, 양--혁
+8. Cupid: 이--진(TL), 박--윤, 박--연, 전--호
+9. Ummm: 황--인(TL), 강--찬, 민--원
+10. 1st row: 이--훈(TL),박--재, 윤--영, 이--영
+11. Websick: 이--성 (TL), 김--섭
+
+*Note: TL -> Team Leader.*
