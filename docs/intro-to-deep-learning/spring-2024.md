@@ -126,4 +126,14 @@ We give a strong emphasis to Academic Honesty. As a student your best guidelines
 
 ## Presented Papers
 
-*TBD*. 
+- Futrega, M., Milesi, A., Marcinkiewicz, M., & Ribalta, P. (2022). Optimized U-Net for Brain Tumor Segmentation. In A. Crimi & S. Bakas (Eds.), Brainlesion: Glioma, Multiple Sclerosis, Stroke and Traumatic Brain Injuries (Vol. 12963, pp. 15–29). Springer International Publishing. https://doi.org/10.1007/978-3-031-09002-8_2
+- Balakrishnan, G., Zhao, A., Sabuncu, M. R., Guttag, J., & Dalca, A. V. (2019). VoxelMorph: A Learning Framework for Deformable Medical Image Registration. IEEE Transactions on Medical Imaging, 38(8), 1788–1800. https://doi.org/10.1109/TMI.2019.2897538
+- Ledig, C., Theis, L., Huszar, F., Caballero, J., Cunningham, A., Acosta, A., Aitken, A., Tejani, A., Totz, J., Wang, Z., & Shi, W. (2017). Photo-Realistic Single Image Super-Resolution Using a Generative Adversarial Network (arXiv:1609.04802). arXiv. http://arxiv.org/abs/1609.04802
+- Al-Fakih, A., Shazly, A., Mohammed, A., Elbushnaq, M., Ryu, K., Gu, Y. H., Al-masni, M. A., & Makary, M. M. (2024). FLAIR MRI sequence synthesis using squeeze attention generative model for reliable brain tumor segmentation. Alexandria Engineering Journal, 99, 108–123. https://doi.org/10.1016/j.aej.2024.05.008
+- Redmon, J., Divvala, S., Girshick, R., & Farhadi, A. (2016). You Only Look Once: Unified, Real-Time Object Detection (arXiv:1506.02640). arXiv. http://arxiv.org/abs/1506.02640
+- Wang, C.-Y., Yeh, I.-H., & Liao, H.-Y. M. (2024). YOLOv9: Learning What You Want to Learn Using Programmable Gradient Information (arXiv:2402.13616). arXiv. http://arxiv.org/abs/2402.13616
+- Liu, L., Du, B., Xu, J., Xia, Y., & Tong, H. (2022). Joint Knowledge Graph Completion and Question Answering. Proceedings of the 28th ACM SIGKDD Conference on Knowledge Discovery and Data Mining, 1098–1108. https://doi.org/10.1145/3534678.3539289
+- Nicodemus, J., Kneifl, J., Fehr, J., & Unger, B. (2022). Physics-informed Neural Networks-based Model Predictive Control for Multi-link Manipulators. IFAC-PapersOnLine, 55(20), 331–336. https://doi.org/10.1016/j.ifacol.2022.09.117
+- Xie, E., Wang, W., Yu, Z., Anandkumar, A., Alvarez, J. M., & Luo, P. (2021). SegFormer: Simple and Efficient Design for Semantic Segmentation with Transformers (arXiv:2105.15203). arXiv. http://arxiv.org/abs/2105.15203
+- Ren, S., He, K., Girshick, R., & Sun, J. (2016). Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks (arXiv:1506.01497). arXiv. http://arxiv.org/abs/1506.01497
+- Bu, M., Feng, T., & Lu, G. (2023). Prediction on local structure and properties of LiCl-KCl-AlCl3 ternary molten salt with deep learning potential. Journal of Molecular Liquids, 375, 120689. https://doi.org/10.1016/j.molliq.2022.120689
