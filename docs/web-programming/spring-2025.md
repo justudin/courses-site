@@ -1,8 +1,8 @@
 ---
-sidebar_position: 2
+sidebar_position: 3
 ---
 
-# Spring 2024
+# Spring 2025
 
 ## Web Programming (웹프로그래밍)
 
@@ -21,7 +21,7 @@ Then this course is for you! In this course, you will:
 
 ### Lecture
 
-Tue, Thu at 10:30‐12:00 am KST at *센B202*
+Friday 금 at 09:00‐12:00 am KST at *이201*
 
 ### Office hours
 
@@ -66,7 +66,7 @@ Schedule
 | 11  |Web programming with Flask III |  강의+실습 (Lecture + Practice)|
 | 12  |Project example I (WebApp for prediction or classification) | 강의+실습 (Lecture + Practice)|
 | 13  |Project example II (WebApp using Application Programming Interface (API)) |  강의+실습 (Lecture + Practice)|
-| 14  |Group project discussion and development |  강의+실습 (Lecture + Practice)|
+| 14  |No class -- Public holiday |  No class -- Public holiday|
 | 15  |Group project discussion and development |  강의+실습 (Lecture + Practice)|
 | 16  |Final group project presentation (ppt, codes, and project report final submission) | Evaluation |
 
@@ -117,16 +117,4 @@ We give a strong emphasis to Academic Honesty. As a student your best guidelines
 
 ## Formed Group Projects
 
-1. GOAT: 함--진 (TL), 방--원, 김--현, F. FLO--AN
-2. 지호 해조: 국--호(TL), 이--성, 김--현, 조--주
-3. Spiders: 이--원(TL), 강--성, 이--찬, 김--린
-4. ABB (아몬드봉봉): 강--빈(TL), 이--윤, 김--우
-5. 김지민조: 정--우(TL), 김--민, 설--언, 김--연
-6. Dream Catcher: 최--지(TL), 최--연,박--연, 이--우
-7. 이름없조: 김--우(TL), 구--교, 김--원, 양--혁
-8. Cupid: 이--진(TL), 박--윤, 박--연, 전--호
-9. Ummm: 황--인(TL), 강--찬, 민--원
-10. 1st row: 이--훈(TL),박--재, 윤--영, 이--영
-11. Websick: 이--성 (TL), 김--섭
-
-*Note: TL -> Team Leader.*
+TBD.
