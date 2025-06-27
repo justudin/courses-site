@@ -117,4 +117,16 @@ We give a strong emphasis to Academic Honesty. As a student your best guidelines
 
 ## Formed Group Projects
 
-TBD.
+1. Penguins of Madagasca: RA--NA (TL), ZA--A, GA--ZX, JO--NE 
+2. SAMSA: AN--S (TL), AQ--AH, SHA--RA, N--K
+3. 신라면 : 신--영 (TL), 최--훈, 김--선
+4. Albumate: 권--주 (TL), 이--영, 황--림, 신--휘
+5. CodeyCakes: 이--울 (TL), 김--나, 임--서
+6. Lemonade: 이--경 (TL), 정--우, 박--희 
+7. 사이퍼: 심--휘 (TL), 박--준, 정--형, 김--현
+8. practical: 전--수 (TL), 이--양, 황--준, 김--주
+9. Trio: OY--EK (TL), AB--LOV, JI--ONG
+10. The SentiMinds: 백--현, 최--서, 김--언
+11. LCK: 배--수 (TL), 김--영, 이--우
+
+*Note: TL -> Team Leader.*
