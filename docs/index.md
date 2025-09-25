@@ -11,6 +11,8 @@ Here is the list of courses which are taught by [Dr. Muhammad Syafrudin](https:/
 - [Introduction to Big Data](category/intro-to-big-data) (011113), 3 credits, undergraduate course
 - [Linear Algebra and Programming](category/linear-algebra-programming) (009961), 3 credits, undergraduate course
 - [Web Programming](category/web-programming) (006237), 3 credits, undergraduate course
+- [Linear Algebra](category/linear-algebra) (001725), 3 credits, undergraduate course
+- [Big Data Processing](category/big-data-processing) (011176), 3 credits, undergraduate course
 - [Topics in Machine Learning](category/topics-in-machine-learning) (300195), 3 credits, graduate course
 - [Introduction to Deep Learning](category/intro-to-deep-learning) (416695), 3 credits, graduate course
 
