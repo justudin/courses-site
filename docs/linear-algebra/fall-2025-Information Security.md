@@ -2,7 +2,7 @@
 sidebar_position: 2
 ---
 
-# Fall 2025 - Department of Information Security - 정보보호학과
+# Fall 2025 - 정보보호학과
 
 ## Linear Algebra (선형대수및프로그래밍)
 
