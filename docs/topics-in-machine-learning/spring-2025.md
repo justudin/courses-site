@@ -73,12 +73,12 @@ Schedule
 | 8 |Midterm exam (4/22) | 시험 (Exam) |
 | 9 |Paper presentation - round one: 3 students (4/29) | Student presentation and discussion |
 | 10  |No class -- Public holiday (5/6) |   No class |
-| 11  |Paper presentation - round one: 3 students(5/20) | Student presentation and discussion|
-| 12  |Explainable AI(5/27) |  Lecture and discussion |
-| 13  |Meta Learning / Guest Lecture (Tentative) (11/28) | Lecture and discussion |
-| 14  |Paper presentation - round two: 4 students (12/5) | Student presentation and discussion |
-| 15  |Paper presentation - round two: 4 students  (12/12) | Student presentation and discussion 
-| 16  |Paper presentation - round two: 1 student (12/19) | Student presentation and discussion |
+| 11  |Paper presentation - round one: 3 students(5/13) | Student presentation and discussion|
+| 12  |Explainable AI(5/20) |  Lecture and discussion |
+| 13  |Meta Learning / Guest Lecture (Tentative) (5/27) | Lecture and discussion |
+| 14  |Paper presentation - round two: 4 students (6/3) | Student presentation and discussion |
+| 15  |Paper presentation - round two: 4 students  (6/10) | Student presentation and discussion 
+| 16  |Paper presentation - round two: 1 student (6/17) | Student presentation and discussion |
 
 
 ### Grading
@@ -124,6 +124,18 @@ Class announcements will be through ecampus. All homework and quizzes will be po
 
 We give a strong emphasis to Academic Honesty. As a student your best guidelines are to be reasonable and fair. We encourage teamwork for problem sets, but you should not split the homework and you should work on all the problems together.
 
-## Presented Papers
+## Presented Papers (Selected by students)
 
-TBD.
+- Wan, A., Chang, Q., AL-Bukhaiti, K., & He, J. (2023). Short-term power load forecasting for combined heat and power using CNN-LSTM enhanced by attention mechanism. Energy, 282, 128274. https://doi.org/10.1016/j.energy.2023.128274
+- Mutsaddi, A., & Choudhary, A. (2025). Enhancing Plagiarism Detection in Marathi with a Weighted Ensemble of TF-IDF and BERT Embeddings for Low-Resource Language Processing (Version 1). arXiv. https://doi.org/10.48550/ARXIV.2501.05260
+- Ardianto Nugroho, V., & Moo Lee, B. (2025). GPS-Aided Deep Learning for Beam Prediction and Tracking in UAV mmWave Communication. IEEE Access, 13, 117065–117077. https://doi.org/10.1109/ACCESS.2025.3586594
+- Prabhu, H., Valadi, J., & Arjunan, P. (2024). Generative Adversarial Network with Soft-Dynamic Time Warping and Parallel Reconstruction for Energy Time Series Anomaly Detection (Version 1). arXiv. https://doi.org/10.48550/ARXIV.2402.14384
+- Han, H., Lee, K., & Soylu, F. (2020). Applying the Deep Learning Method for Simulating Outcomes of Educational Interventions. SN Computer Science, 1(2), 70. https://doi.org/10.1007/s42979-020-0075-z
+- Wang, G., Liu, D., & Cui, L. (2024). Auto-Embedding Transformer for Interpretable Few-Shot Fault Diagnosis of Rolling Bearings. IEEE Transactions on Reliability, 73(2), 1270–1279. https://doi.org/10.1109/TR.2023.3328597
+- Li, X., Liang, S., Lei, Y., Li, C., Hou, Y., Zheng, D., & Ma, T. (2024). CausalMed: Causality-Based Personalized Medication Recommendation Centered on Patient Health State. Proceedings of the 33rd ACM International Conference on Information and Knowledge Management, 1276–1285. https://doi.org/10.1145/3627673.3679542
+- Nguyen, Q. M., Nguyen, L. M., & Das, S. (2023). Correlated Attention in Transformers for Multivariate Time Series (Version 1). arXiv. https://doi.org/10.48550/ARXIV.2311.11959
+- Martin Ester, Hans-Peter Kriegel, Jörg Sander, and Xiaowei Xu. 1996. A density-based algorithm for discovering clusters in large spatial databases with noise. In Proceedings of the Second International Conference on Knowledge Discovery and Data Mining (KDD'96). AAAI Press, 226–231.
+- Zhang, X., Li, Y., Wang, J., Sun, B., Ma, W., Sun, P., & Zhang, M. (2024). Large Language Models as Evaluators for Recommendation Explanations. 18th ACM Conference on Recommender Systems, 33–42. https://doi.org/10.1145/3640457.3688075
+- Ahmed, I., Ahmad, M., Chehri, A., & Jeon, G. (2023). A Smart-Anomaly-Detection System for Industrial Machines Based on Feature Autoencoder and Deep Learning. Micromachines, 14(1), 154. https://doi.org/10.3390/mi14010154
+- Ali, R., Hussain, J., & Lee, S. W. (2023). Multilayer perceptron-based self-care early prediction of children with disabilities. DIGITAL HEALTH, 9, 20552076231184054. https://doi.org/10.1177/20552076231184054
+- An, T. T., & Lee, B. M. (2023). Robust Automatic Modulation Classification in Low Signal to Noise Ratio. IEEE Access, 11, 7860–7872. https://doi.org/10.1109/ACCESS.2023.3238995
