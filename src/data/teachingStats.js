@@ -8,65 +8,65 @@ export const teachingStats = {
     {
       id: 1,
       name: "Database Design and Analysis",
-      semesters: ["Spring 2019", "Fall 2019"],
-      studentsPerSemester: [28, 32],
-      evaluationScores: [4.7, 4.8]
+      semesters: ["Fall 2019"],
+      studentsPerSemester: [45],
+      evaluationScores: [4.02]
     },
     {
       id: 2,
       name: "Industrial Programming",
-      semesters: ["Fall 2020"],
-      studentsPerSemester: [45],
-      evaluationScores: [4.6]
+      semesters: ["Spring 2020"],
+      studentsPerSemester: [44],
+      evaluationScores: [4.28]
     },
     {
       id: 3,
       name: "Intro to Big Data",
       semesters: ["Spring 2022"],
-      studentsPerSemester: [38],
+      studentsPerSemester: [18],
       evaluationScores: [4.9]
     },
     {
       id: 4,
       name: "Linear Algebra Programming",
       semesters: ["Fall 2022", "Fall 2023", "Fall 2024"],
-      studentsPerSemester: [42, 39, 41],
+      studentsPerSemester: [37, 40, 38],
       evaluationScores: [4.5, 4.7, 4.8]
     },
     {
       id: 5,
       name: "Topics in Machine Learning",
       semesters: ["Fall 2023", "Spring 2025", "Spring 2026"],
-      studentsPerSemester: [25, 30, 28],
+      studentsPerSemester: [8, 9, 5],
       evaluationScores: [4.9, 4.8, 4.9]
     },
     {
       id: 6,
       name: "Web Programming",
-      semesters: ["Spring 2023", "Spring 2024", "Spring 2025"],
-      studentsPerSemester: [50, 48, 52],
-      evaluationScores: [4.6, 4.7, 4.8]
+      semesters: ["Spring 2023", "Spring 2024", "Spring 2025", "Spring 2026"],
+      studentsPerSemester: [41, 40, 40, 44],
+      evaluationScores: [4.6, 4.7, 4.8, 4.9]
     },
     {
       id: 7,
       name: "Intro to Deep Learning",
       semesters: ["Spring 2024"],
-      studentsPerSemester: [35],
+      studentsPerSemester: [11],
       evaluationScores: [4.8]
     },
     {
       id: 8,
       name: "Big Data Processing",
       semesters: ["Fall 2025"],
-      studentsPerSemester: [40],
+      studentsPerSemester: [32],
       evaluationScores: [4.7]
     },
     {
       id: 9,
       name: "Linear Algebra",
-      semesters: ["Fall 2025"],
-      studentsPerSemester: [45],
-      evaluationScores: [4.6]
+      semesters: ["Fall 2025", "Fall 2025 InformationSecurity"],
+      studentsPerSemester: [40, 17],
+      evaluationScores: [4.7, 4.8]
     }
   ]
 };
