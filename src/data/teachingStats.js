@@ -78,8 +78,10 @@ export const calculateStats = () => {
   // Calculate years of experience
   const yearsExperience = stats.teachingExperience.currentYear - stats.teachingExperience.startYear;
   
-  // Calculate total number of unique courses
-  const totalCourses = stats.courses.length;
+  // Calculate total course offerings across semesters
+  const totalCourses = stats.courses.reduce((total, course) => {
+    return total + course.semesters.length;
+  }, 0);
   
   // Calculate total students across all courses and semesters
   const totalStudents = stats.courses.reduce((total, course) => {
