@@ -24,14 +24,14 @@ export const teachingStats = {
       name: "Intro to Big Data",
       semesters: ["Spring 2022"],
       studentsPerSemester: [18],
-      evaluationScores: [4.9]
+      evaluationScores: [4.73]
     },
     {
       id: 4,
       name: "Linear Algebra Programming",
       semesters: ["Fall 2022", "Fall 2023", "Fall 2024"],
       studentsPerSemester: [37, 40, 38],
-      evaluationScores: [4.5, 4.7, 4.8]
+      evaluationScores: [4.92, 4.73, 4.78]
     },
     {
       id: 5,
@@ -45,7 +45,7 @@ export const teachingStats = {
       name: "Web Programming",
       semesters: ["Spring 2023", "Spring 2024", "Spring 2025", "Spring 2026"],
       studentsPerSemester: [41, 40, 40, 44],
-      evaluationScores: [4.6, 4.7, 4.8, 4.9]
+      evaluationScores: [4.68, 4.83, 4.60, 4.9]
     },
     {
       id: 7,
@@ -59,14 +59,14 @@ export const teachingStats = {
       name: "Big Data Processing",
       semesters: ["Fall 2025"],
       studentsPerSemester: [32],
-      evaluationScores: [4.7]
+      evaluationScores: [4.86]
     },
     {
       id: 9,
       name: "Linear Algebra",
       semesters: ["Fall 2025", "Fall 2025 InformationSecurity"],
       studentsPerSemester: [40, 17],
-      evaluationScores: [4.7, 4.8]
+      evaluationScores: [4.53, 4.44]
     }
   ]
 };
