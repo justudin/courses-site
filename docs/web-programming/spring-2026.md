@@ -171,7 +171,7 @@ Modification: Revised logic and added error handling independently
 
 Specific assignments or instructors may **restrict or expand AI usage**. In such cases, course-specific policies take precedence over this general guideline.
 
-*Based on [AX혁신원] 2026 세종대학교 AI 활용 가이드라인 안내/2026 Sejong University AI Usage Guideline: https://www.sejong.ac.kr/kor/intro/notice3.do?mode=view&articleNo=864878
+*Based on [AX혁신원] 2026 세종대학교 AI 활용 가이드라인 안내/2026 Sejong University AI Usage Guideline: https://www.sejong.ac.kr/kor/intro/notice3.do?mode=view&articleNo=864878*
 
 
 ## Formed Group Projects
