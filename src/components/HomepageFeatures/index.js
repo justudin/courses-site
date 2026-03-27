@@ -122,7 +122,7 @@ export default function HomepageFeatures() {
           <Link
             className={`button button--secondary button--lg ${styles.ctaButton}`}
             to="/reviews">
-            Read Success Stories
+            Read Their Stories
           </Link>
         </div>
       </div>

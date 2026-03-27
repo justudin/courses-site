@@ -96,7 +96,7 @@ const config = {
       },
       footer: {
         style: 'dark',
-        copyright: `<span class="footer-quote">"The beautiful thing about learning is that no one can take it away from you." - B.B. King</span><br />Copyright © 2019-${new Date().getFullYear()} Courses by Muhammad Syafrudin.`,
+        copyright: `<span class="footer-quote">"The beautiful thing about learning is that no one can take it away from you." - B.B. King</span><br />Copyright © 2019-${new Date().getFullYear()} Courses by Muhammad Syafrudin. Built with Docusaurus & assisted with 🤖 Copilot.`,
       },
       prism: {
         theme: lightCodeTheme,
