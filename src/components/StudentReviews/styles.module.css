@@ -419,6 +419,26 @@
   border-color: rgba(255, 255, 255, 0.1);
 }
 
+[data-theme='dark'] .autoPlayText {
+  color: #cfe0f4;
+}
+
+[data-theme='dark'] .playIcon {
+  background: rgba(122, 184, 255, 0.2);
+}
+
+[data-theme='dark'] .playIcon svg {
+  color: #b8dcff;
+}
+
+[data-theme='dark'] .dot {
+  border-color: rgba(122, 184, 255, 0.75);
+}
+
+[data-theme='dark'] .dot::before {
+  background: #9dceff;
+}
+
 /* Responsive Design */
 @media screen and (max-width: 996px) {
   .reviewsSection {

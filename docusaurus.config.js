@@ -35,10 +35,6 @@ const config = {
         docs: {
           routeBasePath: '/learn',
           sidebarPath: require.resolve('./sidebars.js'),
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          //editUrl:'https://github.com/justudin/courses-site/blob/main/',
-          
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
@@ -97,6 +93,12 @@ const config = {
       footer: {
         style: 'dark',
         copyright: `<span class="footer-quote">"The beautiful thing about learning is that no one can take it away from you." - B.B. King</span><br />Copyright © 2019-${new Date().getFullYear()} Courses by Muhammad Syafrudin. Built with Docusaurus & assisted with 🤖 Copilot.`,
+      },
+      docs: {
+        sidebar: {
+          hideable: true,
+          autoCollapseCategories: true,
+        },
       },
       prism: {
         theme: lightCodeTheme,

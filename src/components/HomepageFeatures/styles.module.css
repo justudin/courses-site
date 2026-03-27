@@ -384,6 +384,28 @@
   color: var(--ifm-color-secondary-lighter);
 }
 
+[data-theme='dark'] .featureBenefits li {
+  color: #d9e6f7;
+}
+
+[data-theme='dark'] .featureBenefits li::before {
+  color: #7ab8ff;
+}
+
+[data-theme='dark'] .featureMetric {
+  background: linear-gradient(90deg, #1e66c7, #1d8f8a);
+  color: #f8fbff;
+  box-shadow: 0 6px 14px rgba(6, 12, 22, 0.45);
+}
+
+[data-theme='dark'] .featuresFooter {
+  border-top-color: rgba(118, 174, 247, 0.2);
+}
+
+[data-theme='dark'] .ctaButton {
+  box-shadow: 0 8px 18px rgba(4, 9, 18, 0.45);
+}
+
 
 
 [data-theme='dark'] .expandButton {

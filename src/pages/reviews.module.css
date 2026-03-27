@@ -265,3 +265,68 @@
     padding: 0.95rem;
   }
 }
+
+:global([data-theme='dark']) .page {
+  background:
+    radial-gradient(circle at 10% 10%, rgba(56, 125, 220, 0.25), transparent 38%),
+    radial-gradient(circle at 90% 0%, rgba(17, 138, 134, 0.2), transparent 42%),
+    linear-gradient(180deg, #0d1421 0%, #0f1624 100%);
+}
+
+:global([data-theme='dark']) .eyebrow {
+  background: rgba(67, 141, 240, 0.22);
+  color: #a8d0ff;
+}
+
+:global([data-theme='dark']) .hero h1 {
+  color: #eff5ff;
+}
+
+:global([data-theme='dark']) .subtitle,
+:global([data-theme='dark']) .resultInfo,
+:global([data-theme='dark']) .searchWrap span,
+:global([data-theme='dark']) .sortWrap span {
+  color: #bdd0e6;
+}
+
+:global([data-theme='dark']) .statCard,
+:global([data-theme='dark']) .reviewCard,
+:global([data-theme='dark']) .languageToggle {
+  border-color: rgba(118, 174, 247, 0.26);
+  background: linear-gradient(180deg, rgba(19, 29, 46, 0.92), rgba(14, 22, 35, 0.9));
+  box-shadow: 0 12px 24px rgba(3, 8, 17, 0.46);
+}
+
+:global([data-theme='dark']) .statCard span,
+:global([data-theme='dark']) .languageBadge,
+:global([data-theme='dark']) .idBadge,
+:global([data-theme='dark']) .languageToggle button {
+  color: #bdd0e6;
+}
+
+:global([data-theme='dark']) .statCard strong,
+:global([data-theme='dark']) .quote {
+  color: #e7eef8;
+}
+
+:global([data-theme='dark']) .searchWrap input,
+:global([data-theme='dark']) .sortWrap select {
+  border-color: rgba(118, 174, 247, 0.28);
+  background: rgba(12, 20, 32, 0.9);
+  color: #e7eef8;
+}
+
+:global([data-theme='dark']) .languageToggle button:hover {
+  background: rgba(111, 179, 255, 0.16);
+}
+
+:global([data-theme='dark']) .languageBadge,
+:global([data-theme='dark']) .focusTag {
+  border-color: rgba(120, 196, 186, 0.35);
+  background: rgba(17, 138, 134, 0.24);
+  color: #b5efe3;
+}
+
+:global([data-theme='dark']) .quoteMark {
+  color: #7ab8ff;
+}
