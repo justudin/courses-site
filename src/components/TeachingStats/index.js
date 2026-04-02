@@ -51,8 +51,9 @@ export default function TeachingStats() {
     <section id="TeachingExcellence" className={styles.statsSection}>
       <div className="container">
         <div className={styles.statsHeader}>
-          <h2>Teaching Excellence</h2>
-          <p>Delivering quality education with proven results</p>
+          <p className={styles.statsEyebrow}>Teaching Excellence</p>
+          <h2>By the Numbers</h2>
+          <p className={styles.statsSubtitle}>Delivering quality education with proven results</p>
         </div>
         
         <div className={styles.statsGrid}>

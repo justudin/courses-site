@@ -67,6 +67,11 @@ const config = {
             label: 'Reviews',
           },
           {
+            to: 'showcase',
+            position: 'left',
+            label: 'Showcase',
+          },
+          {
             to: 'about',
             position: 'left',
             label: 'About',

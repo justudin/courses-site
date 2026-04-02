@@ -99,8 +99,9 @@ export default function StudentReviews() {
     <section className={styles.reviewsSection}>
       <div className="container">
         <div className={styles.reviewsHeader}>
+          <p className={styles.reviewsEyebrow}>Student Voices</p>
           <h2>What Students Say</h2>
-          <p>
+          <p className={styles.reviewsSubtitle}>
             Discover how our courses have transformed careers and opened new opportunities
             for students across different disciplines and backgrounds.
           </p>

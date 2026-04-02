@@ -7,6 +7,7 @@ import HomepageFeatures from '@site/src/components/HomepageFeatures';
 import HeroSlider from '@site/src/components/HeroSlider';
 import TeachingStats from '@site/src/components/TeachingStats';
 import StudentReviews from '@site/src/components/StudentReviews';
+import CallToAction from '@site/src/components/CallToAction';
 
 import styles from './index.module.css';
 
@@ -21,6 +22,7 @@ export default function Home() {
         <TeachingStats />
         <StudentReviews />
         <HomepageFeatures />
+        <CallToAction />
       </main>
     </Layout>
   );

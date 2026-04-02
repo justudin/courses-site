@@ -97,8 +97,9 @@ export default function HomepageFeatures() {
     <section className={styles.features}>
       <div className="container">
         <div className={styles.featuresHeader}>
+          <p className={styles.featuresEyebrow}>Why Choose Us</p>
           <h2>Why Choose Our Courses?</h2>
-          <p>
+          <p className={styles.featuresSubtitle}>
             Experience a learning environment designed for your success, with proven methodologies
             and continuous support throughout your journey.
           </p>
@@ -109,22 +110,7 @@ export default function HomepageFeatures() {
             <MainFeature key={feature.id} {...feature} />
           ))}
         </div>
-        
-        <div className={styles.featuresFooter}>
-          <Link
-            className={`button button--primary button--lg ${styles.ctaButton}`}
-            to="/learn/">
-            Start Your Journey
-            <svg className={styles.buttonIcon} viewBox="0 0 24 24">
-              <path fill="currentColor" d="M4,11V13H16L10.5,18.5L11.92,19.92L19.84,12L11.92,4.08L10.5,5.5L16,11H4Z"/>
-            </svg>
-          </Link>
-          <Link
-            className={`button button--secondary button--lg ${styles.ctaButton}`}
-            to="/reviews">
-            Read Their Stories
-          </Link>
-        </div>
+      
       </div>
     </section>
   );

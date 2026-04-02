@@ -1,67 +1,51 @@
-/* Student Reviews Section */
+﻿/* Student Reviews Section - Review-page style */
 .reviewsSection {
-  padding: 8rem 0;
-  background: linear-gradient(
-    135deg,
-    rgba(14, 89, 169, 0.03) 0%,
-    rgba(255, 255, 255, 0.8) 25%,
-    rgba(14, 89, 169, 0.02) 50%,
-    rgba(255, 255, 255, 0.9) 75%,
-    rgba(14, 89, 169, 0.03) 100%
-  );
+  padding: 4rem 0 5rem;
+  background:
+    radial-gradient(circle at 90% 85%, rgba(12, 89, 174, 0.14), transparent 35%),
+    radial-gradient(circle at 10% 95%, rgba(13, 122, 109, 0.1), transparent 38%),
+    linear-gradient(180deg, #f2f6f9 0%, #f7fbff 100%);
   position: relative;
   overflow: hidden;
 }
 
-.reviewsSection::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    var(--ifm-color-primary) 20%,
-    var(--ifm-color-primary-light) 50%,
-    var(--ifm-color-primary) 80%,
-    transparent 100%
-  );
-  opacity: 0.6;
-}
-
 .reviewsHeader {
   text-align: center;
-  margin-bottom: 4rem;
-  max-width: 800px;
+  margin-bottom: 2.5rem;
+  max-width: 760px;
   margin-left: auto;
   margin-right: auto;
 }
 
-.reviewsHeader h2 {
-  font-size: 3rem;
-  font-weight: 800;
-  color: var(--ifm-color-primary-darkest);
-  margin-bottom: 1.5rem;
-  line-height: 1.1;
-  background: linear-gradient(
-    135deg,
-    var(--ifm-color-primary-darkest) 0%,
-    var(--ifm-color-primary) 50%,
-    var(--ifm-color-primary-dark) 100%
-  );
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+.reviewsEyebrow {
+  width: fit-content;
+  margin: 0 auto 0.85rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(12, 89, 174, 0.12);
+  color: #074288;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 700;
 }
 
-.reviewsHeader p {
-  font-size: 1.2rem;
-  color: var(--ifm-color-secondary-darkest);
+.reviewsHeader h2 {
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 1;
+  font-family: Sora, "Noto Sans KR", "Segoe UI", sans-serif;
+  font-weight: 800;
+  color: #09213a;
+}
+
+.reviewsSubtitle {
+  margin: 1rem auto 0;
+  text-align: center;
+  max-width: 700px;
+  font-size: clamp(1rem, 2.2vw, 1.15rem);
   line-height: 1.6;
-  opacity: 0.8;
-  font-weight: 400;
+  color: #36506c;
 }
 
 /* Slider Container */
@@ -69,8 +53,8 @@
   position: relative;
   display: flex;
   align-items: center;
-  gap: 2rem;
-  margin-bottom: 3rem;
+  gap: 1.2rem;
+  margin-bottom: 2rem;
 }
 
 .reviewsContainer {
@@ -78,18 +62,20 @@
   width: 100%;
   min-width: 0;
   overflow: hidden;
-  border-radius: 24px;
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(20px);
-  box-shadow: 
-    0 24px 48px rgba(14, 89, 169, 0.1),
-    0 8px 16px rgba(0, 0, 0, 0.05);
+  border-radius: 16px;
+  border: 1px solid rgba(12, 70, 132, 0.16);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.97), rgba(255, 255, 255, 0.88)),
+    radial-gradient(circle at 100% 0%, rgba(10, 98, 194, 0.15), transparent 36%);
+  box-shadow:
+    0 8px 18px rgba(9, 35, 66, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
   position: relative;
 }
 
 .reviewsTrack {
   display: flex;
-  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: transform;
 }
 
@@ -98,33 +84,31 @@
   min-width: 100%;
   width: 100%;
   box-sizing: border-box;
-  padding: 3rem;
+  padding: 2.2rem 2rem;
   display: flex;
   flex-direction: column;
   position: relative;
 }
 
+.active {}
+
 .quoteIcon {
   position: absolute;
-  top: -10px;
-  right: 2rem;
-  width: 60px;
-  height: 60px;
-  background: linear-gradient(
-    135deg,
-    var(--ifm-color-primary) 0%,
-    var(--ifm-color-primary-light) 100%
-  );
-  border-radius: 50%;
+  top: 1rem;
+  right: 1.5rem;
+  width: 44px;
+  height: 44px;
+  background: linear-gradient(135deg, #0a62c2, #0e8a88);
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 8px 24px rgba(14, 89, 169, 0.3);
+  box-shadow: 0 4px 12px rgba(10, 98, 194, 0.25);
 }
 
 .quoteIcon svg {
-  width: 28px;
-  height: 28px;
+  width: 22px;
+  height: 22px;
   color: white;
 }
 
@@ -134,13 +118,13 @@
 }
 
 .reviewText {
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   line-height: 1.7;
-  color: var(--ifm-color-secondary-darkest);
-  margin-bottom: 2rem;
+  color: #1d3c5f;
+  margin-bottom: 1.5rem;
   font-style: italic;
   position: relative;
-  padding-left: 1.5rem;
+  padding-left: 1.2rem;
   overflow-wrap: anywhere;
 }
 
@@ -150,163 +134,111 @@
   left: 0;
   top: 0;
   bottom: 0;
-  width: 4px;
-  background: linear-gradient(
-    180deg,
-    var(--ifm-color-primary) 0%,
-    var(--ifm-color-primary-light) 100%
-  );
+  width: 3px;
+  background: linear-gradient(180deg, #0a62c2, #0e8a88);
   border-radius: 2px;
 }
 
-/* Review Meta Information */
+/* Review Meta */
 .reviewMeta {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 0.8rem;
 }
 
 .courseInfo {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 0.2rem;
 }
 
 .courseName {
-  font-size: 1.1rem;
+  font-size: 0.95rem;
   font-weight: 700;
-  color: var(--ifm-color-primary-darkest);
+  color: #0a335b;
 }
 
 .semester {
-  font-size: 0.95rem;
-  color: var(--ifm-color-secondary-darker);
-  opacity: 0.8;
-  font-weight: 500;
+  font-size: 0.82rem;
+  color: #4f6783;
+  font-weight: 600;
 }
 
 .studentName {
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--ifm-color-primary);
-  background: linear-gradient(
-    135deg,
-    var(--ifm-color-primary-lightest) 0%,
-    rgba(255, 255, 255, 0.5) 100%
-  );
-  padding: 0.5rem 1rem;
-  border-radius: 12px;
-  border: 1px solid rgba(14, 89, 169, 0.1);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid rgba(12, 89, 174, 0.2);
+  background: rgba(12, 89, 174, 0.08);
+  color: #34506f;
 }
 
 /* Navigation Buttons */
 .navButton {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background: linear-gradient(
-    135deg,
-    var(--ifm-color-primary) 0%,
-    var(--ifm-color-primary-dark) 100%
-  );
-  border: none;
-  color: white;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.97), rgba(255, 255, 255, 0.88));
+  border: 1px solid rgba(12, 70, 132, 0.16);
+  color: #0a335b;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 8px 24px rgba(14, 89, 169, 0.3);
-  position: relative;
-  overflow: hidden;
-}
-
-.navButton::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(255, 255, 255, 0.2);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  border-radius: 50%;
+  box-shadow: 0 8px 18px rgba(9, 35, 66, 0.06);
+  transition: all 220ms ease;
+  flex-shrink: 0;
 }
 
 .navButton:hover {
-  transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 12px 32px rgba(14, 89, 169, 0.4);
-}
-
-.navButton:hover::before {
-  opacity: 1;
-}
-
-.navButton:active {
-  transform: translateY(-1px) scale(1.02);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(9, 35, 66, 0.1);
+  background: linear-gradient(135deg, #0a62c2, #0e8a88);
+  color: white;
+  border-color: transparent;
 }
 
 .navButton svg {
-  width: 28px;
-  height: 28px;
-  z-index: 1;
-  position: relative;
+  width: 22px;
+  height: 22px;
 }
+
+.prevButton {}
+.nextButton {}
 
 /* Navigation Dots */
 .navigationDots {
   display: flex;
   justify-content: center;
-  gap: 1rem;
-  margin-bottom: 2rem;
+  gap: 0.55rem;
+  margin-bottom: 1.2rem;
 }
 
 .dot {
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  border: 2px solid var(--ifm-color-primary-lighter);
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  border: 2px solid rgba(12, 89, 174, 0.3);
   background: transparent;
   cursor: pointer;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: hidden;
-}
-
-.dot::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  background: var(--ifm-color-primary);
-  border-radius: 50%;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  transform: translate(-50%, -50%);
+  transition: all 280ms ease;
+  padding: 0;
 }
 
 .dot:hover {
-  border-color: var(--ifm-color-primary);
-  transform: scale(1.2);
-}
-
-.dot:hover::before {
-  width: 8px;
-  height: 8px;
+  border-color: #0a62c2;
+  background: rgba(10, 98, 194, 0.15);
 }
 
 .activeDot {
-  border-color: var(--ifm-color-primary);
-  transform: scale(1.3);
-}
-
-.activeDot::before {
-  width: 12px;
-  height: 12px;
+  border-color: #0a62c2;
+  background: linear-gradient(135deg, #0a62c2, #0e8a88);
+  width: 26px;
 }
 
 /* Auto Play Indicator */
@@ -314,9 +246,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.75rem;
-  opacity: 0.7;
-  transition: opacity 0.3s ease;
+  gap: 0.5rem;
+  opacity: 0.65;
+  transition: opacity 220ms ease;
 }
 
 .autoPlayIndicator:hover {
@@ -324,433 +256,161 @@
 }
 
 .playIcon {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: var(--ifm-color-primary-lightest);
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  background: rgba(12, 89, 174, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s ease;
+  transition: all 220ms ease;
 }
 
 .playIcon.playing {
-  background: var(--ifm-color-success);
-  animation: pulse 2s infinite;
+  background: rgba(17, 138, 134, 0.18);
 }
 
 .playIcon svg {
-  width: 16px;
-  height: 16px;
-  color: var(--ifm-color-primary);
+  width: 12px;
+  height: 12px;
+  color: #0a335b;
 }
 
 .playIcon.playing svg {
-  color: white;
+  color: #0e8a88;
 }
 
 .autoPlayText {
-  font-size: 0.9rem;
-  color: var(--ifm-color-secondary-darker);
-  font-weight: 500;
+  font-size: 0.78rem;
+  color: #49617f;
+  font-weight: 600;
+  letter-spacing: 0.04em;
 }
 
-@keyframes pulse {
-  0%, 100% {
-    transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.4);
-  }
-  50% {
-    transform: scale(1.05);
-    box-shadow: 0 0 0 10px rgba(40, 167, 69, 0);
-  }
+/* Dark Mode */
+:global([data-theme='dark']) .reviewsSection {
+  background:
+    radial-gradient(circle at 90% 85%, rgba(56, 125, 220, 0.2), transparent 38%),
+    radial-gradient(circle at 10% 95%, rgba(17, 138, 134, 0.16), transparent 40%),
+    linear-gradient(180deg, #0f1624 0%, #0d1421 100%);
 }
 
-/* Dark Mode Styles */
-[data-theme='dark'] .reviewsSection {
-  background: linear-gradient(
-    135deg,
-    rgba(18, 116, 220, 0.08) 0%,
-    rgba(0, 0, 0, 0.3) 25%,
-    rgba(18, 116, 220, 0.05) 50%,
-    rgba(0, 0, 0, 0.4) 75%,
-    rgba(18, 116, 220, 0.08) 100%
-  );
+:global([data-theme='dark']) .reviewsEyebrow {
+  background: rgba(67, 141, 240, 0.22);
+  color: #a8d0ff;
 }
 
-[data-theme='dark'] .reviewsHeader h2 {
-  background: linear-gradient(
-    135deg,
-    var(--ifm-color-primary-lighter) 0%,
-    var(--ifm-color-primary-light) 50%,
-    var(--ifm-color-primary) 100%
-  );
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+:global([data-theme='dark']) .reviewsHeader h2 {
+  color: #eff5ff;
 }
 
-[data-theme='dark'] .reviewsHeader p {
-  color: var(--ifm-color-secondary-lighter);
+:global([data-theme='dark']) .reviewsSubtitle {
+  color: #bdd0e6;
 }
 
-[data-theme='dark'] .reviewsContainer {
-  background: rgba(255, 255, 255, 0.05);
-  box-shadow: 
-    0 24px 48px rgba(0, 0, 0, 0.3),
-    0 8px 16px rgba(0, 0, 0, 0.2);
+:global([data-theme='dark']) .reviewsContainer {
+  border-color: rgba(118, 174, 247, 0.26);
+  background: linear-gradient(180deg, rgba(19, 29, 46, 0.92), rgba(14, 22, 35, 0.9));
+  box-shadow: 0 12px 24px rgba(3, 8, 17, 0.46);
 }
 
-[data-theme='dark'] .reviewText {
-  color: var(--ifm-color-secondary-lighter);
+:global([data-theme='dark']) .reviewText {
+  color: #e7eef8;
 }
 
-[data-theme='dark'] .courseName {
-  color: var(--ifm-color-primary-lighter);
+:global([data-theme='dark']) .courseName {
+  color: #e7eef8;
 }
 
-[data-theme='dark'] .semester {
-  color: var(--ifm-color-secondary-lighter);
+:global([data-theme='dark']) .semester {
+  color: #bdd0e6;
 }
 
-[data-theme='dark'] .studentName {
-  color: var(--ifm-color-primary-light);
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.1);
+:global([data-theme='dark']) .studentName {
+  color: #b5efe3;
+  border-color: rgba(120, 196, 186, 0.35);
+  background: rgba(17, 138, 134, 0.24);
 }
 
-[data-theme='dark'] .autoPlayText {
-  color: #cfe0f4;
+:global([data-theme='dark']) .navButton {
+  border-color: rgba(118, 174, 247, 0.26);
+  background: linear-gradient(180deg, rgba(19, 29, 46, 0.92), rgba(14, 22, 35, 0.9));
+  box-shadow: 0 8px 18px rgba(3, 8, 17, 0.35);
+  color: #bdd0e6;
 }
 
-[data-theme='dark'] .playIcon {
-  background: rgba(122, 184, 255, 0.2);
+:global([data-theme='dark']) .navButton:hover {
+  background: linear-gradient(135deg, #0a62c2, #0e8a88);
+  color: white;
+  border-color: transparent;
 }
 
-[data-theme='dark'] .playIcon svg {
-  color: #b8dcff;
+:global([data-theme='dark']) .dot {
+  border-color: rgba(118, 174, 247, 0.4);
 }
 
-[data-theme='dark'] .dot {
-  border-color: rgba(122, 184, 255, 0.75);
+:global([data-theme='dark']) .activeDot {
+  border-color: #7ab8ff;
+  background: linear-gradient(135deg, #387ddc, #118a86);
 }
 
-[data-theme='dark'] .dot::before {
-  background: #9dceff;
+:global([data-theme='dark']) .autoPlayText {
+  color: #8aa3bf;
 }
 
-/* Responsive Design */
-@media screen and (max-width: 996px) {
+:global([data-theme='dark']) .playIcon {
+  background: rgba(118, 174, 247, 0.16);
+}
+
+:global([data-theme='dark']) .playIcon svg {
+  color: #bdd0e6;
+}
+
+:global([data-theme='dark']) .playIcon.playing {
+  background: rgba(17, 138, 134, 0.28);
+}
+
+:global([data-theme='dark']) .playIcon.playing svg {
+  color: #b5efe3;
+}
+
+:global([data-theme='dark']) .quoteIcon {
+  box-shadow: 0 4px 12px rgba(10, 98, 194, 0.4);
+}
+
+:global([data-theme='dark']) .reviewText::before {
+  background: linear-gradient(180deg, #387ddc, #118a86);
+}
+
+/* Responsive */
+@media (max-width: 996px) {
   .reviewsSection {
-    padding: 6rem 0;
-  }
-
-  .reviewsHeader h2 {
-    font-size: 2.5rem;
-  }
-
-  .reviewsHeader p {
-    font-size: 1.1rem;
-  }
-
-  .reviewsSlider {
-    flex-direction: column;
-    gap: 2rem;
-  }
-
-  .navButton {
-    width: 56px;
-    height: 56px;
-  }
-
-  .navButton svg {
-    width: 28px;
-    height: 28px;
+    padding: 3.5rem 0 4rem;
   }
 
   .reviewCard {
-    padding: 2.5rem 2rem;
-  }
-
-  .reviewText {
-    font-size: 1.2rem;
-  }
-
-  .navigationDots {
-    gap: 1.2rem;
-  }
-
-  .dot {
-    width: 18px;
-    height: 18px;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .reviewsSection {
-    padding: 4rem 0;
-  }
-
-  .reviewsHeader {
-    margin-bottom: 3rem;
-    padding: 0 1rem;
-  }
-
-  .reviewsHeader h2 {
-    font-size: 2rem;
-  }
-
-  .reviewsHeader p {
-    font-size: 1rem;
-  }
-
-  .reviewsSlider {
-    gap: 1.5rem;
-  }
-
-  .reviewsContainer {
-    width: 100%;
-    border-radius: 18px;
-  }
-
-  .navButton {
-    width: 52px;
-    height: 52px;
-    /* Increase touch target size */
-  }
-
-  .navButton svg {
-    width: 26px;
-    height: 26px;
-  }
-
-  .reviewCard {
-    padding: 2rem 1.5rem;
-  }
-
-  .reviewText {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    padding-left: 1rem;
-  }
-
-  .quoteIcon {
-    width: 50px;
-    height: 50px;
-    top: -5px;
-    right: 1.5rem;
-  }
-
-  .quoteIcon svg {
-    width: 24px;
-    height: 24px;
-  }
-
-  .reviewMeta {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1.5rem;
-  }
-
-  .courseName {
-    font-size: 1rem;
-  }
-
-  .semester {
-    font-size: 0.9rem;
-  }
-
-  .studentName {
-    font-size: 0.95rem;
-    padding: 0.4rem 0.8rem;
-  }
-
-  .navigationDots {
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .dot {
-    width: 16px;
-    height: 16px;
-    /* Better touch targets for mobile */
-  }
-
-  .autoPlayIndicator {
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .playIcon {
-    width: 28px;
-    height: 28px;
-  }
-
-  .autoPlayText {
-    font-size: 0.8rem;
-  }
-}
-
-@media screen and (max-width: 576px) {
-  .reviewsSection {
-    padding: 3rem 0;
-  }
-
-  .reviewsHeader {
-    margin-bottom: 2.5rem;
-    padding: 0 1rem;
-  }
-
-  .reviewsHeader h2 {
-    font-size: 1.8rem;
-    line-height: 1.2;
-  }
-
-  .reviewsHeader p {
-    font-size: 0.95rem;
-    line-height: 1.5;
-  }
-
-  .reviewsSlider {
-    gap: 1rem;
-  }
-
-  .reviewsContainer {
-    width: 100%;
-    border-radius: 14px;
-  }
-
-  .navButton {
-    width: 48px;
-    height: 48px;
-    /* Maintain good touch target */
-  }
-
-  .navButton svg {
-    width: 24px;
-    height: 24px;
-  }
-
-  .reviewCard {
-    padding: 1.5rem 1rem;
+    padding: 1.8rem 1.5rem;
   }
 
   .reviewText {
     font-size: 1rem;
-    line-height: 1.6;
-    padding-left: 0.8rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .reviewText::before {
-    width: 3px;
-  }
-
-  .quoteIcon {
-    width: 40px;
-    height: 40px;
-    right: 1rem;
-    top: -3px;
-  }
-
-  .quoteIcon svg {
-    width: 20px;
-    height: 20px;
-  }
-
-  .reviewMeta {
-    gap: 1rem;
-  }
-
-  .courseName {
-    font-size: 0.95rem;
-  }
-
-  .semester {
-    font-size: 0.85rem;
-  }
-
-  .studentName {
-    font-size: 0.9rem;
-    padding: 0.3rem 0.6rem;
-    border-radius: 8px;
-  }
-
-  .navigationDots {
-    gap: 0.8rem;
-    margin-bottom: 1rem;
-  }
-
-  .dot {
-    width: 14px;
-    height: 14px;
-    border-width: 1.5px;
-  }
-
-  .dot::before {
-    width: 6px;
-    height: 6px;
-  }
-
-  .activeDot::before {
-    width: 10px;
-    height: 10px;
-  }
-
-  .autoPlayIndicator {
-    gap: 0.4rem;
-  }
-
-  .playIcon {
-    width: 24px;
-    height: 24px;
-  }
-
-  .playIcon svg {
-    width: 12px;
-    height: 12px;
-  }
-
-  .autoPlayText {
-    font-size: 0.75rem;
   }
 }
 
-/* Extra small devices (phones in landscape) */
-@media screen and (max-width: 480px) {
-  .reviewsSection {
-    padding: 2.5rem 0;
-  }
-
-  .reviewsHeader {
-    margin-bottom: 2rem;
-  }
-
-  .reviewsHeader h2 {
-    font-size: 1.6rem;
-  }
-
-  .reviewsHeader p {
-    font-size: 0.9rem;
+@media (max-width: 768px) {
+  .reviewsSlider {
+    gap: 0;
   }
 
   .reviewCard {
-    padding: 1.25rem 0.875rem;
-  }
-
-  .reviewsContainer {
-    border-radius: 12px;
-  }
-
-  .reviewText {
-    font-size: 0.95rem;
-    margin-bottom: 1.2rem;
+    padding: 1.5rem 1.2rem;
   }
 
   .quoteIcon {
     width: 36px;
     height: 36px;
-    right: 0.8rem;
+    top: 0.8rem;
+    right: 1rem;
   }
 
   .quoteIcon svg {
@@ -758,115 +418,29 @@
     height: 18px;
   }
 
-  .courseName {
-    font-size: 0.9rem;
-  }
-
-  .semester {
-    font-size: 0.8rem;
-  }
-
-  .studentName {
-    font-size: 0.85rem;
-  }
-
-  .navButton {
-    width: 44px;
-    height: 44px;
-  }
-
-  .navButton svg {
-    width: 22px;
-    height: 22px;
-  }
-
-  .dot {
-    width: 12px;
-    height: 12px;
-  }
-
-  .dot::before {
-    width: 5px;
-    height: 5px;
-  }
-
-  .activeDot::before {
-    width: 8px;
-    height: 8px;
+  .reviewMeta {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }
 
-/* Touch device optimizations */
-@media (hover: none) and (pointer: coarse) {
-  .navButton {
-    min-width: 48px;
-    min-height: 48px;
-    /* Ensure minimum touch target size */
+@media (max-width: 576px) {
+  .reviewsSection {
+    padding: 3rem 0;
   }
 
-  .dot {
-    min-width: 16px;
-    min-height: 16px;
-    /* Better touch targets for dots */
+  .reviewText {
+    font-size: 0.95rem;
+    padding-left: 0.9rem;
   }
 
-  .navButton:hover {
-    /* Remove hover effects on touch devices */
-    transform: none;
-    box-shadow: 0 8px 24px rgba(14, 89, 169, 0.3);
-  }
-
-  .dot:hover {
-    /* Remove hover effects on touch devices */
-    transform: none;
-    border-color: var(--ifm-color-primary-lighter);
+  .reviewCard {
+    padding: 1.2rem 1rem;
   }
 }
 
-/* Improve performance on mobile */
-@media screen and (max-width: 768px) {
-  .reviewsTrack {
-    will-change: auto;
-    /* Reduce GPU usage on mobile */
-  }
-
-  .reviewsContainer {
-    backdrop-filter: none;
-    /* Remove backdrop filter for better performance on mobile */
-    background: rgba(255, 255, 255, 0.95);
-  }
-
-  [data-theme='dark'] .reviewsContainer {
-    background: rgba(255, 255, 255, 0.08);
-  }
-}
-
-/* Animation Performance */
 @media (prefers-reduced-motion: reduce) {
-  .reviewsTrack,
-  .navButton,
-  .dot,
-  .playIcon {
-    transition: none;
-  }
-  
-  .playIcon.playing {
-    animation: none;
-  }
-}
-
-/* Reduce motion for mobile performance */
-@media screen and (max-width: 576px) {
   .reviewsTrack {
-    transition-duration: 0.5s;
-    /* Faster transitions on mobile */
-  }
-
-  .navButton {
-    transition-duration: 0.2s;
-  }
-
-  .dot {
-    transition-duration: 0.2s;
+    transition: none;
   }
 }
