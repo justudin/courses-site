@@ -103,7 +103,7 @@ export default function TeachingStats() {
         
         <div className={styles.statsFooter}>
           <p>
-            *Statistics are automatically calculated from course evaluations and enrollment data
+            *Statistics are automatically calculated from course evaluations and enrollment data since 2019 only.
           </p>
         </div>
       </div>

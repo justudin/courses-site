@@ -1,8 +1,7 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const lightCodeTheme = require('prism-react-renderer/themes/github');
-const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+const {themes: prismThemes} = require('prism-react-renderer');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -11,13 +10,13 @@ const config = {
   url: 'https://courses.muhammadsyafrudin.com',
   baseUrl: '/',
   onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'warn',
   favicon: '/img/favicon.png',
 
-  // GitHub pages deployment config.
-  // If you aren't using GitHub pages, you don't need these.
-  //organizationName: 'justudin', // Usually your GitHub org/user name.
-  //projectName: 'courses-site', // Usually your repo name.
+  markdown: {
+    hooks: {
+      onBrokenMarkdownLinks: 'warn',
+    },
+  },
 
   // Even if you don't use internalization, you can use this field to set useful
   // metadata like html lang. For example, if your site is Chinese, you may want
@@ -97,7 +96,7 @@ const config = {
       },
       footer: {
         style: 'dark',
-        copyright: `<span class="footer-quote">"The beautiful thing about learning is that no one can take it away from you." - B.B. King</span><br />Copyright © 2019-${new Date().getFullYear()} Courses by Muhammad Syafrudin. Built with Docusaurus & assisted with 🤖 Copilot.`,
+        copyright: `<span class="footer-quote">"The beautiful thing about learning is that no one can take it away from you." - B.B. King</span><br />Copyright © 2019-${new Date().getFullYear()} Courses by Muhammad Syafrudin. Built with Docusaurus & assisted with 🤖.`,
       },
       docs: {
         sidebar: {
@@ -106,8 +105,8 @@ const config = {
         },
       },
       prism: {
-        theme: lightCodeTheme,
-        darkTheme: darkCodeTheme,
+        theme: prismThemes.github,
+        darkTheme: prismThemes.dracula,
       },
     }),
 };
