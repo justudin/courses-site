@@ -1,4 +1,4 @@
-﻿/* Hero Slider - Review-page style */
+﻿/* Hero Slider - Research-site style */
 .heroSlider {
   position: relative;
   z-index: 0;
@@ -15,10 +15,9 @@
 .slideContent {
   position: relative;
   width: 100%;
-  height: 520px;
+  height: 580px;
   display: flex;
   align-items: center;
-  justify-content: center;
   animation: fadeIn 600ms ease-in-out;
 }
 
@@ -55,42 +54,38 @@
 .slideText {
   position: relative;
   z-index: 3;
-  text-align: center;
+  text-align: left;
   color: white;
-  max-width: 800px;
-  padding: 2rem;
-  margin: 0 auto;
+  max-width: 680px;
+  padding: 2rem 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
 }
 
 .slideTitle {
-  font-size: clamp(2.2rem, 5.5vw, 3.8rem);
+  font-size: clamp(2.4rem, 5.5vw, 3.8rem);
   font-weight: 800;
   margin-bottom: 1.25rem;
-  line-height: 1;
+  line-height: 1.05;
   letter-spacing: -0.02em;
   font-family: Sora, "Noto Sans KR", "Segoe UI", sans-serif;
   text-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
 }
 
 .slideSubtitle {
-  font-size: clamp(1rem, 2.2vw, 1.2rem);
+  font-size: clamp(1rem, 2.2vw, 1.18rem);
   margin-bottom: 2rem;
-  line-height: 1.6;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.7;
+  max-width: 540px;
+  color: rgba(255, 255, 255, 0.88);
 }
 
 .slideActions {
   display: flex;
   gap: 1rem;
   align-items: center;
-  justify-content: center;
   flex-wrap: wrap;
   margin-top: 0.5rem;
 }
@@ -132,6 +127,11 @@
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 /* Dark Mode */
 [data-theme='dark'] .slideOverlay {
   background:
@@ -155,10 +155,17 @@
 /* Responsive */
 @media screen and (max-width: 996px) {
   .slideContent {
-    height: 440px;
+    height: 480px;
+  }
+
+  .slideText {
+    text-align: center;
+    align-items: center;
+    padding: 1.5rem;
   }
 
   .slideActions {
+    justify-content: center;
     flex-direction: column;
     gap: 0.7rem;
   }
@@ -169,10 +176,6 @@
     max-width: 260px;
     text-align: center;
     justify-content: center;
-  }
-
-  .slideText {
-    padding: 1.5rem;
   }
 
   .heroSlider {
@@ -190,7 +193,7 @@
 
 @media screen and (max-width: 768px) {
   .slideContent {
-    height: 400px;
+    height: 420px;
   }
 
   .slideText {

@@ -1,0 +1,449 @@
+/* ─── Page background ─── */
+.page {
+  background:
+    radial-gradient(circle at 10% 10%, rgba(12, 89, 174, 0.18), transparent 35%),
+    radial-gradient(circle at 90% 0%, rgba(13, 122, 109, 0.12), transparent 40%),
+    linear-gradient(180deg, #f7fbff 0%, #f2f6f9 100%);
+  padding-bottom: 4rem;
+}
+
+/* ─── Hero ─── */
+.hero {
+  padding: 5rem 0 2.5rem;
+}
+
+.eyebrow {
+  width: fit-content;
+  margin: 0 auto 0.85rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(12, 89, 174, 0.12);
+  color: #074288;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.hero h1 {
+  margin: 0;
+  text-align: center;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  line-height: 1.05;
+  font-family: Sora, "Noto Sans KR", "Segoe UI", sans-serif;
+  font-weight: 800;
+  color: #09213a;
+}
+
+.subtitle {
+  margin: 1.25rem auto 0;
+  text-align: center;
+  max-width: 760px;
+  font-size: clamp(1rem, 2.2vw, 1.2rem);
+  line-height: 1.6;
+  color: #36506c;
+}
+
+/* ─── Stats Grid ─── */
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.9rem;
+  margin-top: 2rem;
+}
+
+.statCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem 0.8rem;
+  border-radius: 16px;
+  border: 1px solid rgba(7, 66, 136, 0.13);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.97), rgba(255, 255, 255, 0.88)),
+    radial-gradient(circle at 100% 0%, rgba(10, 98, 194, 0.15), transparent 36%);
+  box-shadow:
+    0 8px 18px rgba(9, 35, 66, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  text-align: center;
+  transform: translateY(12px);
+  opacity: 0;
+  animation: riseIn 480ms ease forwards;
+}
+
+.statCard:nth-child(2) { animation-delay: 70ms; }
+.statCard:nth-child(3) { animation-delay: 130ms; }
+.statCard:nth-child(4) { animation-delay: 190ms; }
+
+.statLabel {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #4f6783;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.3rem;
+}
+
+.statCard strong {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #0a335b;
+  font-family: Sora, "Noto Sans KR", "Segoe UI", sans-serif;
+}
+
+/* ─── Sections ─── */
+.section {
+  margin-top: 2.5rem;
+}
+
+.sectionTitle {
+  margin-bottom: 1rem;
+  font-size: clamp(1.45rem, 3.1vw, 2rem);
+  font-family: Sora, "Noto Sans KR", "Segoe UI", sans-serif;
+  font-weight: 800;
+  color: #0a335b;
+}
+
+/* ─── Gratitude cards ─── */
+.gratitudeGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.card {
+  padding: 1.2rem 1.3rem;
+  border-radius: 16px;
+  border: 1px solid rgba(12, 70, 132, 0.16);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.97), rgba(255, 255, 255, 0.88)),
+    radial-gradient(circle at 100% 0%, rgba(10, 98, 194, 0.15), transparent 36%);
+  box-shadow:
+    0 8px 18px rgba(9, 35, 66, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  transform: translateY(12px);
+  opacity: 0;
+  animation: riseIn 480ms ease forwards;
+}
+
+.card:nth-child(2) { animation-delay: 70ms; }
+
+.cardTitle {
+  margin: 0 0 0.6rem;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #0a335b;
+  font-family: Sora, "Noto Sans KR", "Segoe UI", sans-serif;
+}
+
+.cardList {
+  margin: 0;
+  padding-left: 1.2rem;
+  color: #1d3c5f;
+  line-height: 1.65;
+  font-size: 0.95rem;
+}
+
+.cardList li + li {
+  margin-top: 0.35rem;
+}
+
+/* ─── License pills ─── */
+.licensePills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.licensePill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(12, 89, 174, 0.08);
+  color: #0a335b;
+  font-size: 0.82rem;
+  font-weight: 600;
+  border: 1px solid rgba(12, 89, 174, 0.14);
+}
+
+.licensePill strong {
+  color: #0e59a9;
+}
+
+/* ─── Tables ─── */
+.tableWrap {
+  overflow-x: auto;
+  border-radius: 16px;
+  border: 1px solid rgba(12, 70, 132, 0.16);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.97), rgba(255, 255, 255, 0.88));
+  box-shadow:
+    0 8px 18px rgba(9, 35, 66, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.table th {
+  padding: 0.7rem 1rem;
+  text-align: left;
+  font-weight: 700;
+  color: #074288;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-bottom: 2px solid rgba(12, 70, 132, 0.12);
+  background: rgba(12, 89, 174, 0.04);
+}
+
+.table td {
+  padding: 0.55rem 1rem;
+  color: #1d3c5f;
+  border-bottom: 1px solid rgba(12, 70, 132, 0.08);
+}
+
+.table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.table tbody tr:hover {
+  background: rgba(12, 89, 174, 0.04);
+}
+
+.pkgName {
+  font-weight: 600;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  font-size: 0.84rem;
+}
+
+.licenseBadge {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  background: rgba(12, 89, 174, 0.08);
+  color: #0a335b;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.npmLink {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  background: rgba(12, 89, 174, 0.08);
+  color: #0e59a9;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 220ms ease;
+}
+
+.npmLink:hover {
+  background: linear-gradient(135deg, #0a62c2, #0e8a88);
+  color: #fff;
+  text-decoration: none;
+}
+
+/* ─── Toggle button ─── */
+.toggleBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.55rem 1.1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(12, 89, 174, 0.2);
+  background: rgba(12, 89, 174, 0.06);
+  color: #0e59a9;
+  font-weight: 700;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: all 220ms ease;
+  margin-bottom: 1rem;
+}
+
+.toggleBtn:hover {
+  background: linear-gradient(135deg, #0a62c2, #0e8a88);
+  color: #fff;
+  border-color: transparent;
+}
+
+.toggleIcon {
+  width: 18px;
+  height: 18px;
+  transition: transform 220ms ease;
+}
+
+.toggleIcon.rotated {
+  transform: rotate(180deg);
+}
+
+/* ─── Footnote ─── */
+.footnote {
+  margin-top: 1.5rem;
+  text-align: center;
+  color: #49617f;
+  font-style: italic;
+  font-size: 0.88rem;
+}
+
+.footnote code {
+  font-size: 0.82rem;
+  background: rgba(12, 89, 174, 0.08);
+  padding: 0.15rem 0.4rem;
+  border-radius: 6px;
+}
+
+/* ─── Animation ─── */
+@keyframes riseIn {
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 996px) {
+  .statsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .gratitudeGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero {
+    padding-top: 4rem;
+  }
+
+  .statsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ─── Dark mode ─── */
+:global([data-theme='dark']) .page {
+  background:
+    radial-gradient(circle at 10% 10%, rgba(56, 125, 220, 0.25), transparent 38%),
+    radial-gradient(circle at 90% 0%, rgba(17, 138, 134, 0.2), transparent 42%),
+    linear-gradient(180deg, #0d1421 0%, #0f1624 100%);
+}
+
+:global([data-theme='dark']) .eyebrow {
+  background: rgba(67, 141, 240, 0.22);
+  color: #a8d0ff;
+}
+
+:global([data-theme='dark']) .hero h1 {
+  color: #eff5ff;
+}
+
+:global([data-theme='dark']) .subtitle {
+  color: #bdd0e6;
+}
+
+:global([data-theme='dark']) .sectionTitle {
+  color: #f0f5ff;
+}
+
+:global([data-theme='dark']) .statCard,
+:global([data-theme='dark']) .card,
+:global([data-theme='dark']) .tableWrap {
+  border-color: rgba(118, 174, 247, 0.26);
+  background: linear-gradient(180deg, rgba(19, 29, 46, 0.92), rgba(14, 22, 35, 0.9));
+  box-shadow: 0 12px 24px rgba(3, 8, 17, 0.46);
+}
+
+:global([data-theme='dark']) .statCard:hover,
+:global([data-theme='dark']) .card:hover {
+  box-shadow: 0 16px 36px rgba(3, 8, 17, 0.6);
+}
+
+:global([data-theme='dark']) .statLabel {
+  color: #bdd0e6;
+}
+
+:global([data-theme='dark']) .statCard strong {
+  color: #e7eef8;
+}
+
+:global([data-theme='dark']) .cardTitle {
+  color: #f0f5ff;
+}
+
+:global([data-theme='dark']) .cardList {
+  color: #e7eef8;
+}
+
+:global([data-theme='dark']) .licensePill {
+  background: rgba(67, 141, 240, 0.15);
+  border-color: rgba(118, 174, 247, 0.2);
+  color: #e7eef8;
+}
+
+:global([data-theme='dark']) .licensePill strong {
+  color: #7ab8ff;
+}
+
+:global([data-theme='dark']) .table th {
+  color: #a8d0ff;
+  background: rgba(56, 125, 220, 0.08);
+  border-color: rgba(118, 174, 247, 0.15);
+}
+
+:global([data-theme='dark']) .table td {
+  color: #e7eef8;
+  border-color: rgba(118, 174, 247, 0.1);
+}
+
+:global([data-theme='dark']) .table tbody tr:hover {
+  background: rgba(56, 125, 220, 0.08);
+}
+
+:global([data-theme='dark']) .pkgName {
+  color: #e7eef8;
+}
+
+:global([data-theme='dark']) .licenseBadge {
+  background: rgba(67, 141, 240, 0.15);
+  color: #e7eef8;
+}
+
+:global([data-theme='dark']) .npmLink {
+  background: rgba(67, 141, 240, 0.15);
+  color: #7ab8ff;
+}
+
+:global([data-theme='dark']) .npmLink:hover {
+  background: linear-gradient(135deg, #387ddc, #118a86);
+  color: #fff;
+}
+
+:global([data-theme='dark']) .toggleBtn {
+  border-color: rgba(118, 174, 247, 0.26);
+  background: rgba(118, 174, 247, 0.08);
+  color: #7ab8ff;
+}
+
+:global([data-theme='dark']) .toggleBtn:hover {
+  background: linear-gradient(135deg, #387ddc, #118a86);
+  color: #fff;
+  border-color: transparent;
+}
+
+:global([data-theme='dark']) .footnote {
+  color: #8aa3bf;
+}
+
+:global([data-theme='dark']) .footnote code {
+  background: rgba(67, 141, 240, 0.15);
+  color: #e7eef8;
+}

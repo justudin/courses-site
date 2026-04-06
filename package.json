@@ -4,8 +4,9 @@
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
-    "start": "docusaurus start --host 0.0.0.0",
-    "build": "docusaurus build",
+    "generate-credits": "node scripts/generate-credits-page.js",
+    "start": "npm run generate-credits && docusaurus start --host 0.0.0.0",
+    "build": "npm run generate-credits && docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",

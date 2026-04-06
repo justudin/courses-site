@@ -1,5 +1,4 @@
 import React from 'react';
-import clsx from 'clsx';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
@@ -8,8 +7,7 @@ import HeroSlider from '@site/src/components/HeroSlider';
 import TeachingStats from '@site/src/components/TeachingStats';
 import StudentReviews from '@site/src/components/StudentReviews';
 import CallToAction from '@site/src/components/CallToAction';
-
-import styles from './index.module.css';
+import RunningText from '@site/src/components/RunningText';
 
 export default function Home() {
   const {siteConfig} = useDocusaurusContext();
@@ -20,8 +18,11 @@ export default function Home() {
       <HeroSlider />
       <main>
         <TeachingStats />
+        <RunningText text="Teaching Excellence" variant="subtle" direction="right" />
         <StudentReviews />
+        <RunningText text="Student Success" variant="subtle" />
         <HomepageFeatures />
+        <RunningText text="Shaping the Future" variant="accent" direction="right" />
         <CallToAction />
       </main>
     </Layout>
