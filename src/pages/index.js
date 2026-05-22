@@ -134,7 +134,7 @@ function JoinAINTLab() {
 function AcademicGenealogy() {
   const Svg = require('../assets/academic-genealogy.svg').default;
    return (
-    <section className={`${styles.academic} section-with-bg-text bg-text--research`} id="academic-genealogy">
+    <section className={`${styles.academic}`} id="academic-genealogy">
       <div className="container">
         <h1 className="text--center">Academic Genealogy</h1>
         <p className="text--center"><em>Tracing the scholarly lineage and academic mentorship network connected to AINTLab.</em></p>
