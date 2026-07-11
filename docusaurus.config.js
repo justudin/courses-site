@@ -7,7 +7,7 @@ const {themes: prismThemes} = require('prism-react-renderer');
 const config = {
   title: 'Applied INTelligence Lab (AINTLab)',
   tagline: 'AINTLab is not only a laboratory but also a playground to learn and explore things related to applied intelligence.',
-  url: 'https://aintlab.com',
+  url: 'https://research.muhammadsyafrudin.com',
   baseUrl: '/',
   onBrokenLinks: 'throw',
   favicon: '/img/favicon.png',
@@ -61,7 +61,7 @@ const config = {
         '@context': 'https://schema.org/',
         '@type': 'Organization',
         name: 'Applied INTelligence Lab (AINTLab)',
-        url: 'https://aintlab.com/',
+        url: 'https://research.muhammadsyafrudin.com/',
         description: 'Applied INTelligence Lab (AINTLab) - AINTLab is not only a laboratory but also a playground to learn and explore things related to applied intelligence. We explore the frontier of artificial intelligence, data science, and intelligent systems. We design AI-driven solutions that connect systems, enhance communication, and promote sustainability. Through collaboration across academia and industry, we aim to build systems that shape a smarter, more connected world. AINTLab is a hub for learning and innovation in applied intelligence and IoT. Pioneering Artificial Intelligence research, AINTLab focuses on machine learning, deep learning, IoT, and self-supervised learning. Our expertise drives agricultural innovation, vessel detection, human action recognition, and predictive analytics, promoting sustainable agriculture and global food security. Explore our extensive collection of research publications on AI, machine learning, IoT, and sustainable agriculture, featuring groundbreaking work on transformer models, predictive analytics, and more.',
         foundingDate: '2019',
         founder: {
