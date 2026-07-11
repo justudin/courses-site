@@ -5,7 +5,7 @@ import Link from '@docusaurus/Link'
 import backgroundVideo from '../../assets/background.mp4';
 
 // The target RSS feed URL
-const XML_URL = 'https://aintlab.com/updates/rss.xml';
+const XML_URL = `${typeof window !== 'undefined' ? window.location.origin : ''}/updates/rss.xml`;
 
 function RecentUpdates() {
   const [posts, setPosts] = useState([]);
