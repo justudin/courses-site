@@ -40,7 +40,7 @@ const config = {
           showReadingTime: true,
           feedOptions: {
             type: 'all',
-            copyright: `Copyright © 2019-${new Date().getFullYear()} Applied INTelligence Lab (AINTLab); Lead by Muhammad Syafrudin.`,
+            copyright: `Copyright © ${new Date().getFullYear()} Applied INTelligence Lab; Lead by Muhammad Syafrudin.`,
           },
         },
         theme: {
@@ -62,7 +62,7 @@ const config = {
         '@type': 'Organization',
         name: 'Applied INTelligence Lab (AINTLab)',
         url: 'https://research.muhammadsyafrudin.com/',
-        description: 'Applied INTelligence Lab (AINTLab) - AINTLab is not only a laboratory but also a playground to learn and explore things related to applied intelligence. We explore the frontier of artificial intelligence, data science, and intelligent systems. We design AI-driven solutions that connect systems, enhance communication, and promote sustainability. Through collaboration across academia and industry, we aim to build systems that shape a smarter, more connected world. AINTLab is a hub for learning and innovation in applied intelligence and IoT. Pioneering Artificial Intelligence research, AINTLab focuses on machine learning, deep learning, IoT, and self-supervised learning. Our expertise drives agricultural innovation, vessel detection, human action recognition, and predictive analytics, promoting sustainable agriculture and global food security. Explore our extensive collection of research publications on AI, machine learning, IoT, and sustainable agriculture, featuring groundbreaking work on transformer models, predictive analytics, and more.',
+        description: 'Applied INTelligence Lab - AINTLab is not only a laboratory but also a playground to learn and explore things related to applied intelligence. We explore the frontier of artificial intelligence, data science, and intelligent systems. We design AI-driven solutions that connect systems, enhance communication, and promote sustainability. Through collaboration across academia and industry, we aim to build systems that shape a smarter, more connected world. AINTLab is a hub for learning and innovation in applied intelligence and IoT. Pioneering Artificial Intelligence research, AINTLab focuses on machine learning, deep learning, IoT, and self-supervised learning. Our expertise drives agricultural innovation, vessel detection, human action recognition, and predictive analytics, promoting sustainable agriculture and global food security. Explore our extensive collection of research publications on AI, machine learning, IoT, and sustainable agriculture, featuring groundbreaking work on transformer models, predictive analytics, and more.',
         foundingDate: '2019',
         founder: {
           '@type': 'Person',
@@ -87,7 +87,7 @@ const config = {
         contactPoint: {
           '@type': 'ContactPoint',
           'contactType': 'Contact Support',
-          'email': 'udin@aintlab.com',
+          'email': 'hello@aintlab.com',
           'telephone': '+82-2-3408-1879'
         },
         sameAs: [
@@ -157,7 +157,7 @@ const config = {
         style: 'dark',
         copyright: `<div class="footer-shell">
           <div class="footer-brand-row">
-            <img class="footer-brand-logo" src="/img/aintlab-logo-footer.png" alt="Applied INTelligence Lab (AINTLab)">
+            <img class="footer-brand-logo" src="/img/aintlab-logo-footer.png" alt="Applied INTelligence Lab">
           </div>
           <div class="footer-nav-row">
             <a href="/">Home</a>
@@ -170,10 +170,10 @@ const config = {
             <a href="/email-policy">Email Policy</a>
           </div>
 
-          <p class="footer-copy">Copyright © 2019-${new Date().getFullYear()} Applied INTelligence Lab (AINTLab); Lead by Muhammad Syafrudin. <br/>Built with <a href="/credits">Docusaurus & others.</a> Assisted with 🤖. <span>Follow us on</span>
+          <p class="footer-copy">Copyright © 2019-${new Date().getFullYear()} Applied INTelligence Lab; Lead by Muhammad Syafrudin. <br/>Built with <a href="/credits">Docusaurus & others.</a> Assisted with 🤖. <span>Follow us on</span>
             <a class="footer-social" href="https://www.linkedin.com/company/aintlab" target="_blank" rel="noopener noreferrer" aria-label="AINTLab LinkedIn">
               <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <title>AINTLab (Applied INTelligence Lab) @ LinkedIn</title>
+                <title>Applied INTelligence Lab @ LinkedIn</title>
                 <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path>
               </svg>
             </a></p>
