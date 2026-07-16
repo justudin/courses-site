@@ -39,7 +39,7 @@ We are committed to:
 
 function Feature({ title, description }) {
   return (
-    <div className={clsx('col col--6', styles.cardCol)}>
+    <div className={clsx('col col--6', styles.cardCol, 'reveal')}>
       <article className={styles.narrativeBlock}>
         <h2 className={styles.blockTitle}>{title}</h2>
         <div className={styles.blockContent}>{description}</div>

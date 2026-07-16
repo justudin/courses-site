@@ -29,7 +29,7 @@ const MissionVisionList = [
       <>
       <em>Our collaboration map from the past five years.</em>
       <br/>
-      <img loading="lazy" alt="Our collaboration map from the past five years" src="/team/collaboration_map.png" className={styles.mapImage}/>
+      <img loading="lazy" alt="Our collaboration map from the past five years" src="/team/collaboration_map.webp" width="686" height="364" className={styles.mapImage}/>
       <p className={styles.mapCaption}><em>If you are interested in collaborating with us, please <Link to="/contact">contact us.</Link></em></p>
       </>
     ),
@@ -39,7 +39,7 @@ const MissionVisionList = [
 
 function Feature({ title, description }) {
   return (
-    <div className={clsx('col col--6', styles.cardCol)}>
+    <div className={clsx('col col--6', styles.cardCol, 'reveal')}>
       <article className={styles.narrativeBlock}>
         <h2>{title}</h2>
         <div className={styles.narrativeBody}>{description}</div>
@@ -54,7 +54,7 @@ export default function MissionVision() {
       <div className="container">
         <p className={styles.kicker}>Partnership</p>
         <h1 className="text--center">Collaborate With Us</h1>
-        <p className="text--center"><em>A trusted collaboration ecosystem for academia, industry, and future researchers.</em></p>
+        <p className="text--center"><em>A global collaboration ecosystem for academia, industry, and future researchers.</em></p>
         <div className="row">
           {MissionVisionList.map((props, idx) => (
             <Feature key={idx} {...props} />

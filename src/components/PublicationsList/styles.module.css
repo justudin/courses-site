@@ -17,6 +17,14 @@
   background: color-mix(in srgb, var(--ifm-color-primary) 3%, transparent);
 }
 
+.metricCard:nth-child(2) {
+  transition-delay: 0.06s;
+}
+
+.metricCard:nth-child(3) {
+  transition-delay: 0.12s;
+}
+
 .metricLabel {
   margin: 0;
   font-size: 0.72rem;
@@ -32,6 +40,7 @@
   font-weight: 700;
   color: var(--ifm-font-color-base);
   line-height: 1.15;
+  text-shadow: 0 0 18px color-mix(in srgb, var(--ifm-color-primary) 40%, transparent);
 }
 
 .metricMeta {
@@ -144,7 +153,12 @@
   border: none;
   border-bottom: 1px solid color-mix(in srgb, var(--ifm-border-color) 80%, transparent);
   border-radius: 0;
-  transition: none;
+}
+
+/* Compound selector (higher specificity than the global .reveal rule) so this
+   combined transition list reliably wins regardless of CSS bundle order. */
+.publicationItem.reveal {
+  transition: background 0.2s ease, opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .publicationFeatured {
@@ -152,10 +166,6 @@
   padding-left: 0.85rem;
   border-left: 2px solid var(--ifm-color-primary);
   background: transparent;
-}
-
-.publicationFeatured::before {
-  display: none;
 }
 
 .publicationItem:hover {
@@ -358,11 +368,6 @@
   background: color-mix(in srgb, #c2410c 14%, var(--ifm-background-surface-color));
   color: #c2410c;
   border-color: color-mix(in srgb, #c2410c 40%, var(--ifm-border-color));
-}
-
-[data-theme='dark'] .publicationItem,
-[data-theme='dark'] .controls {
-  background: transparent;
 }
 
 [data-theme='dark'] .publicationFeatured {

@@ -23,6 +23,10 @@
   display: flex;
 }
 
+.cardCol:nth-child(2) {
+  transition-delay: 0.08s;
+}
+
 .card {
   display: none;
 }

@@ -63,7 +63,7 @@ const FeatureList = [
 
 function Feature({Svg, title, items}) {
   return (
-    <div className={clsx('col col--4', styles.cardCol)}>
+    <div className={clsx('col col--4', styles.cardCol, 'reveal')}>
       <article className={styles.card}>
       <div className={styles.iconWrap}>
         <Svg loading="lazy" className={styles.featureSvg} alt="AINTLab - Research Area" role="img" />

@@ -275,19 +275,19 @@ export default function PublicationsList() {
   return (
     <div className={styles.publicationsContainer}>
       <div className={styles.metricsPanel}>
-        <div className={styles.metricCard}>
+        <div className={`${styles.metricCard} reveal`}>
           <p className={styles.metricLabel}>CiteScore Total (Scopus)</p>
           <p className={styles.metricValue}>{formatMetricValue(metricStats.citeScoreScopus.total)}</p>
           <p className={styles.metricMeta}>Average: {formatMetricValue(metricStats.citeScoreScopus.average)} | Data points: {metricStats.citeScoreScopus.countWithMetric}</p>
         </div>
 
-        <div className={styles.metricCard}>
+        <div className={`${styles.metricCard} reveal`}>
           <p className={styles.metricLabel}>Impact Factor Total (SCIE/SSCI/ESCI)</p>
           <p className={styles.metricValue}>{formatMetricValue(metricStats.impactFactorAll.total)}</p>
           <p className={styles.metricMeta}>Average: {formatMetricValue(metricStats.impactFactorAll.average)} | Data points: {metricStats.impactFactorAll.countWithMetric}</p>
         </div>
 
-        <div className={styles.metricCard}>
+        <div className={`${styles.metricCard} reveal`}>
           <p className={styles.metricLabel}>Impact Factor Total (Without ESCI)</p>
           <p className={styles.metricValue}>{formatMetricValue(metricStats.impactFactorWithoutESCI.total)}</p>
           <p className={styles.metricMeta}>Average: {formatMetricValue(metricStats.impactFactorWithoutESCI.average)} | Data points: {metricStats.impactFactorWithoutESCI.countWithMetric}</p>
@@ -379,7 +379,7 @@ function PublicationItem({ publication }) {
     : [];
 
   return (
-    <div className={`${styles.publicationItem} ${publication.featured ? styles.publicationFeatured : ''}`}>
+    <div className={`${styles.publicationItem} reveal ${publication.featured ? styles.publicationFeatured : ''}`}>
       <div className={styles.itemHeader}>
         <span className={styles.itemNumber}>{number}</span>
         <span className={`${styles.badge} ${styles[publication.type]}`}>

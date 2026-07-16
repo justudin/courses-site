@@ -1,0 +1,62 @@
+.booksPage :global(h1) {
+  margin-bottom: 0.9rem;
+}
+
+.booksPage :global(.row) {
+  margin: 0.6rem 0 0.75rem;
+  padding: 0.6rem 0 0.9rem;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--ifm-border-color) 76%, transparent);
+  /* Higher specificity than the global .reveal rule (two class selectors vs
+     one), so this combined transition list reliably wins regardless of CSS
+     bundle order. */
+  transition: background 0.2s ease, opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.booksPage :global(.row:last-of-type) {
+  border-bottom: none;
+}
+
+.booksPage :global(.row:hover) {
+  background: color-mix(in srgb, var(--ifm-color-primary) 2.5%, transparent);
+}
+
+.booksPage :global(.row img) {
+  width: 100%;
+  max-width: 168px;
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
+  border: 1px solid color-mix(in srgb, var(--ifm-border-color) 60%, transparent);
+  box-shadow: none;
+}
+
+.booksPage :global(.row h3) {
+  margin-top: 0.2rem;
+  margin-bottom: 0.35rem;
+  color: var(--ifm-color-primary);
+}
+
+.booksPage :global(.row > .col--10 > i) {
+  color: var(--ifm-font-color-secondary);
+}
+
+@media (max-width: 996px) {
+  .booksPage :global(.row img) {
+    max-width: 140px;
+  }
+}
+
+@media (max-width: 768px) {
+  .booksPage :global(.row) {
+    padding: 0.5rem 0 0.75rem;
+  }
+
+  .booksPage :global(.row img) {
+    max-width: 116px;
+    margin-bottom: 0.6rem;
+  }
+}

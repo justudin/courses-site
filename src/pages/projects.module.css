@@ -22,10 +22,6 @@
   padding: 0;
 }
 
-.overviewPanel::after {
-  display: none;
-}
-
 .overviewCopy {
   position: relative;
   z-index: 1;
@@ -67,6 +63,18 @@
   background: color-mix(in srgb, var(--ifm-color-primary) 3%, transparent);
 }
 
+.metricCard:nth-child(2) {
+  transition-delay: 0.06s;
+}
+
+.metricCard:nth-child(3) {
+  transition-delay: 0.12s;
+}
+
+.metricCard:nth-child(4) {
+  transition-delay: 0.18s;
+}
+
 .metricLabel,
 .metricValue,
 .cardOrg,
@@ -86,6 +94,7 @@
   margin-top: 0.2rem;
   font-size: clamp(1.2rem, 1.8vw, 1.5rem);
   font-weight: 700;
+  text-shadow: 0 0 18px color-mix(in srgb, var(--ifm-color-primary) 40%, transparent);
 }
 
 .sectionBlock {
@@ -184,9 +193,24 @@
   background: transparent;
 }
 
+/* Compound selector (higher specificity than the global .reveal rule) so this
+   combined transition list reliably wins regardless of CSS bundle order. */
+.currentCard.reveal {
+  transition: background 0.2s ease, opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.currentCard:nth-child(2) {
+  transition-delay: 0.06s;
+}
+
+.currentCard:nth-child(3) {
+  transition-delay: 0.12s;
+}
+
 .currentCard:hover {
   transform: none;
   box-shadow: none;
+  background: color-mix(in srgb, var(--ifm-color-primary) 3%, transparent);
 }
 
 .cardBadgeRow,

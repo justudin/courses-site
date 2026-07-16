@@ -19,6 +19,14 @@
   background: transparent;
   box-shadow: none;
   border-bottom: 1px solid color-mix(in srgb, var(--ifm-border-color) 76%, transparent);
+  /* Higher specificity than the global .reveal rule (two class selectors vs
+     one), so this combined transition list reliably wins regardless of CSS
+     bundle order. */
+  transition: background 0.2s ease, opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.teamPage :global(.row:hover) {
+  background: color-mix(in srgb, var(--ifm-color-primary) 2.5%, transparent);
 }
 
 .teamPage :global(.row.director-row) {

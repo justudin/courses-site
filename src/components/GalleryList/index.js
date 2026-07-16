@@ -83,15 +83,15 @@ export default function GalleryList() {
   return (
     <div className={styles.galleryShell}>
       <div className={styles.galleryMetrics}>
-        <div className={styles.metricCard}>
+        <div className={`${styles.metricCard} reveal`}>
           <p className={styles.metricLabel}>Total Items</p>
           <p className={styles.metricValue}>{stats.total}</p>
         </div>
-        <div className={styles.metricCard}>
+        <div className={`${styles.metricCard} reveal`}>
           <p className={styles.metricLabel}>Year Coverage</p>
           <p className={styles.metricValue}>{stats.years}</p>
         </div>
-        <div className={styles.metricCard}>
+        <div className={`${styles.metricCard} reveal`}>
           <p className={styles.metricLabel}>Latest Year</p>
           <p className={styles.metricValue}>{stats.latest}</p>
         </div>
@@ -175,7 +175,7 @@ export default function GalleryList() {
           {displayedItems.map((item) => (
             <article
               key={item.id}
-              className={`${styles.galleryCard} ${item.featured ? styles.featuredCard : ''}`}
+              className={`${styles.galleryCard} reveal ${item.featured ? styles.featuredCard : ''}`}
             >
               <PhotoView src={item.image}>
                 <button

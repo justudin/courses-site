@@ -2,6 +2,8 @@
 title: Books
 ---
 
+import styles from './books.module.css'
+
 <section className="section-with-bg-logo">
 <div className="page-shell">
 <div className="page-header">
@@ -10,11 +12,11 @@ title: Books
 <p className="page-lead"><em>Published books authored and co-authored by AINTLab members.</em></p>
 </div>
 
-<div className="page-content">
+<div className={`page-content ${styles.booksPage}`}>
 
 ### <highlight color="#0184c6">Published Books</highlight>
 
-<div className="row">
+<div className="row reveal">
 <div className="col col--2"><img src="/updates/9798369368299.webp" alt="Artificial Intelligence and Data Science for Sustainability book cover" /></div>
 <div className="col col--10">
 <h3>Artificial Intelligence and Data Science for Sustainability: Applications and Methods</h3>
@@ -33,7 +35,7 @@ The integration of artificial intelligence (AI) and data science (DS) into susta
 </div>
 </div>
 
-<div className="row">
+<div className="row reveal">
 <div className="col col--2"><img src="/updates/9798337325309.webp" alt="Achieving Sustainability in Multi-Industry Settings With AI book cover" /></div>
 <div className="col col--10">
 <h3>Achieving Sustainability in Multi-Industry Settings With AI</h3>
@@ -51,7 +53,7 @@ Harnessing artificial intelligence (AI) for sustainability offers transformative
 </div>
 </div>
 
-<div className="row">
+<div className="row reveal">
 <div className="col col--2"><img src="/updates/metaverse-book.jpg" alt="Metaverse Applications for New Business Models and Disruptive Innovation book cover" /></div>
 <div className="col col--10">
 <h3>Metaverse Applications for New Business Models and Disruptive Innovation</h3>

@@ -74,6 +74,7 @@
   box-shadow: none;
   padding: 0;
   overflow: hidden;
+  transition-delay: 0.08s;
 }
 
 .featureSvg {

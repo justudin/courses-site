@@ -7,7 +7,9 @@ import Link from '@docusaurus/Link';
 const FeatureList = [
   {
     title: 'FLTrans-Net: Transformer-based feature learning network for wheat head detection',
-    img_url: "img/wheat.png",
+    img_url: "/img/wheat.webp",
+    imgWidth: 700,
+    imgHeight: 290,
     doi: "https://doi.org/10.1016/j.compag.2024.109706",
     outlet: "Published in Computers and Electronics in Agriculture (Elsevier, 2025) - SCIE (Q1); IF=8.9; Rank=2/94; IF(%)=1.6%.",
     details: [
@@ -27,7 +29,9 @@ const FeatureList = [
   },
   {
     title: 'AE-BPNN: autoencoder and backpropagation neural network-based model for lithium-ion battery state of health estimation',
-    img_url: "img/battery.png",
+    img_url: "/img/battery.webp",
+    imgWidth: 685,
+    imgHeight: 247,
     doi: "https://doi.org/10.1038/s41598-025-12771-4",
     outlet: "Published in Scientific Reports (Nature Portfolio, 2025) - SCIE (Q1); IF=3.9; Rank=25/136; IF(%)=18.0%.",
     details: [
@@ -47,7 +51,9 @@ const FeatureList = [
   },
   {
     title: 'Tweeting Circular Economy: Unveiling Current Discourse Through Natural Language Processing',
-    img_url: "img/circulareconomy.png",
+    img_url: "/img/circulareconomy.webp",
+    imgWidth: 700,
+    imgHeight: 352,
     doi: "https://doi.org/10.1002/sd.3323",
     outlet: "Published in Sustainable Development (Wiley, 2025) - SSCI (Q1); IF=9.9; Rank=1/63; IF(%)=0.8%.",
     details: [
@@ -68,12 +74,12 @@ const FeatureList = [
   
 ];
 
-function Feature({img_url, doi, title, outlet, details}) {
+function Feature({img_url, imgWidth, imgHeight, doi, title, outlet, details}) {
   return (
-    <div className={clsx('col col--4', styles.cardCol)}>
+    <div className={clsx('col col--4', styles.cardCol, 'reveal')}>
       <article className={styles.card}>
       <div className={styles.mediaWrap}>
-        <img loading="lazy" alt={title} className={styles.featureSvg} role="img" src={img_url}/>
+        <img loading="lazy" alt={title} className={styles.featureSvg} role="img" src={img_url} width={imgWidth} height={imgHeight}/>
       </div>
       <div className={styles.contentWrap}>
         <h2 className={styles.paperTitle}>

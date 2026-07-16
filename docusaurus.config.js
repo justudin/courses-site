@@ -5,8 +5,8 @@ const {themes: prismThemes} = require('prism-react-renderer');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Applied INTelligence Lab (AINTLab)',
-  tagline: 'AINTLab is not only a laboratory but also a playground to learn and explore things related to applied intelligence.',
+  title: 'Applied INTelligence Lab',
+  tagline: 'Applied INTelligence Lab (AINTLab) is not only a laboratory but also a playground to learn and explore things related to applied intelligence.',
   url: 'https://research.muhammadsyafrudin.com',
   baseUrl: '/',
   onBrokenLinks: 'throw',
@@ -51,6 +51,29 @@ const config = {
   ],
 
   headTags: [
+    // Preload the two most-used self-hosted Inter weights (body text + bold
+    // headings) so they're discovered by the browser's preload scanner
+    // immediately, instead of waiting on CSS to be parsed.
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'preload',
+        href: '/fonts/inter/inter-400-latin.woff2',
+        as: 'font',
+        type: 'font/woff2',
+        crossorigin: 'anonymous',
+      },
+    },
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'preload',
+        href: '/fonts/inter/inter-700-latin.woff2',
+        as: 'font',
+        type: 'font/woff2',
+        crossorigin: 'anonymous',
+      },
+    },
     // Declare some json-ld structured data
     {
       tagName: 'script',
@@ -60,7 +83,7 @@ const config = {
       innerHTML: JSON.stringify({
         '@context': 'https://schema.org/',
         '@type': 'Organization',
-        name: 'Applied INTelligence Lab (AINTLab)',
+        name: 'Applied INTelligence Lab',
         url: 'https://research.muhammadsyafrudin.com/',
         description: 'Applied INTelligence Lab - AINTLab is not only a laboratory but also a playground to learn and explore things related to applied intelligence. We explore the frontier of artificial intelligence, data science, and intelligent systems. We design AI-driven solutions that connect systems, enhance communication, and promote sustainability. Through collaboration across academia and industry, we aim to build systems that shape a smarter, more connected world. AINTLab is a hub for learning and innovation in applied intelligence and IoT. Pioneering Artificial Intelligence research, AINTLab focuses on machine learning, deep learning, IoT, and self-supervised learning. Our expertise drives agricultural innovation, vessel detection, human action recognition, and predictive analytics, promoting sustainable agriculture and global food security. Explore our extensive collection of research publications on AI, machine learning, IoT, and sustainable agriculture, featuring groundbreaking work on transformer models, predictive analytics, and more.',
         foundingDate: '2019',
@@ -71,7 +94,6 @@ const config = {
             'https://www.wikidata.org/entity/Q61147698',
             'https://mathgenealogy.org/id.php?id=297235',
             'https://www.google.com/search?kgmid=/g/11fmgyc_gp',
-            'https://dblp.org/pid/216/5849.html',
             'https://orcid.org/0000-0002-5640-4413',
             'https://scholar.google.co.kr/citations?user=WLTzkOMAAAAJ&hl=en',
             'https://muhammadsyafrudin.com/',
@@ -93,7 +115,7 @@ const config = {
         sameAs: [
           'https://www.linkedin.com/company/aintlab',
         ],
-        logo: 'https://aintlab.com/img/favicon.png',
+        logo: 'https://research.muhammadsyafrudin.com/img/favicon.png',
       }),
     },
   ],
@@ -104,7 +126,7 @@ const config = {
       {name: 'keywords', content: 'Applied Intelligence Lab, AINTLab, AI research publications, artificial intelligence papers, machine learning publications, deep learning research, IoT research, RFID in supply chain, sustainable agriculture papers, self-supervised learning, self-organizing maps, vessel detection, human action recognition, transformer models, agricultural technology research, AgriTech publications, predictive analytics papers, AI for agriculture, AI-powered innovation, scientific articles, AI in agriculture, academic publications, AI research, machine learning, deep learning, artificial intelligence lab, IoT, RFID, sustainable agriculture, satellite imagery, AI-powered solutions, food security, agricultural data analysis, AgriTech solutions, AI innovation, Applied INTelligence Lab (AINTLab), Department of Artificial Intelligence and Data Science, Sejong University, Seoul 05006, Republic of Korea'},
       {name: 'twitter:card', content: 'Applied INTelligence Lab (AINTLab) - AINTLab is not only a laboratory but also a playground to learn and explore things related to applied intelligence. We explore the frontier of artificial intelligence, data science, and intelligent systems. We design AI-driven solutions that connect systems, enhance communication, and promote sustainability. Through collaboration across academia and industry, we aim to build systems that shape a smarter, more connected world. AINTLab is a hub for learning and innovation in applied intelligence and IoT. Pioneering Artificial Intelligence research, AINTLab focuses on machine learning, deep learning, IoT, and self-supervised learning. Our expertise drives agricultural innovation, vessel detection, human action recognition, and predictive analytics, promoting sustainable agriculture and global food security. Explore our extensive collection of research publications on AI, machine learning, IoT, and sustainable agriculture, featuring groundbreaking work on transformer models, predictive analytics, and more.'},
       {name: 'description', content: 'Applied INTelligence Lab (AINTLab) - AINTLab is not only a laboratory but also a playground to learn and explore things related to applied intelligence. We explore the frontier of artificial intelligence, data science, and intelligent systems. We design AI-driven solutions that connect systems, enhance communication, and promote sustainability. Through collaboration across academia and industry, we aim to build systems that shape a smarter, more connected world. AINTLab is a hub for learning and innovation in applied intelligence and IoT. Pioneering Artificial Intelligence research, AINTLab focuses on machine learning, deep learning, IoT, and self-supervised learning. Our expertise drives agricultural innovation, vessel detection, human action recognition, and predictive analytics, promoting sustainable agriculture and global food security. Explore our extensive collection of research publications on AI, machine learning, IoT, and sustainable agriculture, featuring groundbreaking work on transformer models, predictive analytics, and more.'},
-      {name: 'og:image',content: 'https://aintlab.com/img/aintlab-social-media.png'},
+      {name: 'og:image',content: 'https://research.muhammadsyafrudin.com/img/aintlab-social-media.png'},
     
     ],
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
@@ -112,8 +134,10 @@ const config = {
         title: '',
         logo: {
           alt: 'AINTLab is not only a laboratory but also a playground to learn and explore things related to applied intelligence. We explore the frontier of artificial intelligence, data science, and intelligent systems. We design AI-driven solutions that connect systems, enhance communication, and promote sustainability. Through collaboration across academia and industry, we aim to build systems that shape a smarter, more connected world.',
-          src: '/img/research.png',
-          srcDark: '/img/research-dark.png',
+          src: '/img/favicon.svg',
+          srcDark: '/img/favicon-dark.svg',
+          width: 64,
+          height: 64,
         },
         items: [
           {
@@ -156,9 +180,6 @@ const config = {
       footer: {
         style: 'dark',
         copyright: `<div class="footer-shell">
-          <div class="footer-brand-row">
-            <img class="footer-brand-logo" src="/img/aintlab-logo-footer.png" alt="Applied INTelligence Lab">
-          </div>
           <div class="footer-nav-row">
             <a href="/">Home</a>
             <a href="/team">The Team</a>
@@ -170,7 +191,7 @@ const config = {
             <a href="/email-policy">Email Policy</a>
           </div>
 
-          <p class="footer-copy">Copyright © 2019-${new Date().getFullYear()} Applied INTelligence Lab; Lead by Muhammad Syafrudin. <br/>Built with <a href="/credits">Docusaurus & others.</a> Assisted with 🤖. <span>Follow us on</span>
+          <p class="footer-copy">Copyright © ${new Date().getFullYear()} Applied INTelligence Lab; Lead by Muhammad Syafrudin. <br/>Built with <a href="/credits">Docusaurus & others.</a> Assisted with 🤖. <span>Follow us on</span>
             <a class="footer-social" href="https://www.linkedin.com/company/aintlab" target="_blank" rel="noopener noreferrer" aria-label="AINTLab LinkedIn">
               <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <title>Applied INTelligence Lab @ LinkedIn</title>

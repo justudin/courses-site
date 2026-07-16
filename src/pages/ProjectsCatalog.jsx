@@ -136,19 +136,19 @@ function ProjectsCatalog() {
       <section className={styles.overviewPanel}>
     
         <div className={styles.metricsGrid}>
-          <div className={styles.metricCard}>
+          <div className={`${styles.metricCard} reveal`}>
             <p className={styles.metricLabel}>Active</p>
             <p className={styles.metricValue}>{currentProjects.length}</p>
           </div>
-          <div className={styles.metricCard}>
+          <div className={`${styles.metricCard} reveal`}>
             <p className={styles.metricLabel}>Archive</p>
             <p className={styles.metricValue}>{pastProjects.length}</p>
           </div>
-          <div className={styles.metricCard}>
+          <div className={`${styles.metricCard} reveal`}>
             <p className={styles.metricLabel}>Institutions</p>
             <p className={styles.metricValue}>{organizations.size}</p>
           </div>
-          <div className={styles.metricCard}>
+          <div className={`${styles.metricCard} reveal`}>
             <p className={styles.metricLabel}>Coverage</p>
             <p className={styles.metricValue}>{portfolioStart ? `${portfolioStart}-2026` : 'Portfolio'}</p>
           </div>
@@ -165,7 +165,7 @@ function ProjectsCatalog() {
 
         <div className={styles.currentGrid}>
           {currentProjects.map((project) => (
-            <article key={project.id} className={styles.currentCard}>
+            <article key={project.id} className={`${styles.currentCard} reveal`}>
               <div className={styles.cardBadgeRow}>
                 <span className={styles.statusBadge}>Active</span>
                 <span className={styles.typeBadge}>{project.type}</span>

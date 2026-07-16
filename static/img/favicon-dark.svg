@@ -1,7 +1,23 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 90 90">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0.5 3.5 84 84">
+  <style>
+    .aint-flame-dark {
+      transform-box: fill-box;
+      transform-origin: 50% 100%;
+      animation: aint-flame-flicker-dark 2.6s ease-in-out infinite;
+    }
+    @keyframes aint-flame-flicker-dark {
+      0%, 100% { fill: #ffffff; opacity: 0.92; transform: scale(1, 1); }
+      22% { fill: #cfe6ff; opacity: 1; transform: scale(0.97, 1.05); }
+      48% { fill: #8cc0f4; opacity: 0.85; transform: scale(1.03, 0.95); }
+      74% { fill: #e7f2ff; opacity: 1; transform: scale(0.98, 1.04); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .aint-flame-dark { animation: none; }
+    }
+  </style>
   <g transform="translate(-49.927 -34.893)scale(1.24292)">
     <circle cx="74.346" cy="64.667" r="31.371" style="stroke-width:1;fill:#fff;paint-order:fill;stroke:#242526"/>
     <path style="stroke-width:1.091;fill:#242526" d="m67.798 36.606-15.28 49.891h13.097l6.549-17.462h4.366l6.548 17.462h13.098l-15.28-49.891z"/>
-    <path d="M73.992 40.421c-13.812 16.904 2.134 10.423-.397 28.056 10.901-14.542 6.951-18.556.397-28.056" style="stroke-width:1.091;fill:#fff"/>
+    <path class="aint-flame-dark" d="M73.992 40.421c-13.812 16.904 2.134 10.423-.397 28.056 10.901-14.542 6.951-18.556.397-28.056" style="stroke-width:1.091;fill:#fff"/>
   </g>
 </svg>

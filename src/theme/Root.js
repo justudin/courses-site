@@ -1,7 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
+
+const BackToTopIcon = require('@site/static/img/favicon.svg').default;
 
 export default function Root({children}) {
   const [isVisible, setIsVisible] = useState(false);
+  const progressBarRef = useRef(null);
 
   useEffect(() => {
     const adjustLayoutColumns = () => {
@@ -48,15 +51,88 @@ export default function Root({children}) {
   }, []);
 
   useEffect(() => {
+    let ticking = false;
+
+    const updateScrollState = () => {
+      const scrollY = window.scrollY;
+      setIsVisible(scrollY > 320);
+
+      const navbar = document.querySelector('.navbar');
+      if (navbar) {
+        navbar.classList.toggle('navbar--scrolled', scrollY > 8);
+      }
+
+      if (progressBarRef.current) {
+        const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+        const pct = scrollable > 0 ? Math.min(1, Math.max(0, scrollY / scrollable)) : 0;
+        progressBarRef.current.style.transform = `scaleX(${pct})`;
+      }
+
+      ticking = false;
+    };
+
     const onScroll = () => {
-      setIsVisible(window.scrollY > 320);
+      if (!ticking) {
+        ticking = true;
+        window.requestAnimationFrame(updateScrollState);
+      }
     };
 
     window.addEventListener('scroll', onScroll, {passive: true});
-    onScroll();
+    window.addEventListener('resize', onScroll, {passive: true});
+    updateScrollState();
 
     return () => {
       window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    const revealedClass = 'reveal-visible';
+
+    const revealAll = () => {
+      document.querySelectorAll('.reveal').forEach((el) => el.classList.add(revealedClass));
+    };
+
+    if (typeof IntersectionObserver === 'undefined') {
+      revealAll();
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add(revealedClass);
+            obs.unobserve(entry.target);
+          }
+        });
+      },
+      {threshold: 0.15, rootMargin: '0px 0px -8% 0px'},
+    );
+
+    let scheduled = false;
+    const observeNew = () => {
+      scheduled = false;
+      document.querySelectorAll(`.reveal:not(.${revealedClass})`).forEach((el) => {
+        observer.observe(el);
+      });
+    };
+
+    observeNew();
+
+    const mutationObserver = new MutationObserver(() => {
+      if (!scheduled) {
+        scheduled = true;
+        window.requestAnimationFrame(observeNew);
+      }
+    });
+    mutationObserver.observe(document.body, {childList: true, subtree: true});
+
+    return () => {
+      observer.disconnect();
+      mutationObserver.disconnect();
     };
   }, []);
 
@@ -66,6 +142,7 @@ export default function Root({children}) {
 
   return (
     <>
+      <div className="scroll-progress-bar" ref={progressBarRef} aria-hidden="true" />
       {children}
       <button
         type="button"
@@ -73,7 +150,8 @@ export default function Root({children}) {
         onClick={scrollToTop}
         aria-label="Back to top"
       >
-        Back to top
+        <BackToTopIcon className="global-back-to-top-icon" aria-hidden="true" />
+        <span>Back to top</span>
       </button>
     </>
   );

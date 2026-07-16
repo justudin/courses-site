@@ -22,6 +22,14 @@
   display: flex;
 }
 
+.cardCol:nth-child(2) {
+  transition-delay: 0.08s;
+}
+
+.cardCol:nth-child(3) {
+  transition-delay: 0.16s;
+}
+
 .card {
   width: 100%;
   border: none;

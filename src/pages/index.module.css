@@ -25,6 +25,19 @@
   margin-top: 1.55rem;
 }
 
+.kicker {
+  margin: 0 auto 0.4rem;
+  width: fit-content;
+  font-size: 0.77rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ifm-color-primary);
+  background: color-mix(in srgb, var(--ifm-color-primary) 14%, transparent);
+  padding: 0.3rem 0.65rem;
+  border-radius: 999px;
+}
+
 
 .academic {
   display: flex;
@@ -102,15 +115,14 @@
   position: relative;
   padding-bottom: 1.2rem;
   border-bottom: 3px solid var(--ifm-color-primary);
-  animation: revealUp 0.72s ease both;
 }
 
 .statMetric:nth-child(2) {
-  animation-delay: 0.08s;
+  transition-delay: 0.08s;
 }
 
 .statMetric:nth-child(3) {
-  animation-delay: 0.16s;
+  transition-delay: 0.16s;
 }
 
 .statValue {
@@ -120,6 +132,7 @@
   line-height: 1;
   margin-bottom: 0.45rem;
   font-weight: 700;
+  text-shadow: 0 0 22px color-mix(in srgb, var(--ifm-color-primary) 45%, transparent);
 }
 
 .statLabel {
@@ -151,16 +164,14 @@
   border-left: 4px solid var(--ifm-color-primary);
   background: transparent;
   border-radius: 0;
-  transition: none;
-  animation: revealUp 0.72s ease both;
 }
 
 .pillarItem:nth-child(2) {
-  animation-delay: 0.08s;
+  transition-delay: 0.08s;
 }
 
 .pillarItem:nth-child(3) {
-  animation-delay: 0.16s;
+  transition-delay: 0.16s;
 }
 
 .pillarItem:hover {
@@ -179,23 +190,6 @@
   margin-bottom: 0;
   font-size: 0.98rem;
   line-height: 1.6;
-}
-
-.statCard,
-.pillarCard {
-  display: none;
-}
-
-.revealUp {
-  animation: revealUp 0.72s ease both;
-}
-
-.revealUp:nth-child(2) {
-  animation-delay: 0.08s;
-}
-
-.revealUp:nth-child(3) {
-  animation-delay: 0.16s;
 }
 
 .ctaSection {
@@ -230,17 +224,6 @@
 
 [data-theme='dark'] .ctaCard {
   background: transparent;
-}
-
-@keyframes revealUp {
-  from {
-    opacity: 0;
-    transform: translateY(16px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 @media (max-width: 1200px) {
@@ -384,16 +367,6 @@
 
   .pillarItem p {
     font-size: 0.88rem;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .revealUp,
-  .statCard,
-  .pillarCard {
-    animation: none;
-    transition: none;
-    transform: none;
   }
 }
 

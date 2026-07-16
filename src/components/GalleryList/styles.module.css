@@ -15,6 +15,14 @@
   background: color-mix(in srgb, var(--ifm-color-primary) 3%, transparent);
 }
 
+.metricCard:nth-child(2) {
+  transition-delay: 0.06s;
+}
+
+.metricCard:nth-child(3) {
+  transition-delay: 0.12s;
+}
+
 .metricLabel {
   margin: 0;
   font-size: 0.72rem;
@@ -30,6 +38,7 @@
   font-size: 1.3rem;
   font-weight: 700;
   color: var(--ifm-font-color-base);
+  text-shadow: 0 0 18px color-mix(in srgb, var(--ifm-color-primary) 40%, transparent);
 }
 
 .controls {
@@ -105,14 +114,13 @@
 }
 
 .resultSummary {
-  margin-bottom: 0.95rem;
+  margin: 0 0 0.95rem;
   padding: 0.62rem 0.78rem;
   background: color-mix(in srgb, var(--ifm-color-primary) 8%, var(--ifm-background-surface-color));
   border-left: 3px solid var(--ifm-color-primary);
   border-radius: 8px;
   font-size: 0.91rem;
   color: var(--ifm-font-color-base);
-  margin: 0;
 }
 
 .galleryGrid {
@@ -132,7 +140,20 @@
   break-inside: avoid;
   background: transparent;
   border: 1px solid color-mix(in srgb, var(--ifm-border-color) 60%, transparent);
-  transition: border-color 0.22s ease;
+}
+
+/* Compound selector (higher specificity than the global .reveal rule) so this
+   combined transition list reliably wins regardless of CSS bundle order. */
+.galleryCard.reveal {
+  transition: border-color 0.22s ease, opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.galleryCard:nth-child(2) {
+  transition-delay: 0.05s;
+}
+
+.galleryCard:nth-child(3) {
+  transition-delay: 0.1s;
 }
 
 .galleryCard:hover,
@@ -263,8 +284,6 @@
   color: rgba(186, 214, 249, 0.95);
   font-weight: 700;
 }
-
-
 
 @media (max-width: 1199px) {
   .galleryGrid {

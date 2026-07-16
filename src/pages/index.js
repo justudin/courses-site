@@ -8,9 +8,9 @@ import MissionVision from '@site/src/components/MissionVision';
 import RecentUpdates from '@site/src/components/RecentUpdates';
 import FeaturedPapers from '@site/src/components/FeaturedPapers';
 import CollaborateWithUs from '@site/src/components/CollaborateWithUs';
-import backgroundVideo from '../assets/background.mp4';
 import backgroundImg from '../assets/background.webp';
 import LogoSlider from '@site/src/components/LogoSlider';
+import Hero3D from '@site/src/components/Hero3D';
 
 import styles from './index.module.css';
 
@@ -43,16 +43,7 @@ function HomepageHeader() {
   const {siteConfig} = useDocusaurusContext();
   return (
     <header id="hero" className={clsx('hero hero--primary', styles.heroBanner)}>
-    <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="background-video" 
-      >
-        <source src={backgroundVideo} type="video/mp4" alt={siteConfig.tagline}/>
-        <img src={backgroundImg} alt={siteConfig.tagline} /> 
-      </video>
+      <Hero3D posterSrc={backgroundImg} alt={siteConfig.tagline} />
       <div className="container">
         <h1 className="hero__title">{siteConfig.title}</h1>
         <p className="hero__subtitle">{siteConfig.tagline}</p>
@@ -77,11 +68,12 @@ function LabStats() {
   return (
     <section id="lab-stats" className={`${styles.labStats} section-with-bg-text bg-text--discovery`}>
       <div className="container">
+        <p className={clsx(styles.kicker, 'text--center')}>Impact</p>
         <h1 className="text--center">By The Numbers</h1>
         <p className="text--center"><em>AINTLab as a living playground for ideas, collaboration, and discovery.</em></p>
         <div className={styles.statMetrics}>
           {LAB_STATS.map((item) => (
-            <div key={item.label} className={styles.statMetric}>
+            <div key={item.label} className={clsx(styles.statMetric, 'reveal')}>
               <div className={styles.statValue}>{item.value}</div>
               <h2 className={styles.statLabel}>{item.label}</h2>
               <p className={styles.statDetail}>{item.detail}</p>
@@ -97,11 +89,12 @@ function WhyAINTLab() {
   return (
     <section id="why-aintlab" className={`${styles.whySection} section-with-bg-text bg-text--collaboration`}>
       <div className="container">
+        <p className={clsx(styles.kicker, 'text--center')}>Identity</p>
         <h1 className="text--center">Why AINTLab</h1>
         <p className="text--center"><em>The laboratory identity: rigorous research, human-centered design, and impactful deployment.</em></p>
         <div className={styles.pillarList}>
           {AINTLAB_PILLARS.map((pillar) => (
-            <div key={pillar.title} className={styles.pillarItem}>
+            <div key={pillar.title} className={clsx(styles.pillarItem, 'reveal')}>
               <h2>{pillar.title}</h2>
               <p>{pillar.description}</p>
             </div>
@@ -116,7 +109,8 @@ function JoinAINTLab() {
   return (
     <section id="join-aintlab" className={`${styles.ctaSection} section-with-bg-text bg-text--future`}>
       <div className="container">
-        <div className={styles.ctaCard}>
+        <div className={clsx(styles.ctaCard, 'reveal')}>
+          <p className={styles.kicker}>Get Involved</p>
           <h1>Ready To Build The Next Applied Intelligence Breakthrough?</h1>
           <p>
             Join our ecosystem of researchers, students, and industry partners shaping AI systems for a smarter and more connected world.
@@ -136,11 +130,12 @@ function AcademicGenealogy() {
    return (
     <section className={`${styles.academic}`} id="academic-genealogy">
       <div className="container">
+        <p className={clsx(styles.kicker, 'text--center')}>Lineage</p>
         <h1 className="text--center">Academic Genealogy</h1>
         <p className="text--center"><em>Tracing the scholarly lineage and academic mentorship network connected to AINTLab.</em></p>
         <div className="row">
           <div className={clsx('col col--12')}>
-            <div className={styles.genealogyFrame}>
+            <div className={clsx(styles.genealogyFrame, 'reveal')}>
               <Svg loading="lazy" className={styles.genealogySvg} aria-label="AINTLab academic genealogy" role="img" />
             </div>
           </div>
