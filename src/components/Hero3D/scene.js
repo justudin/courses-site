@@ -13,7 +13,7 @@ import {
   BoxGeometry,
   BufferAttribute,
   BufferGeometry,
-  Clock,
+  Timer,
   Color,
   DirectionalLight,
   DoubleSide,
@@ -55,7 +55,7 @@ const THREE = {
   BoxGeometry,
   BufferAttribute,
   BufferGeometry,
-  Clock,
+  Timer,
   Color,
   DirectionalLight,
   DoubleSide,
@@ -204,7 +204,9 @@ export function createHeroScene(canvas, { theme = 'light', quality = {} } = {}) 
   const icons = createConceptIcons(THREE);
   scene.add(icons.group);
 
-  const clock = new THREE.Clock();
+  // THREE.Clock is deprecated (r183) in favor of Timer, which requires an
+  // explicit update() each frame before reading getElapsed().
+  const timer = new THREE.Timer();
   let running = false;
   let frameId = null;
 
@@ -223,7 +225,8 @@ export function createHeroScene(canvas, { theme = 'light', quality = {} } = {}) 
   const mouseWorldPoint = new THREE.Vector3();
 
   function renderFrame() {
-    const t = clock.getElapsedTime();
+    timer.update();
+    const t = timer.getElapsed();
     pointerCurrent.x += (pointerTarget.x - pointerCurrent.x) * 0.06;
     pointerCurrent.y += (pointerTarget.y - pointerCurrent.y) * 0.06;
     logoGroup.rotation.y = baseRotationY + Math.sin(t * 0.15) * 0.12 + pointerCurrent.x * 0.18;
@@ -263,7 +266,7 @@ export function createHeroScene(canvas, { theme = 'light', quality = {} } = {}) 
     raycastHelper.setFromCamera(new THREE.Vector2(cx, -cy), camera);
     const worldPoint = new THREE.Vector3();
     if (raycastHelper.ray.intersectPlane(mousePlane, worldPoint)) {
-      network.pulse(worldPoint, clock.getElapsedTime());
+      network.pulse(worldPoint, timer.getElapsed());
     }
   }
 

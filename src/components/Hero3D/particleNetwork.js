@@ -41,7 +41,8 @@ const MOUSE_GLSL = /* glsl */ `
 const RIPPLE_GLSL = /* glsl */ `
   uniform vec3 uClickPos;
   uniform float uClickTime;
-  uniform float uTime;
+  // uTime is already declared by the vertex shader this gets spliced into —
+  // redeclaring it here is a GLSL compile error ('uTime' : redefinition).
 
   float ripple(vec3 pos) {
     float dt = uTime - uClickTime;
