@@ -189,6 +189,11 @@ export function createParticleNetwork(THREE, { count = 70, color = '#5ea4ef', ne
     fragmentShader: POINTS_FRAGMENT,
     transparent: true,
     depthWrite: false,
+    // The network sits behind the opaque logo disc (world z ~ -1..-3.4 vs the
+    // disc at ~0), so with depth testing on, the disc's depth-buffer writes
+    // occlude most of the network behind it. It's an ambient/additive layer,
+    // not solid geometry, so it should read through instead of being clipped.
+    depthTest: false,
     blending: THREE.AdditiveBlending,
   });
 
@@ -251,6 +256,7 @@ export function createParticleNetwork(THREE, { count = 70, color = '#5ea4ef', ne
     fragmentShader: LINE_FRAGMENT,
     transparent: true,
     depthWrite: false,
+    depthTest: false,
     blending: THREE.AdditiveBlending,
   });
 

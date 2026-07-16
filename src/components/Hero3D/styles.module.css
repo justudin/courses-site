@@ -34,7 +34,13 @@
   transition: opacity 0.8s ease;
 }
 
-.canvasReady {
+/* Compound selector (not just .canvasReady) so this always outranks
+   .heroCanvas's opacity:0 on specificity alone. A same-specificity single
+   class selector here is order-dependent, and production CSS minification
+   is free to relocate equal-declaration rules earlier in the stylesheet
+   (e.g. merging with unrelated selectors that share a declaration) — which
+   silently flips the cascade winner and leaves the canvas invisible. */
+.heroCanvas.canvasReady {
   opacity: 1;
 }
 
