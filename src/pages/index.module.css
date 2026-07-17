@@ -25,24 +25,200 @@
   margin-top: 1.55rem;
 }
 
+/* Quiet uppercase eyebrow — small, letterspaced, no pill chrome. */
 .kicker {
-  margin: 0 auto 0.4rem;
+  margin: 0 auto 0.55rem;
   width: fit-content;
-  font-size: 0.77rem;
+  font-size: 0.8rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.2em;
   color: var(--ifm-color-primary);
-  background: color-mix(in srgb, var(--ifm-color-primary) 14%, transparent);
-  padding: 0.3rem 0.65rem;
+}
+
+/* ---- Hero content + first-visit intro ---- */
+
+.heroContent {
+  position: relative;
+  z-index: 2;
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.heroContentHidden {
+  opacity: 0;
+  transform: translateY(18px);
+  pointer-events: none;
+}
+
+.titleAccent {
+  background: linear-gradient(100deg, #58b8ff 0%, #9adcff 55%, #e8f8ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.introOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 1.25rem clamp(3rem, 10vh, 6rem);
+  background: radial-gradient(ellipse at 50% 42%, transparent 34%, rgba(2, 10, 24, 0.6) 100%);
+  pointer-events: none;
+  transition: opacity 0.9s ease;
+}
+
+.introOverlayDone {
+  opacity: 0;
+}
+
+.introCaptions {
+  min-height: 6.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  text-align: center;
+}
+
+.introCaption {
+  margin: 0;
+  color: #eaf4ff;
+  font-size: clamp(1.2rem, 2.8vw, 2rem);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  text-shadow: 0 4px 30px rgba(2, 12, 28, 0.85);
+  animation: introRise 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.introEyebrow {
+  margin: 0 0 0.7rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.24em;
+  color: rgba(154, 220, 255, 0.9);
+  animation: introRise 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.introSpiritWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.introSpirit {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem 1.6rem;
+  margin: 0;
+  padding: 0;
+}
+
+.introSpirit li {
+  color: #f2f9ff;
+  font-size: clamp(1rem, 2vw, 1.4rem);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-shadow: 0 3px 24px rgba(2, 12, 28, 0.85);
+  opacity: 0;
+  animation: introRise 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.introSpirit li:last-child {
+  background: linear-gradient(100deg, #58b8ff, #c9ecff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@keyframes introRise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+.introSkip {
+  pointer-events: auto;
+  position: absolute;
+  right: clamp(1rem, 3vw, 2rem);
+  bottom: clamp(1rem, 3vh, 1.6rem);
+  padding: 0.42rem 1rem;
   border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(8, 22, 44, 0.4);
+  color: rgba(240, 248, 255, 0.92);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.introSkip:hover,
+.introSkip:focus-visible {
+  background: rgba(20, 48, 88, 0.6);
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+.scrollCue {
+  position: absolute;
+  bottom: 1.3rem;
+  left: calc(50% - 1.25rem);
+  z-index: 2;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  background: rgba(8, 22, 44, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.9s ease, border-color 0.2s ease;
+  animation: cueFloat 2.8s ease-in-out infinite;
+}
+
+.scrollCue:hover {
+  border-color: rgba(255, 255, 255, 0.65);
+}
+
+.scrollCueChevron {
+  width: 0.6rem;
+  height: 0.6rem;
+  border-right: 2px solid rgba(255, 255, 255, 0.85);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.85);
+  transform: rotate(45deg);
+  margin-top: -0.25rem;
+}
+
+@keyframes cueFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(6px);
+  }
 }
 
 
 .academic {
   display: flex;
   align-items: center;
-  padding: 2.25rem 0 1rem;
+  padding: 3.5rem 0 1.5rem;
   width: 100%;
 }
 
@@ -100,21 +276,37 @@
 
 .labStats,
 .whySection {
-  padding: 2.2rem 0 0.7rem;
+  padding: 4rem 0 2rem;
 }
 
 .statMetrics {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 2.5rem 2rem;
-  padding: 1.5rem 0;
+  padding: 2rem 0 1rem;
 }
 
 .statMetric {
   text-align: center;
   position: relative;
-  padding-bottom: 1.2rem;
-  border-bottom: 3px solid var(--ifm-color-primary);
+}
+
+/* Stats are links to their source pages — quiet until hovered. */
+.statLink {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  border-radius: 12px;
+  padding: 0.6rem 0.4rem;
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), background 0.22s ease;
+}
+
+.statLink:hover,
+.statLink:focus-visible {
+  text-decoration: none;
+  color: inherit;
+  transform: translateY(-4px);
+  background: color-mix(in srgb, var(--ifm-color-primary) 5%, transparent);
 }
 
 .statMetric:nth-child(2) {
@@ -125,20 +317,24 @@
   transition-delay: 0.16s;
 }
 
+/* Apple-spec-style numbers: huge gradient figure, small quiet label. */
 .statValue {
   font-family: var(--ifm-heading-font-family);
-  font-size: clamp(2rem, 3.5vw, 2.75rem);
-  color: var(--ifm-color-primary);
+  font-size: clamp(2.8rem, 6vw, 4.4rem);
   line-height: 1;
-  margin-bottom: 0.45rem;
-  font-weight: 700;
-  text-shadow: 0 0 22px color-mix(in srgb, var(--ifm-color-primary) 45%, transparent);
+  margin-bottom: 0.55rem;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  background: linear-gradient(120deg, var(--ifm-color-primary-light), #6fc3ff 80%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 .statLabel {
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin-bottom: 0.45rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
   color: var(--ifm-font-color-base);
 }
 
@@ -146,6 +342,8 @@
   font-size: 0.92rem;
   color: var(--ifm-font-color-secondary);
   line-height: 1.5;
+  max-width: 30ch;
+  margin: 0 auto;
 }
 
 .whySection {
@@ -207,7 +405,8 @@
 
 .ctaCard h1 {
   margin-bottom: 0.55rem;
-  font-size: clamp(1.45rem, 3vw, 2.35rem);
+  font-size: clamp(1.8rem, 3.8vw, 3rem);
+  letter-spacing: -0.025em;
 }
 
 .ctaCard p {

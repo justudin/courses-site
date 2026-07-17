@@ -99,11 +99,53 @@ const THEME_TOKENS = {
   },
 };
 
+// Steady-state blue-fire values shared by the intro's end state and the
+// no-intro (returning visitor) initial state.
+const FLAME_INTENSITY = 1.35;
+const RIM_INTENSITY = 0.9;
+
+/**
+ * First-visit "forging of the mark" timeline (seconds from intro start).
+ * Each entry fires onIntroPhase(name) once when its time is reached, so the
+ * DOM captions stay in sync with the 3D beats:
+ *   forge  — particle field converges, the disc coins into place
+ *   rise   — the "A" descends into the disc
+ *   ignite — the blue fire bursts alive (ripple through the network)
+ *   spirit — orbiting concept shapes appear; captions list the lab's spirit
+ *   done   — intro over, scene blends into its ambient idle behavior
+ */
+const INTRO_TIMELINE = [
+  { name: 'forge', at: 0 },
+  { name: 'rise', at: 2.1 },
+  { name: 'ignite', at: 4.0 },
+  { name: 'spirit', at: 5.7 },
+  { name: 'done', at: 9.6 },
+];
+const INTRO_END = INTRO_TIMELINE[INTRO_TIMELINE.length - 1].at;
+
+function segment(t, from, to) {
+  return Math.min(1, Math.max(0, (t - from) / (to - from)));
+}
+
+function easeOutCubic(x) {
+  return 1 - Math.pow(1 - x, 3);
+}
+
+function easeInOutCubic(x) {
+  return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+}
+
+function easeOutBack(x) {
+  const c1 = 1.70158;
+  const c3 = c1 + 1;
+  return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2);
+}
+
 function resolveTheme(theme) {
   return THEME_TOKENS[theme] ? theme : 'light';
 }
 
-export function createHeroScene(canvas, { theme = 'light', quality = {} } = {}) {
+export function createHeroScene(canvas, { theme = 'light', quality = {}, intro = false, onIntroPhase } = {}) {
   const particleCount = quality.particleCount ?? 70;
   const initialDpr = quality.dpr ?? Math.min(window.devicePixelRatio || 1, 2);
   let activeTheme = resolveTheme(theme);
@@ -119,7 +161,15 @@ export function createHeroScene(canvas, { theme = 'light', quality = {} } = {}) 
 
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(32, 1, 0.1, 100);
-  camera.position.set(0, 0, 6.4);
+  // Camera distance is aspect-aware: on narrow (mobile) viewports the camera
+  // pulls back so the mark always fits ~78% of the frame width instead of
+  // bleeding past the edges. Recomputed on every resize.
+  let cameraDistance = 6.4;
+  function updateCameraDistance() {
+    const halfH = Math.tan((camera.fov * Math.PI) / 360);
+    cameraDistance = Math.max(6.4, 1.6 / (halfH * camera.aspect));
+  }
+  camera.position.set(0, 0, cameraDistance);
   camera.lookAt(0, 0, 0);
 
   const keyLight = new THREE.DirectionalLight(0xffffff, 1.15);
@@ -133,12 +183,14 @@ export function createHeroScene(canvas, { theme = 'light', quality = {} } = {}) 
   );
   scene.add(fillLight);
 
-  const rimLight = new THREE.PointLight(0xffb066, 0.85, 7, 2);
+  // Cool rim glow from the flame side — the blue fire's light cast onto the
+  // mark. Starts dark during the intro and comes alive at ignition.
+  const rimLight = new THREE.PointLight(0x4fc3ff, RIM_INTENSITY, 7, 2);
   rimLight.position.set(-0.7, 0.35, 1.8);
   scene.add(rimLight);
 
   // Logo: extruded disc + embossed "A" (with a real geometric hole for the
-  // flame) + a flat ember-shader mesh recessed inside that hole.
+  // flame) + a flat blue-fire shader mesh recessed inside that hole.
   const circleShape = buildCircleShape(THREE);
   const aShape = buildAShapeWithFlameHole(THREE);
   const flameShape = buildFlameShape(THREE);
@@ -187,9 +239,13 @@ export function createHeroScene(canvas, { theme = 'light', quality = {} } = {}) 
   const flameMesh = new THREE.Mesh(flameGeometry, fireMaterial);
   flameMesh.position.z = 0.235;
 
+  // The mark floats in the upper two-thirds of the frame; the headline owns
+  // the lower third (see the hero layout), so they never fight for the eye.
+  const LOGO_BASE_Y = 0.45;
   const logoGroup = new THREE.Group();
   logoGroup.add(discMesh, aMesh, flameMesh);
-  logoGroup.scale.setScalar(1.55);
+  logoGroup.scale.setScalar(1.25);
+  logoGroup.position.y = LOGO_BASE_Y;
   const baseRotationX = -0.1;
   const baseRotationY = 0.16;
   logoGroup.rotation.set(baseRotationX, baseRotationY, 0);
@@ -202,6 +258,7 @@ export function createHeroScene(canvas, { theme = 'light', quality = {} } = {}) 
   scene.add(network.group);
 
   const icons = createConceptIcons(THREE);
+  icons.group.position.y = LOGO_BASE_Y;
   scene.add(icons.group);
 
   // THREE.Clock is deprecated (r183) in favor of Timer, which requires an
@@ -209,6 +266,119 @@ export function createHeroScene(canvas, { theme = 'light', quality = {} } = {}) 
   const timer = new THREE.Timer();
   let running = false;
   let frameId = null;
+
+  // ---- Intro state -------------------------------------------------------
+  let introActive = Boolean(intro);
+  let introStartElapsed = null; // captured on the first rendered intro frame
+  let introPhaseIndex = -1;
+  // Elapsed timestamp when the intro ended; drives the blend back into the
+  // ambient idle sway. A large negative sentinel means "never had an intro",
+  // so the blend is already 1 on the first frame.
+  let introEndElapsed = introActive ? null : -100;
+  let ignitionPulseFired = false;
+
+  function emitIntroPhases(it) {
+    while (
+      introPhaseIndex + 1 < INTRO_TIMELINE.length &&
+      it >= INTRO_TIMELINE[introPhaseIndex + 1].at
+    ) {
+      introPhaseIndex += 1;
+      if (onIntroPhase) {
+        onIntroPhase(INTRO_TIMELINE[introPhaseIndex].name);
+      }
+    }
+  }
+
+  function applySteadyState() {
+    camera.position.set(0, 0, cameraDistance);
+    camera.lookAt(0, 0, 0);
+    discMesh.visible = true;
+    discMesh.scale.setScalar(1);
+    discMesh.rotation.set(0, 0, 0);
+    aMesh.visible = true;
+    aMesh.scale.setScalar(1);
+    aMesh.position.set(0, 0, 0.2);
+    flameMesh.visible = true;
+    fireMaterial.uniforms.uIntensity.value = FLAME_INTENSITY;
+    fireMaterial.uniforms.uIgnite.value = 0;
+    rimLight.intensity = RIM_INTENSITY;
+    network.group.scale.setScalar(1);
+    icons.group.visible = true;
+    icons.group.scale.setScalar(1);
+  }
+
+  function applyIntroFrame(it) {
+    // Camera dolly: drift in from afar while the mark forges itself.
+    const camP = easeInOutCubic(segment(it, 0, 5.4));
+    camera.position.set(0, 0.5 * (1 - camP), cameraDistance + 2.8 * (1 - camP));
+    camera.lookAt(0, 0, 0);
+
+    // Particle field converges from a compressed core — the "big bang" the
+    // rest of the mark is born out of.
+    const netP = easeOutCubic(segment(it, 0, 2.4));
+    network.group.scale.setScalar(0.12 + 0.88 * netP);
+
+    // Disc coins into place with a decaying spin.
+    const discScaleP = easeOutBack(segment(it, 0.2, 2.0));
+    const discSpinP = easeOutCubic(segment(it, 0.2, 2.2));
+    discMesh.visible = it >= 0.2;
+    discMesh.scale.setScalar(Math.max(0.0001, discScaleP));
+    discMesh.rotation.y = (1 - discSpinP) * Math.PI * 2.5;
+
+    // The "A" descends into the disc.
+    const aP = easeOutCubic(segment(it, 2.15, 3.8));
+    aMesh.visible = it >= 2.15;
+    aMesh.position.y = (1 - aP) * 2.3;
+    aMesh.position.z = 0.2 + (1 - aP) * 1.4;
+    aMesh.scale.setScalar(0.6 + 0.4 * aP);
+
+    // Ignition: burst to white-hot, then settle into the steady blue burn.
+    flameMesh.visible = it >= 3.95;
+    const igniteRamp = segment(it, 4.0, 4.35);
+    const igniteDecay = 1 - easeOutCubic(segment(it, 4.35, 5.9));
+    fireMaterial.uniforms.uIgnite.value = igniteRamp * igniteDecay;
+    fireMaterial.uniforms.uIntensity.value = FLAME_INTENSITY * segment(it, 4.0, 4.55);
+    rimLight.intensity = RIM_INTENSITY * easeOutCubic(segment(it, 4.0, 4.9));
+    if (!ignitionPulseFired && it >= 4.05) {
+      ignitionPulseFired = true;
+      network.pulse(new THREE.Vector3(0, LOGO_BASE_Y + 0.45, 0.3), timer.getElapsed());
+    }
+
+    // Concept shapes join the orbit once the fire is alive.
+    const iconP = easeOutBack(segment(it, 5.7, 6.7));
+    icons.group.visible = it >= 5.65;
+    icons.group.scale.setScalar(Math.max(0.0001, iconP));
+  }
+
+  function finishIntro() {
+    introActive = false;
+    introEndElapsed = timer.getElapsed();
+    applySteadyState();
+    // Make sure every phase (including 'done') has been reported exactly once.
+    while (introPhaseIndex + 1 < INTRO_TIMELINE.length) {
+      introPhaseIndex += 1;
+      if (onIntroPhase) {
+        onIntroPhase(INTRO_TIMELINE[introPhaseIndex].name);
+      }
+    }
+  }
+
+  if (!introActive) {
+    applySteadyState();
+  } else {
+    // Hide everything until the first intro frame sets it up, so a render
+    // before start() (e.g. the resize() static render) doesn't flash the
+    // finished logo.
+    discMesh.visible = false;
+    aMesh.visible = false;
+    flameMesh.visible = false;
+    icons.group.visible = false;
+    fireMaterial.uniforms.uIntensity.value = 0;
+    rimLight.intensity = 0;
+    network.group.scale.setScalar(0.12);
+    camera.position.set(0, 0.5, cameraDistance + 2.8);
+    camera.lookAt(0, 0, 0);
+  }
 
   // Pointer-parallax: target is set instantly by setPointer() (desktop only —
   // see index.js), current eases toward it each frame for a damped tilt
@@ -227,11 +397,31 @@ export function createHeroScene(canvas, { theme = 'light', quality = {} } = {}) 
   function renderFrame() {
     timer.update();
     const t = timer.getElapsed();
+
+    if (introActive) {
+      if (introStartElapsed === null) {
+        introStartElapsed = t;
+      }
+      const it = t - introStartElapsed;
+      applyIntroFrame(it);
+      emitIntroPhases(it);
+      if (it >= INTRO_END) {
+        finishIntro();
+      }
+    }
+
+    // Ambient idle sway + pointer parallax, blended in over ~1.6s after the
+    // intro ends (idleBlend is already 1 when there was no intro).
+    const idleBlend = introActive
+      ? 0
+      : Math.min(1, Math.max(0, (t - (introEndElapsed ?? t)) / 1.6));
     pointerCurrent.x += (pointerTarget.x - pointerCurrent.x) * 0.06;
     pointerCurrent.y += (pointerTarget.y - pointerCurrent.y) * 0.06;
-    logoGroup.rotation.y = baseRotationY + Math.sin(t * 0.15) * 0.12 + pointerCurrent.x * 0.18;
-    logoGroup.rotation.x = baseRotationX + Math.cos(t * 0.12) * 0.04 - pointerCurrent.y * 0.12;
-    logoGroup.position.y = Math.sin(t * 0.4) * 0.05;
+    logoGroup.rotation.y =
+      baseRotationY + (Math.sin(t * 0.15) * 0.12 + pointerCurrent.x * 0.18) * idleBlend;
+    logoGroup.rotation.x =
+      baseRotationX + (Math.cos(t * 0.12) * 0.04 - pointerCurrent.y * 0.12) * idleBlend;
+    logoGroup.position.y = LOGO_BASE_Y + Math.sin(t * 0.4) * 0.05 * idleBlend;
     fireMaterial.uniforms.uTime.value = t;
 
     if (pointerActive) {
@@ -270,6 +460,15 @@ export function createHeroScene(canvas, { theme = 'light', quality = {} } = {}) 
     }
   }
 
+  function skipIntro() {
+    if (introActive) {
+      finishIntro();
+      if (!running) {
+        renderer.render(scene, camera);
+      }
+    }
+  }
+
   function start() {
     if (running) return;
     running = true;
@@ -289,6 +488,10 @@ export function createHeroScene(canvas, { theme = 'light', quality = {} } = {}) 
     const height = Math.max(nextHeight, 1);
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
+    updateCameraDistance();
+    if (!introActive) {
+      camera.position.z = cameraDistance;
+    }
     renderer.setPixelRatio(nextDpr ?? initialDpr);
     renderer.setSize(width, height, false);
     if (!running) {
@@ -320,5 +523,5 @@ export function createHeroScene(canvas, { theme = 'light', quality = {} } = {}) 
     renderer.forceContextLoss();
   }
 
-  return { start, stop, resize, setTheme, setPointer, click, dispose };
+  return { start, stop, resize, setTheme, setPointer, click, skipIntro, dispose };
 }

@@ -1,9 +1,14 @@
 /**
- * Procedural "ember glow" shader for the flame cutout inside the logo's "A".
- * No textures/assets — a small hand-written value-noise FBM drives a slow,
- * low-key flicker through a warm ember color ramp. Tuned deliberately
- * restrained (low max alpha, slow scroll speed) per the "subtle ember, not a
- * cartoon flame" brief.
+ * Procedural "blue fire" shader for the flame cutout inside the logo's "A".
+ * No textures/assets — a small hand-written value-noise FBM drives a slow
+ * upward-licking flicker through a blue-fire color ramp (deep royal blue →
+ * electric blue → ice-white core). The blue fire is the spirit of the lab —
+ * it should read as alive and igniting, not decorative: a visible core with
+ * soft tongues rising off it.
+ *
+ * uIgnite drives the one-shot ignition burst during the first-visit intro:
+ * it briefly whites out the core, expands the glow radius, and boosts alpha,
+ * then eases back to the steady burn.
  */
 
 const VERTEX_SHADER = /* glsl */ `
@@ -18,6 +23,7 @@ const FRAGMENT_SHADER = /* glsl */ `
   varying vec2 vLocalPos;
   uniform float uTime;
   uniform float uIntensity;
+  uniform float uIgnite;
   uniform vec3 uColorDeep;
   uniform vec3 uColorMid;
   uniform vec3 uColorCore;
@@ -52,17 +58,23 @@ const FRAGMENT_SHADER = /* glsl */ `
 
   void main() {
     vec2 p = vLocalPos * 3.1;
-    float flicker = fbm(p + vec2(0.0, -uTime * 0.32)) * 0.6;
-    flicker += fbm(p * 1.7 + vec2(uTime * 0.09, -uTime * 0.55)) * 0.4;
+    // Two upward-scrolling noise layers at different speeds read as rising
+    // tongues of flame rather than a static shimmer.
+    float flicker = fbm(p + vec2(0.0, -uTime * 0.45)) * 0.6;
+    flicker += fbm(p * 1.7 + vec2(uTime * 0.09, -uTime * 0.8)) * 0.4;
 
-    float dist = distance(vLocalPos, uFlameCenter) / uFlameRadius;
+    float radius = uFlameRadius * (1.0 + uIgnite * 0.55);
+    float dist = distance(vLocalPos, uFlameCenter) / radius;
     float radial = smoothstep(1.05, 0.0, dist);
 
-    float glow = radial * (0.4 + 0.6 * flicker);
-    vec3 color = mix(uColorDeep, uColorMid, smoothstep(0.12, 0.55, glow));
-    color = mix(color, uColorCore, smoothstep(0.62, 0.95, glow));
+    float glow = radial * (0.55 + 0.6 * flicker);
+    vec3 color = mix(uColorDeep, uColorMid, smoothstep(0.08, 0.42, glow));
+    color = mix(color, uColorCore, smoothstep(0.48, 0.85, glow));
 
-    float alpha = glow * uIntensity;
+    // Ignition burst: white-hot core flash + overall brightening.
+    color = mix(color, vec3(0.92, 0.98, 1.0), uIgnite * radial * 0.85);
+
+    float alpha = glow * uIntensity * (1.0 + uIgnite * 1.6);
     gl_FragColor = vec4(color, alpha);
   }
 `;
@@ -78,10 +90,11 @@ export function createFireMaterial(THREE) {
     fragmentShader: FRAGMENT_SHADER,
     uniforms: {
       uTime: { value: 0 },
-      uIntensity: { value: 0.55 },
-      uColorDeep: { value: new THREE.Color('#5c1f10') },
-      uColorMid: { value: new THREE.Color('#e07a35') },
-      uColorCore: { value: new THREE.Color('#ffdf9e') },
+      uIntensity: { value: 1.35 },
+      uIgnite: { value: 0 },
+      uColorDeep: { value: new THREE.Color('#0d3d8f') },
+      uColorMid: { value: new THREE.Color('#3f9df0') },
+      uColorCore: { value: new THREE.Color('#e6f7ff') },
       uFlameCenter: { value: new THREE.Vector2(FLAME_CENTER[0], FLAME_CENTER[1]) },
       uFlameRadius: { value: FLAME_RADIUS },
     },

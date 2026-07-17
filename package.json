@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "generate:credits": "node scripts/generate-credits-page.js",
+    "generate:network": "node scripts/generate-collaboration-network.js",
     "prestart": "npm run generate:credits",
     "prebuild": "npm run generate:credits",
     "predevelop": "npm run generate:credits",

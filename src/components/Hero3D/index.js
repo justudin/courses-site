@@ -3,6 +3,8 @@ import styles from './styles.module.css';
 
 const LogoMark = require('@site/static/img/favicon.svg').default;
 
+const INTRO_SEEN_KEY = 'aintlab.introSeen.v1';
+
 function getSiteTheme() {
   if (typeof document === 'undefined') {
     return 'light';
@@ -17,10 +19,19 @@ function getSiteTheme() {
  * asked for reduced motion and their browser supports WebGL. three.js itself
  * is loaded via a dynamic import so it never enters the main bundle and never
  * loads on any page other than the homepage.
+ *
+ * First visit only (per INTRO_SEEN_KEY in localStorage), the scene plays the
+ * "forging of the mark" intro. Phase names are relayed to the page through
+ * onIntroPhase so the caption overlay stays in sync, and introApiRef.current
+ * gets a {skip} handle for the Skip button. The intro is marked seen once it
+ * completes (or is skipped), so an abandoned intro replays next time.
  */
-export default function Hero3D({posterSrc, alt}) {
+export default function Hero3D({posterSrc, alt, onIntroPhase, introApiRef}) {
   const hostRef = useRef(null);
   const canvasRef = useRef(null);
+  // Keep the latest callback reachable from the one-shot mount effect.
+  const onIntroPhaseRef = useRef(onIntroPhase);
+  onIntroPhaseRef.current = onIntroPhase;
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -60,6 +71,34 @@ export default function Hero3D({posterSrc, alt}) {
       };
     }
 
+    // First visit (per localStorage) gets the logo-creation intro. Storage
+    // access can throw (privacy modes); treat that as "already seen".
+    let playIntro = false;
+    try {
+      playIntro = window.localStorage.getItem(INTRO_SEEN_KEY) !== '1';
+    } catch (err) {
+      playIntro = false;
+    }
+
+    const relayIntroPhase = (phase) => {
+      if (phase === 'done') {
+        try {
+          window.localStorage.setItem(INTRO_SEEN_KEY, '1');
+        } catch (err) {
+          // Best effort — the intro simply replays next visit.
+        }
+      }
+      if (onIntroPhaseRef.current) {
+        onIntroPhaseRef.current(phase);
+      }
+    };
+
+    if (playIntro) {
+      // Tell the page immediately (before the async chunk resolves) so it can
+      // veil the hero copy instead of flashing it for a few frames.
+      relayIntroPhase('pending');
+    }
+
     import(/* webpackChunkName: "hero3d" */ './scene').then(({createHeroScene}) => {
       if (cancelled || !canvasRef.current) {
         return;
@@ -67,7 +106,18 @@ export default function Hero3D({posterSrc, alt}) {
       handle = createHeroScene(canvasRef.current, {
         theme: getSiteTheme(),
         quality: computeQuality(),
+        intro: playIntro,
+        onIntroPhase: playIntro ? relayIntroPhase : undefined,
       });
+      if (introApiRef) {
+        introApiRef.current = {
+          skip() {
+            if (handle) {
+              handle.skipIntro();
+            }
+          },
+        };
+      }
       const host = hostRef.current;
       if (host) {
         handle.resize(host.clientWidth, host.clientHeight, computeQuality().dpr);

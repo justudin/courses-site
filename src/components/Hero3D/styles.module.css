@@ -22,6 +22,15 @@
   aspect-ratio: 1 / 1;
   opacity: 0.92;
   filter: drop-shadow(0 18px 46px rgba(4, 14, 28, 0.55));
+  transition: opacity 0.5s ease;
+}
+
+/* Once the 3D scene is live the static logo is redundant — and during the
+   first-visit intro it would show through the transparent canvas and spoil
+   the logo-creation sequence. (Browsers without :has() keep the old
+   behavior: static logo under the canvas.) */
+.heroCanvasHost:has(.canvasReady) .fallbackLogo {
+  opacity: 0;
 }
 
 .heroCanvas {

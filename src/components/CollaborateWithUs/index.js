@@ -2,6 +2,7 @@ import React from 'react';
 import clsx from 'clsx';
 import styles from './styles.module.css';
 import Link from '@docusaurus/Link'
+import CollabMap2D from '@site/src/components/CollabMap2D'
 
 
 const MissionVisionList = [
@@ -19,7 +20,6 @@ const MissionVisionList = [
         <li><b>Industry partners</b> seeking AI expertise in data analytics, and intelligent systems.</li>
         <li><b><Link to="/prospective">Students </Link>and <Link to="/alumni/#visiting-professorsresearchers">visiting researchers</Link></b> looking to learn, contribute, and grow in an innovative environment.</li>
         </ul>
-        Meet <b><Link to="/team">Our Team</Link></b> or if you are interested in joining us, please read the <b><Link to="/prospective">Guidelines for Prospective Students.</Link></b>
 </>
     ),
   },
@@ -27,10 +27,9 @@ const MissionVisionList = [
     title: 'Collaborator Network Map',
     description: (
       <>
-      <em>Our collaboration map from the past five years.</em>
       <br/>
-      <img loading="lazy" alt="Our collaboration map from the past five years" src="/team/collaboration_map.webp" width="686" height="364" className={styles.mapImage}/>
-      <p className={styles.mapCaption}><em>If you are interested in collaborating with us, please <Link to="/contact">contact us.</Link></em></p>
+      <CollabMap2D minWorks={4} />
+      <p className={styles.mapCaption}><em>Countries with 4+ co-authored works, live from our publication DOIs — or <Link to="/contact">contact us</Link> to join the map.</em></p>
       </>
     ),
   },
@@ -53,8 +52,8 @@ export default function MissionVision() {
     <section className={styles.features} id="CollaborateWithUs">
       <div className="container">
         <p className={styles.kicker}>Partnership</p>
-        <h1 className="text--center">Collaborate With Us</h1>
-        <p className="text--center"><em>A global collaboration ecosystem for academia, industry, and future researchers.</em></p>
+        <h1 className="text--center">Collaborate with us.</h1>
+        <p className="text--center"><em>Academia, industry, and future researchers — together.</em></p>
         <div className="row">
           {MissionVisionList.map((props, idx) => (
             <Feature key={idx} {...props} />

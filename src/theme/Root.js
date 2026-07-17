@@ -1,10 +1,9 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
 const BackToTopIcon = require('@site/static/img/favicon.svg').default;
 
 export default function Root({children}) {
   const [isVisible, setIsVisible] = useState(false);
-  const progressBarRef = useRef(null);
 
   useEffect(() => {
     const adjustLayoutColumns = () => {
@@ -60,12 +59,6 @@ export default function Root({children}) {
       const navbar = document.querySelector('.navbar');
       if (navbar) {
         navbar.classList.toggle('navbar--scrolled', scrollY > 8);
-      }
-
-      if (progressBarRef.current) {
-        const scrollable = document.documentElement.scrollHeight - window.innerHeight;
-        const pct = scrollable > 0 ? Math.min(1, Math.max(0, scrollY / scrollable)) : 0;
-        progressBarRef.current.style.transform = `scaleX(${pct})`;
       }
 
       ticking = false;
@@ -142,16 +135,15 @@ export default function Root({children}) {
 
   return (
     <>
-      <div className="scroll-progress-bar" ref={progressBarRef} aria-hidden="true" />
       {children}
       <button
         type="button"
         className={`global-back-to-top ${isVisible ? 'is-visible' : ''}`}
         onClick={scrollToTop}
         aria-label="Back to top"
+        title="Back to top"
       >
         <BackToTopIcon className="global-back-to-top-icon" aria-hidden="true" />
-        <span>Back to top</span>
       </button>
     </>
   );

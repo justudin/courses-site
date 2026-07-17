@@ -92,8 +92,8 @@ function RecentUpdates() {
     <section className={styles.features} id="recentupdated">
       <div className="container">
         <p className={styles.kicker}>Newsroom</p>
-        <h1 className="text--center">Latest Updates</h1>
-        <p className="text--center"><em>Latest five updates from AINTLab below — <Link to="/updates">view all updates here.</Link></em></p>
+        <h1 className="text--center">Latest updates.</h1>
+        <p className="text--center"><em>Fresh from the lab — <Link to="/updates">view all updates</Link>.</em></p>
         <div className="row">
         <div className="col col--7">
         <div className={`${styles.updatesPanel} reveal`}>

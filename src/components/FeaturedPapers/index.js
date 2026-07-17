@@ -109,9 +109,9 @@ export default function HomepageFeatures() {
   return (
     <section className={styles.features} id="FeaturedResearch">
       <div className="container">
-        <p className={styles.kicker}>Selected Works</p>
-        <h1 className="text--center">Featured Research</h1>
-        <p className="text--center"><em>Our work has been published in reputable peer-reviewed journals. Featured publications are shown below — <Link to="/publications">view all publications here.</Link></em></p>
+        <p className={styles.kicker}>Selected works</p>
+        <h1 className="text--center">Featured research.</h1>
+        <p className="text--center"><em>Highlights from Q1 journals — <Link to="/publications">view all publications</Link>.</em></p>
         <div className="row">
           {FeatureList.map((props, idx) => (
             <Feature key={idx} {...props} />

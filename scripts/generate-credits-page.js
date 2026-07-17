@@ -272,18 +272,15 @@ title: Credits
 description: Gratitude and open-source acknowledgements for this website.
 ---
 
+<section className="section-with-bg-logo">
 <div className="page-shell">
 <div className="page-header">
 <p className="page-kicker">Gratitude</p>
 <h1>Credits and Open-Source Acknowledgements</h1>
-<p className="page-lead"><em>With thanks to the open-source community that helps power ${projectName}.</em></p>
+<p className="page-lead"><em>With thanks to the open-source community that helps power this website.</em></p>
 </div>
 
 <div className="page-quickfacts">
-  <div className="page-quickfact">
-    <p className="page-quickfact-label">Generated</p>
-    <p className="page-quickfact-value">${generatedOn}</p>
-  </div>
   <div className="page-quickfact">
     <p className="page-quickfact-label">Runtime Packages</p>
     <p className="page-quickfact-value">${deps.length}</p>
@@ -337,14 +334,11 @@ ${transitiveTable}
 
 </details>
 
-## How this page is updated
-
-This page is auto-generated at build time from package metadata in \`package.json\` and, when available, \`package-lock.json\`.
-
-Generator script: \`scripts/generate-credits-page.js\`
+Updated as of ${generatedOn}.
 
 </div>
 </div>
+</section>
 `;
 }
 

@@ -92,9 +92,9 @@ export default function HomepageFeatures() {
   return (
     <section className={styles.features} id="ResearchArea">
       <div className="container">
-        <p className={styles.kicker}>Core Domains</p>
-        <h1 className="text--center">Research Area</h1>
-        <p className="text--center"><em>AINTLab — applied ML, AI & DS for real-world decision support across data, intelligence, and applications.</em></p>
+        <p className={styles.kicker}>Core domains</p>
+        <h1 className="text--center">Research areas.</h1>
+        <p className="text--center"><em>From raw data to applied intelligence.</em></p>
         <div className="row">
           {FeatureList.map((props, idx) => (
             <Feature key={idx} {...props} />

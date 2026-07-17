@@ -1,0 +1,52 @@
+.mapLink {
+  display: block;
+  text-decoration: none;
+}
+
+.mapLink:hover {
+  text-decoration: none;
+}
+
+/* Same deep-space surface as the /networks globe panel, in both themes. */
+.mapHost {
+  position: relative;
+  display: block;
+  width: 100%;
+  border-radius: 14px;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 50% 130%, rgba(24, 84, 158, 0.4) 0%, transparent 62%),
+    linear-gradient(180deg, #050d1c 0%, #04101f 100%);
+  border: 1px solid color-mix(in srgb, var(--ifm-color-primary) 25%, transparent);
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.mapLink:hover .mapHost,
+.mapLink:focus-visible .mapHost {
+  border-color: color-mix(in srgb, var(--ifm-color-primary) 60%, transparent);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 34px rgba(8, 35, 66, 0.28);
+}
+
+.mapCanvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  padding: 0.6rem 0.4rem 1.9rem;
+  box-sizing: border-box;
+}
+
+.mapCta {
+  position: absolute;
+  right: 0.75rem;
+  bottom: 0.6rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #9adcff;
+  transition: color 0.2s ease;
+}
+
+.mapLink:hover .mapCta {
+  color: #dff4ff;
+}

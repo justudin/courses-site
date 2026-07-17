@@ -1,0 +1,986 @@
+{
+ "generatedAt": "2026-07-17",
+ "home": {
+  "name": "AINTLab — Seoul, Korea",
+  "lat": 37.5503,
+  "lng": 126.9971,
+  "countryCode": "KR"
+ },
+ "totals": {
+  "publications": 114,
+  "dois": 105,
+  "resolved": 101,
+  "countries": 32,
+  "institutions": 113
+ },
+ "countries": [
+  {
+   "code": "KR",
+   "name": "South Korea",
+   "lat": 36.4,
+   "lng": 127.9,
+   "works": 100,
+   "institutions": [
+    "Advanced Institute of Convergence Technology",
+    "Dongguk University",
+    "Kangbuk Samsung Hospital",
+    "Kangwon National University",
+    "Kyung Hee University Medical Center",
+    "Pohang TechnoPark (South Korea)",
+    "Sejong Institute",
+    "Sejong University",
+    "Sungkyunkwan University",
+    "Sungshin Women's University"
+   ]
+  },
+  {
+   "code": "ID",
+   "name": "Indonesia",
+   "lat": -2.5,
+   "lng": 118,
+   "works": 41,
+   "institutions": [
+    "Airlangga University",
+    "Binus University",
+    "Diponegoro University",
+    "Gunadarma University",
+    "IAIN Palangka Raya",
+    "Indonesia Defense University",
+    "Islamic University of Indonesia",
+    "Ministry of Health",
+    "National Research and Innovation Agency",
+    "Sampoerna University",
+    "Sebelas Maret University",
+    "Sepuluh Nopember Institute of Technology",
+    "Sunan Kalijaga State Islamic University Yogyakarta",
+    "Telkom University",
+    "Universitas Ahmad Dahlan",
+    "Universitas Budi Luhur",
+    "Universitas Gadjah Mada",
+    "Universitas Islam Negeri Raden Intan Lampung",
+    "Universitas Jenderal Achmad Yani",
+    "Universitas Teknologi Yogyakarta",
+    "Universitas Tidar",
+    "Walisongo State Islamic University"
+   ]
+  },
+  {
+   "code": "PK",
+   "name": "Pakistan",
+   "lat": 29.9,
+   "lng": 69.4,
+   "works": 28,
+   "institutions": [
+    "COMSATS University Islamabad",
+    "Ghulam Ishaq Khan Institute of Engineering Sciences and Technology",
+    "Government Sadiq College Women University",
+    "HITEC University",
+    "Information Technology University",
+    "Islamia University of Bahawalpur",
+    "Khwaja Fareed University of Engineering and Information Technology",
+    "National University of Computer and Emerging Sciences",
+    "National University of Sciences and Technology",
+    "Quaid-i-Azam University",
+    "University of Engineering and Technology Lahore",
+    "University of Engineering and Technology Taxila",
+    "University of Gujrat",
+    "University of Lahore",
+    "University of Wah",
+    "University of the Punjab"
+   ]
+  },
+  {
+   "code": "BN",
+   "name": "Brunei",
+   "lat": 4.5,
+   "lng": 114.7,
+   "works": 16,
+   "institutions": [
+    "Universiti Brunei Darussalam"
+   ]
+  },
+  {
+   "code": "SA",
+   "name": "Saudi Arabia",
+   "lat": 24.1,
+   "lng": 44.5,
+   "works": 10,
+   "institutions": [
+    "Alfaisal University",
+    "Dar Al Uloom University",
+    "Imam Mohammad ibn Saud Islamic University",
+    "King Faisal University",
+    "King Khalid University",
+    "King Saud University",
+    "Majmaah University",
+    "Northern Border University",
+    "Princess Nourah bint Abdulrahman University",
+    "University of Tabuk"
+   ]
+  },
+  {
+   "code": "MY",
+   "name": "Malaysia",
+   "lat": 3.8,
+   "lng": 109.7,
+   "works": 9,
+   "institutions": [
+    "Curtin University Sarawak",
+    "Tun Hussein Onn University of Malaysia",
+    "University of Technology Malaysia"
+   ]
+  },
+  {
+   "code": "TR",
+   "name": "Turkey",
+   "lat": 39,
+   "lng": 35.3,
+   "works": 9,
+   "institutions": [
+    "Istanbul Technical University",
+    "Istinye University",
+    "Karabük University",
+    "Muğla University",
+    "Osmaniye Korkut Ata University"
+   ]
+  },
+  {
+   "code": "IN",
+   "name": "India",
+   "lat": 21.1,
+   "lng": 78.7,
+   "works": 7,
+   "institutions": [
+    "Chitkara University",
+    "Indian Institute of Technology Guwahati",
+    "Saveetha University"
+   ]
+  },
+  {
+   "code": "CZ",
+   "name": "Czechia",
+   "lat": 49.8,
+   "lng": 15.5,
+   "works": 6,
+   "institutions": [
+    "VSB - Technical University of Ostrava"
+   ]
+  },
+  {
+   "code": "JO",
+   "name": "Jordan",
+   "lat": 31.3,
+   "lng": 36.8,
+   "works": 6,
+   "institutions": [
+    "Al al-Bayt University",
+    "Al-Ahliyya Amman University",
+    "Al-Balqa Applied University",
+    "Applied Science Private University",
+    "Jadara University"
+   ]
+  },
+  {
+   "code": "IQ",
+   "name": "Iraq",
+   "lat": 33,
+   "lng": 43.7,
+   "works": 4,
+   "institutions": [
+    "Mustansiriyah University",
+    "University of Anbar",
+    "University of Baghdad"
+   ]
+  },
+  {
+   "code": "LT",
+   "name": "Lithuania",
+   "lat": 55.2,
+   "lng": 23.9,
+   "works": 4,
+   "institutions": [
+    "Kaunas University of Technology"
+   ]
+  },
+  {
+   "code": "AE",
+   "name": "United Arab Emirates",
+   "lat": 23.9,
+   "lng": 54.3,
+   "works": 4,
+   "institutions": [
+    "Khalifa University of Science and Technology"
+   ]
+  },
+  {
+   "code": "GB",
+   "name": "United Kingdom",
+   "lat": 54,
+   "lng": -2.5,
+   "works": 4,
+   "institutions": [
+    "Coventry University",
+    "University of Lincoln",
+    "University of Plymouth"
+   ]
+  },
+  {
+   "code": "CN",
+   "name": "China",
+   "lat": 35.9,
+   "lng": 104.2,
+   "works": 3,
+   "institutions": [
+    "Beijing Normal University",
+    "Beijing Normal University - Hong Kong Baptist University United International College",
+    "Central South University",
+    "Xiangya Hospital Central South University"
+   ]
+  },
+  {
+   "code": "AU",
+   "name": "Australia",
+   "lat": -25.7,
+   "lng": 134.5,
+   "works": 2,
+   "institutions": [
+    "Macquarie University",
+    "University of Technology Sydney"
+   ]
+  },
+  {
+   "code": "BD",
+   "name": "Bangladesh",
+   "lat": 23.7,
+   "lng": 90.4,
+   "works": 2,
+   "institutions": [
+    "Khulna University of Engineering and Technology",
+    "Noakhali Science and Technology University",
+    "University of Chittagong"
+   ]
+  },
+  {
+   "code": "CA",
+   "name": "Canada",
+   "lat": 56.1,
+   "lng": -106.3,
+   "works": 2,
+   "institutions": [
+    "Artificial Intelligence in Medicine (Canada)",
+    "Ottawa Hospital",
+    "University of Ottawa"
+   ]
+  },
+  {
+   "code": "FJ",
+   "name": "Fiji",
+   "lat": -17.8,
+   "lng": 178,
+   "works": 2,
+   "institutions": [
+    "Ministry Of Health"
+   ]
+  },
+  {
+   "code": "KW",
+   "name": "Kuwait",
+   "lat": 29.3,
+   "lng": 47.6,
+   "works": 2,
+   "institutions": [
+    "American University of the Middle East"
+   ]
+  },
+  {
+   "code": "ES",
+   "name": "Spain",
+   "lat": 40.2,
+   "lng": -3.6,
+   "works": 2,
+   "institutions": [
+    "University of Castilla-La Mancha"
+   ]
+  },
+  {
+   "code": "SE",
+   "name": "Sweden",
+   "lat": 62.8,
+   "lng": 16.7,
+   "works": 2,
+   "institutions": [
+    "Image Intelligence (Sweden)"
+   ]
+  },
+  {
+   "code": "TW",
+   "name": "Taiwan",
+   "lat": 23.8,
+   "lng": 121,
+   "works": 2,
+   "institutions": [
+    "National Taiwan University of Science and Technology"
+   ]
+  },
+  {
+   "code": "TH",
+   "name": "Thailand",
+   "lat": 15.1,
+   "lng": 101,
+   "works": 2,
+   "institutions": [
+    "Shinawatra University"
+   ]
+  },
+  {
+   "code": "VN",
+   "name": "Vietnam",
+   "lat": 15.6,
+   "lng": 106.3,
+   "works": 2,
+   "institutions": [
+    "Duy Tan University",
+    "Phenikaa University"
+   ]
+  },
+  {
+   "code": "BA",
+   "name": "Bosnia and Herzegovina",
+   "lat": 44.2,
+   "lng": 17.8,
+   "works": 1,
+   "institutions": [
+    "Ministry of Science and Technology"
+   ]
+  },
+  {
+   "code": "FR",
+   "name": "France",
+   "lat": 46.6,
+   "lng": 2.4,
+   "works": 1,
+   "institutions": [
+    "Aix-Marseille Université",
+    "Fondation FondaMental"
+   ]
+  },
+  {
+   "code": "DE",
+   "name": "Germany",
+   "lat": 51.2,
+   "lng": 10.4,
+   "works": 1,
+   "institutions": [
+    "Charité - Universitätsmedizin Berlin"
+   ]
+  },
+  {
+   "code": "IR",
+   "name": "Iran",
+   "lat": 32.6,
+   "lng": 54.3,
+   "works": 1,
+   "institutions": [
+    "Lorestan University",
+    "Vali Asr University of Rafsanjan"
+   ]
+  },
+  {
+   "code": "OM",
+   "name": "Oman",
+   "lat": 20.6,
+   "lng": 56.1,
+   "works": 1,
+   "institutions": [
+    "Arab Open University"
+   ]
+  },
+  {
+   "code": "TN",
+   "name": "Tunisia",
+   "lat": 34.1,
+   "lng": 9.6,
+   "works": 1,
+   "institutions": [
+    "University of Gafsa"
+   ]
+  },
+  {
+   "code": "US",
+   "name": "United States",
+   "lat": 39.8,
+   "lng": -98.6,
+   "works": 1,
+   "institutions": [
+    "University of Wisconsin–Oshkosh"
+   ]
+  }
+ ],
+ "institutions": [
+  {
+   "name": "Sejong University",
+   "country": "KR",
+   "works": 75
+  },
+  {
+   "name": "Dongguk University",
+   "country": "KR",
+   "works": 30
+  },
+  {
+   "name": "Sungkyunkwan University",
+   "country": "KR",
+   "works": 17
+  },
+  {
+   "name": "Universiti Brunei Darussalam",
+   "country": "BN",
+   "works": 16
+  },
+  {
+   "name": "Universitas Gadjah Mada",
+   "country": "ID",
+   "works": 15
+  },
+  {
+   "name": "Government Sadiq College Women University",
+   "country": "PK",
+   "works": 11
+  },
+  {
+   "name": "University of Lahore",
+   "country": "PK",
+   "works": 10
+  },
+  {
+   "name": "Curtin University Sarawak",
+   "country": "MY",
+   "works": 9
+  },
+  {
+   "name": "HITEC University",
+   "country": "PK",
+   "works": 7
+  },
+  {
+   "name": "Kangwon National University",
+   "country": "KR",
+   "works": 7
+  },
+  {
+   "name": "Universitas Tidar",
+   "country": "ID",
+   "works": 7
+  },
+  {
+   "name": "Binus University",
+   "country": "ID",
+   "works": 6
+  },
+  {
+   "name": "Karabük University",
+   "country": "TR",
+   "works": 6
+  },
+  {
+   "name": "VSB - Technical University of Ostrava",
+   "country": "CZ",
+   "works": 6
+  },
+  {
+   "name": "Airlangga University",
+   "country": "ID",
+   "works": 5
+  },
+  {
+   "name": "Al-Ahliyya Amman University",
+   "country": "JO",
+   "works": 5
+  },
+  {
+   "name": "Istinye University",
+   "country": "TR",
+   "works": 5
+  },
+  {
+   "name": "Sejong Institute",
+   "country": "KR",
+   "works": 5
+  },
+  {
+   "name": "Sunan Kalijaga State Islamic University Yogyakarta",
+   "country": "ID",
+   "works": 5
+  },
+  {
+   "name": "Telkom University",
+   "country": "ID",
+   "works": 5
+  },
+  {
+   "name": "Kaunas University of Technology",
+   "country": "LT",
+   "works": 4
+  },
+  {
+   "name": "Khalifa University of Science and Technology",
+   "country": "AE",
+   "works": 4
+  },
+  {
+   "name": "Khwaja Fareed University of Engineering and Information Technology",
+   "country": "PK",
+   "works": 4
+  },
+  {
+   "name": "Princess Nourah bint Abdulrahman University",
+   "country": "SA",
+   "works": 4
+  },
+  {
+   "name": "University of Engineering and Technology Taxila",
+   "country": "PK",
+   "works": 4
+  },
+  {
+   "name": "Chitkara University",
+   "country": "IN",
+   "works": 3
+  },
+  {
+   "name": "Diponegoro University",
+   "country": "ID",
+   "works": 3
+  },
+  {
+   "name": "King Khalid University",
+   "country": "SA",
+   "works": 3
+  },
+  {
+   "name": "King Saud University",
+   "country": "SA",
+   "works": 3
+  },
+  {
+   "name": "Northern Border University",
+   "country": "SA",
+   "works": 3
+  },
+  {
+   "name": "Sebelas Maret University",
+   "country": "ID",
+   "works": 3
+  },
+  {
+   "name": "Universitas Jenderal Achmad Yani",
+   "country": "ID",
+   "works": 3
+  },
+  {
+   "name": "American University of the Middle East",
+   "country": "KW",
+   "works": 2
+  },
+  {
+   "name": "Coventry University",
+   "country": "GB",
+   "works": 2
+  },
+  {
+   "name": "Image Intelligence (Sweden)",
+   "country": "SE",
+   "works": 2
+  },
+  {
+   "name": "Indian Institute of Technology Guwahati",
+   "country": "IN",
+   "works": 2
+  },
+  {
+   "name": "Kangbuk Samsung Hospital",
+   "country": "KR",
+   "works": 2
+  },
+  {
+   "name": "Kyung Hee University Medical Center",
+   "country": "KR",
+   "works": 2
+  },
+  {
+   "name": "Ministry of Health",
+   "country": "ID",
+   "works": 2
+  },
+  {
+   "name": "Ministry Of Health",
+   "country": "FJ",
+   "works": 2
+  },
+  {
+   "name": "Mustansiriyah University",
+   "country": "IQ",
+   "works": 2
+  },
+  {
+   "name": "National Research and Innovation Agency",
+   "country": "ID",
+   "works": 2
+  },
+  {
+   "name": "National Taiwan University of Science and Technology",
+   "country": "TW",
+   "works": 2
+  },
+  {
+   "name": "Noakhali Science and Technology University",
+   "country": "BD",
+   "works": 2
+  },
+  {
+   "name": "Saveetha University",
+   "country": "IN",
+   "works": 2
+  },
+  {
+   "name": "Sepuluh Nopember Institute of Technology",
+   "country": "ID",
+   "works": 2
+  },
+  {
+   "name": "Shinawatra University",
+   "country": "TH",
+   "works": 2
+  },
+  {
+   "name": "Universitas Teknologi Yogyakarta",
+   "country": "ID",
+   "works": 2
+  },
+  {
+   "name": "University of Castilla-La Mancha",
+   "country": "ES",
+   "works": 2
+  },
+  {
+   "name": "University of Tabuk",
+   "country": "SA",
+   "works": 2
+  },
+  {
+   "name": "University of the Punjab",
+   "country": "PK",
+   "works": 2
+  },
+  {
+   "name": "Advanced Institute of Convergence Technology",
+   "country": "KR",
+   "works": 1
+  },
+  {
+   "name": "Aix-Marseille Université",
+   "country": "FR",
+   "works": 1
+  },
+  {
+   "name": "Al al-Bayt University",
+   "country": "JO",
+   "works": 1
+  },
+  {
+   "name": "Al-Balqa Applied University",
+   "country": "JO",
+   "works": 1
+  },
+  {
+   "name": "Alfaisal University",
+   "country": "SA",
+   "works": 1
+  },
+  {
+   "name": "Applied Science Private University",
+   "country": "JO",
+   "works": 1
+  },
+  {
+   "name": "Arab Open University",
+   "country": "OM",
+   "works": 1
+  },
+  {
+   "name": "Artificial Intelligence in Medicine (Canada)",
+   "country": "CA",
+   "works": 1
+  },
+  {
+   "name": "Beijing Normal University",
+   "country": "CN",
+   "works": 1
+  },
+  {
+   "name": "Beijing Normal University - Hong Kong Baptist University United International College",
+   "country": "CN",
+   "works": 1
+  },
+  {
+   "name": "Central South University",
+   "country": "CN",
+   "works": 1
+  },
+  {
+   "name": "Charité - Universitätsmedizin Berlin",
+   "country": "DE",
+   "works": 1
+  },
+  {
+   "name": "COMSATS University Islamabad",
+   "country": "PK",
+   "works": 1
+  },
+  {
+   "name": "Dar Al Uloom University",
+   "country": "SA",
+   "works": 1
+  },
+  {
+   "name": "Duy Tan University",
+   "country": "VN",
+   "works": 1
+  },
+  {
+   "name": "Fondation FondaMental",
+   "country": "FR",
+   "works": 1
+  },
+  {
+   "name": "Ghulam Ishaq Khan Institute of Engineering Sciences and Technology",
+   "country": "PK",
+   "works": 1
+  },
+  {
+   "name": "Gunadarma University",
+   "country": "ID",
+   "works": 1
+  },
+  {
+   "name": "IAIN Palangka Raya",
+   "country": "ID",
+   "works": 1
+  },
+  {
+   "name": "Imam Mohammad ibn Saud Islamic University",
+   "country": "SA",
+   "works": 1
+  },
+  {
+   "name": "Indonesia Defense University",
+   "country": "ID",
+   "works": 1
+  },
+  {
+   "name": "Information Technology University",
+   "country": "PK",
+   "works": 1
+  },
+  {
+   "name": "Islamia University of Bahawalpur",
+   "country": "PK",
+   "works": 1
+  },
+  {
+   "name": "Islamic University of Indonesia",
+   "country": "ID",
+   "works": 1
+  },
+  {
+   "name": "Istanbul Technical University",
+   "country": "TR",
+   "works": 1
+  },
+  {
+   "name": "Jadara University",
+   "country": "JO",
+   "works": 1
+  },
+  {
+   "name": "Khulna University of Engineering and Technology",
+   "country": "BD",
+   "works": 1
+  },
+  {
+   "name": "King Faisal University",
+   "country": "SA",
+   "works": 1
+  },
+  {
+   "name": "Lorestan University",
+   "country": "IR",
+   "works": 1
+  },
+  {
+   "name": "Macquarie University",
+   "country": "AU",
+   "works": 1
+  },
+  {
+   "name": "Majmaah University",
+   "country": "SA",
+   "works": 1
+  },
+  {
+   "name": "Ministry of Science and Technology",
+   "country": "BA",
+   "works": 1
+  },
+  {
+   "name": "Muğla University",
+   "country": "TR",
+   "works": 1
+  },
+  {
+   "name": "National University of Computer and Emerging Sciences",
+   "country": "PK",
+   "works": 1
+  },
+  {
+   "name": "National University of Sciences and Technology",
+   "country": "PK",
+   "works": 1
+  },
+  {
+   "name": "Osmaniye Korkut Ata University",
+   "country": "TR",
+   "works": 1
+  },
+  {
+   "name": "Ottawa Hospital",
+   "country": "CA",
+   "works": 1
+  },
+  {
+   "name": "Phenikaa University",
+   "country": "VN",
+   "works": 1
+  },
+  {
+   "name": "Pohang TechnoPark (South Korea)",
+   "country": "KR",
+   "works": 1
+  },
+  {
+   "name": "Quaid-i-Azam University",
+   "country": "PK",
+   "works": 1
+  },
+  {
+   "name": "Sampoerna University",
+   "country": "ID",
+   "works": 1
+  },
+  {
+   "name": "Sungshin Women's University",
+   "country": "KR",
+   "works": 1
+  },
+  {
+   "name": "Tun Hussein Onn University of Malaysia",
+   "country": "MY",
+   "works": 1
+  },
+  {
+   "name": "Universitas Ahmad Dahlan",
+   "country": "ID",
+   "works": 1
+  },
+  {
+   "name": "Universitas Budi Luhur",
+   "country": "ID",
+   "works": 1
+  },
+  {
+   "name": "Universitas Islam Negeri Raden Intan Lampung",
+   "country": "ID",
+   "works": 1
+  },
+  {
+   "name": "University of Anbar",
+   "country": "IQ",
+   "works": 1
+  },
+  {
+   "name": "University of Baghdad",
+   "country": "IQ",
+   "works": 1
+  },
+  {
+   "name": "University of Chittagong",
+   "country": "BD",
+   "works": 1
+  },
+  {
+   "name": "University of Engineering and Technology Lahore",
+   "country": "PK",
+   "works": 1
+  },
+  {
+   "name": "University of Gafsa",
+   "country": "TN",
+   "works": 1
+  },
+  {
+   "name": "University of Gujrat",
+   "country": "PK",
+   "works": 1
+  },
+  {
+   "name": "University of Lincoln",
+   "country": "GB",
+   "works": 1
+  },
+  {
+   "name": "University of Ottawa",
+   "country": "CA",
+   "works": 1
+  },
+  {
+   "name": "University of Plymouth",
+   "country": "GB",
+   "works": 1
+  },
+  {
+   "name": "University of Technology Malaysia",
+   "country": "MY",
+   "works": 1
+  },
+  {
+   "name": "University of Technology Sydney",
+   "country": "AU",
+   "works": 1
+  },
+  {
+   "name": "University of Wah",
+   "country": "PK",
+   "works": 1
+  },
+  {
+   "name": "University of Wisconsin–Oshkosh",
+   "country": "US",
+   "works": 1
+  },
+  {
+   "name": "Vali Asr University of Rafsanjan",
+   "country": "IR",
+   "works": 1
+  },
+  {
+   "name": "Walisongo State Islamic University",
+   "country": "ID",
+   "works": 1
+  },
+  {
+   "name": "Xiangya Hospital Central South University",
+   "country": "CN",
+   "works": 1
+  }
+ ]
+}

@@ -1,0 +1,148 @@
+.statRow {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 1.6rem 0 0;
+}
+
+.statTile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  padding: 1rem 0.5rem;
+}
+
+.statValue {
+  font-family: var(--ifm-heading-font-family);
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  background: linear-gradient(120deg, var(--ifm-color-primary-light), #6fc3ff 80%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.statLabel {
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--ifm-font-color-secondary);
+}
+
+.affiliations {
+  margin-top: 2.4rem;
+}
+
+.affiliations h2 {
+  font-size: clamp(1.6rem, 3vw, 2.3rem);
+  letter-spacing: -0.025em;
+  margin-bottom: 0.4rem;
+}
+
+.affiliationsLead {
+  color: var(--ifm-font-color-secondary);
+  max-width: 760px;
+  margin-bottom: 1.4rem;
+}
+
+.countryGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.countryCard {
+  border: 1px solid color-mix(in srgb, var(--ifm-border-color) 80%, transparent);
+  border-radius: 14px;
+  padding: 1rem 1.1rem;
+  background: color-mix(in srgb, var(--ifm-color-primary) 3%, var(--ifm-background-surface-color));
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.countryCard:hover {
+  border-color: color-mix(in srgb, var(--ifm-color-primary) 45%, var(--ifm-border-color));
+  transform: translateY(-2px);
+}
+
+.countryHead {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 0.55rem;
+}
+
+.countryFlag {
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.countryName {
+  margin: 0;
+  font-size: 1.02rem;
+  font-weight: 700;
+  flex: 1;
+  min-width: 0;
+}
+
+.countryWorks {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ifm-color-primary);
+  white-space: nowrap;
+}
+
+.institutionList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.institutionList li {
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--ifm-font-color-secondary);
+  padding: 0.18rem 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--ifm-border-color) 45%, transparent);
+}
+
+.institutionList li:last-child {
+  border-bottom: none;
+}
+
+.moreInstitutions {
+  margin-top: 0.3rem;
+}
+
+.moreInstitutions summary {
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--ifm-color-primary);
+  list-style: none;
+}
+
+.moreInstitutions summary::-webkit-details-marker {
+  display: none;
+}
+
+.dataNote {
+  margin-top: 1.6rem;
+  font-size: 0.82rem;
+  color: var(--ifm-font-color-secondary);
+}
+
+@media (max-width: 768px) {
+  .statRow {
+    gap: 0.5rem;
+  }
+
+  .countryGrid {
+    grid-template-columns: 1fr;
+  }
+}

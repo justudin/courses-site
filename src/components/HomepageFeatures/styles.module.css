@@ -1,21 +1,18 @@
 .features {
   display: flex;
   align-items: center;
-  padding: 1.5rem 0 1rem;
+  padding: 3.5rem 0 1.5rem;
   width: 100%;
 }
 
 .kicker {
-  margin: 0 auto 0.4rem;
+  margin: 0 auto 0.55rem;
   width: fit-content;
-  font-size: 0.77rem;
+  font-size: 0.8rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.2em;
   color: var(--ifm-color-primary);
-  background: color-mix(in srgb, var(--ifm-color-primary) 14%, transparent);
-  padding: 0.3rem 0.65rem;
-  border-radius: 999px;
 }
 
 .cardCol {
