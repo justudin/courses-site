@@ -102,10 +102,10 @@ export default function Networks() {
               ))}
             </div>
             <p className={styles.dataNote}>
-              Affiliation data derived from publication DOIs via{' '}
+              <em>Affiliation data derived from publication DOIs automatically via{' '}
               <a href="https://openalex.org" target="_blank" rel="noopener noreferrer">
                 OpenAlex
-              </a>{' '}
+              </a>{' '} and may content incorrect data.</em>
             </p>
           </section>
         </div>

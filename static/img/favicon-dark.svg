@@ -1,23 +1,98 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0.5 3.5 84 84">
+  <desc>Applied INtelligence Lab mark (dark navbar variant) — spirit blue fire.
+  Same animated flame as favicon.svg; the wrapper transform maps the shared
+  flame coordinates into this file's geometry.</desc>
   <style>
-    .aint-flame-dark {
-      transform-box: fill-box;
-      transform-origin: 50% 100%;
-      animation: aint-flame-flicker-dark 2.6s ease-in-out infinite;
-    }
-    @keyframes aint-flame-flicker-dark {
-      0%, 100% { fill: #ffffff; opacity: 0.92; transform: scale(1, 1); }
-      22% { fill: #cfe6ff; opacity: 1; transform: scale(0.97, 1.05); }
-      48% { fill: #8cc0f4; opacity: 0.85; transform: scale(1.03, 0.95); }
-      74% { fill: #e7f2ff; opacity: 1; transform: scale(0.98, 1.04); }
+    /* Both rules live inside media queries on purpose: SVGO (used by the
+       site's SVGR pipeline when this file is inlined as a React component)
+       inlines plain class rules onto elements and then deletes anything with
+       display:none — which would strip the static fallback entirely. Rules
+       inside media queries are left alone. */
+    @media (prefers-reduced-motion: no-preference) {
+      .spirit-static { display: none; }
     }
     @media (prefers-reduced-motion: reduce) {
-      .aint-flame-dark { animation: none; }
+      .spirit-anim { display: none; }
     }
   </style>
+  <defs>
+    <radialGradient id="sfBodyD" gradientUnits="userSpaceOnUse" cx="49.5" cy="51.5" r="27">
+      <stop offset="0" stop-color="#EAFBFF"/>
+      <stop offset="0.16" stop-color="#37E6FF"/>
+      <stop offset="0.52" stop-color="#3D7BFF"/>
+      <stop offset="1" stop-color="#1B2A6B"/>
+    </radialGradient>
+    <radialGradient id="sfTongueD" gradientUnits="userSpaceOnUse" cx="49.4" cy="52.5" r="16">
+      <stop offset="0" stop-color="#EAFBFF"/>
+      <stop offset="0.55" stop-color="#37E6FF"/>
+      <stop offset="1" stop-color="#3D7BFF"/>
+    </radialGradient>
+    <filter id="sfAuraD" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="2.6"/>
+    </filter>
+    <filter id="sfWavesD" x="-25%" y="-25%" width="150%" height="150%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.09 0.16" numOctaves="1" seed="7" result="n">
+        <animate attributeName="baseFrequency" dur="6s" values="0.09 0.16;0.12 0.12;0.09 0.16" repeatCount="indefinite"/>
+      </feTurbulence>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="1.6"/>
+    </filter>
+  </defs>
   <g transform="translate(-49.927 -34.893)scale(1.24292)">
     <circle cx="74.346" cy="64.667" r="31.371" style="stroke-width:1;fill:#fff;paint-order:fill;stroke:#242526"/>
     <path style="stroke-width:1.091;fill:#242526" d="m67.798 36.606-15.28 49.891h13.097l6.549-17.462h4.366l6.548 17.462h13.098l-15.28-49.891z"/>
-    <path class="aint-flame-dark" d="M73.992 40.421c-13.812 16.904 2.134 10.423-.397 28.056 10.901-14.542 6.951-18.556.397-28.056" style="stroke-width:1.091;fill:#fff"/>
+    <g transform="matrix(1.091433 0 0 1.091433 19.775261 10.096635)">
+      <path class="spirit-static" fill="url(#sfBodyD)" d="M 49.675 27.784 C 37.02 43.272 51.63 37.334 49.311 53.49 C 59.299 40.166 55.68 36.488 49.675 27.784 Z"/>
+      <g class="spirit-anim">
+        <g transform="translate(49.5 53.5)">
+          <g>
+            <animateTransform attributeName="transform" type="scale" dur="3.5s" values="1;1.04;1" keyTimes="0;0.5;1" calcMode="spline" keySplines="0.45 0 0.55 1;0.45 0 0.55 1" repeatCount="indefinite"/>
+            <path transform="translate(-49.5 -53.5)" fill="#37E6FF" filter="url(#sfAuraD)" opacity="0.3" d="M 49.675 27.784 C 37.02 43.272 51.63 37.334 49.311 53.49 C 59.299 40.166 55.68 36.488 49.675 27.784 Z">
+              <animate attributeName="opacity" dur="3.5s" values="0.25;0.4;0.25" keyTimes="0;0.5;1" calcMode="spline" keySplines="0.45 0 0.55 1;0.45 0 0.55 1" repeatCount="indefinite"/>
+            </path>
+          </g>
+        </g>
+        <path fill="url(#sfBodyD)" filter="url(#sfWavesD)" d="M 49.675 27.784 C 37.02 43.272 51.63 37.334 49.311 53.49 C 59.299 40.166 55.68 36.488 49.675 27.784 Z">
+          <animate attributeName="d" dur="2.8s" repeatCount="indefinite" calcMode="spline"
+            keyTimes="0;0.32;0.58;0.82;1"
+            keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"
+            values="M 49.675 27.784 C 37.02 43.272 51.63 37.334 49.311 53.49 C 59.299 40.166 55.68 36.488 49.675 27.784 Z;
+                    M 47.8 26.2 C 36.2 42.6 51.2 37.0 49.311 53.49 C 59.9 40.6 54.6 34.9 47.8 26.2 Z;
+                    M 51.6 29.8 C 38.4 43.8 52.0 37.8 49.311 53.49 C 58.6 40.0 57.0 37.6 51.6 29.8 Z;
+                    M 49.0 26.6 C 36.6 43.0 51.4 37.2 49.311 53.49 C 59.6 40.3 55.2 35.6 49.0 26.6 Z;
+                    M 49.675 27.784 C 37.02 43.272 51.63 37.334 49.311 53.49 C 59.299 40.166 55.68 36.488 49.675 27.784 Z"/>
+        </path>
+        <path fill="url(#sfTongueD)" opacity="0.92" d="M 49.6 38.4 C 43.9 46.9 51.0 44.5 49.4 53.0 C 54.5 46.1 52.6 42.9 49.6 38.4 Z">
+          <animate attributeName="d" dur="1.9s" begin="-0.65s" repeatCount="indefinite" calcMode="spline"
+            keyTimes="0;0.42;0.74;1"
+            keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"
+            values="M 49.6 38.4 C 43.9 46.9 51.0 44.5 49.4 53.0 C 54.5 46.1 52.6 42.9 49.6 38.4 Z;
+                    M 48.6 37.4 C 43.4 46.5 50.8 44.3 49.4 53.0 C 54.9 46.4 52.0 42.0 48.6 37.4 Z;
+                    M 50.6 39.6 C 44.5 47.3 51.2 44.8 49.4 53.0 C 54.1 45.8 53.2 43.7 50.6 39.6 Z;
+                    M 49.6 38.4 C 43.9 46.9 51.0 44.5 49.4 53.0 C 54.5 46.1 52.6 42.9 49.6 38.4 Z"/>
+        </path>
+        <g fill="#8FD8F2">
+          <circle cx="48.6" cy="44" r="0.8" opacity="0">
+            <animate attributeName="cy" dur="2.6s" begin="-0.4s" values="46;24" repeatCount="indefinite"/>
+            <animate attributeName="cx" dur="2.6s" begin="-0.4s" values="48.6;49.7;47.9;48.9" keyTimes="0;0.35;0.7;1" repeatCount="indefinite"/>
+            <animate attributeName="opacity" dur="2.6s" begin="-0.4s" values="0;0.9;0.55;0" keyTimes="0;0.12;0.6;1" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="47.4" cy="46" r="1.1" opacity="0">
+            <animate attributeName="cy" dur="3.2s" begin="-1.5s" values="47;25" repeatCount="indefinite"/>
+            <animate attributeName="cx" dur="3.2s" begin="-1.5s" values="47.4;46.5;48.3;47.2" keyTimes="0;0.3;0.72;1" repeatCount="indefinite"/>
+            <animate attributeName="opacity" dur="3.2s" begin="-1.5s" values="0;0.85;0.5;0" keyTimes="0;0.14;0.62;1" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="51.2" cy="43" r="0.6" opacity="0">
+            <animate attributeName="cy" dur="2.2s" begin="-2.1s" values="45;26" repeatCount="indefinite"/>
+            <animate attributeName="cx" dur="2.2s" begin="-2.1s" values="51.2;52.0;50.6;51.4" keyTimes="0;0.4;0.75;1" repeatCount="indefinite"/>
+            <animate attributeName="opacity" dur="2.2s" begin="-2.1s" values="0;0.9;0.5;0" keyTimes="0;0.1;0.6;1" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="50.2" cy="47" r="0.9" opacity="0">
+            <animate attributeName="cy" dur="3.6s" begin="-0.9s" values="48;23" repeatCount="indefinite"/>
+            <animate attributeName="cx" dur="3.6s" begin="-0.9s" values="50.2;49.3;51.1;50.0" keyTimes="0;0.33;0.7;1" repeatCount="indefinite"/>
+            <animate attributeName="opacity" dur="3.6s" begin="-0.9s" values="0;0.8;0.45;0" keyTimes="0;0.16;0.64;1" repeatCount="indefinite"/>
+          </circle>
+        </g>
+      </g>
+    </g>
   </g>
 </svg>

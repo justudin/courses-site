@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0.5 3.5 84 84">
+  <desc>Applied INtelligence Lab mark — spirit blue fire, static variant.
+  Use this as the favicon fallback where animated SVGs are not desired.</desc>
+  <defs>
+    <radialGradient id="sfBody" gradientUnits="userSpaceOnUse" cx="49.5" cy="51.5" r="27">
+      <stop offset="0" stop-color="#EAFBFF"/>
+      <stop offset="0.16" stop-color="#37E6FF"/>
+      <stop offset="0.52" stop-color="#3D7BFF"/>
+      <stop offset="1" stop-color="#1B2A6B"/>
+    </radialGradient>
+    <radialGradient id="sfTongue" gradientUnits="userSpaceOnUse" cx="49.4" cy="52.5" r="16">
+      <stop offset="0" stop-color="#EAFBFF"/>
+      <stop offset="0.55" stop-color="#37E6FF"/>
+      <stop offset="1" stop-color="#3D7BFF"/>
+    </radialGradient>
+    <filter id="sfAura" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="2.6"/>
+    </filter>
+  </defs>
+  <g transform="matrix(1.242923, 0, 0, 1.242923, -49.927038, -34.892869)">
+    <g transform="matrix(1, 0, 0, 1, -26.402871, -134.465122)">
+      <circle cx="100.749" cy="199.132" r="31.371" style="stroke: rgb(14, 89, 169); fill: rgb(14, 89, 169); stroke-width: 1;"/>
+      <g fill="#fff" transform="matrix(1.091433, 0, 0, 1.091433, 46.178132, 144.561757)">
+        <polygon points="44 24.289 30 70 42 70 48 54.001 52 54.001 58 70 70 70 56 24.289"/>
+        <path fill="#37E6FF" filter="url(#sfAura)" opacity="0.3" d="M 49.675 27.784 C 37.02 43.272 51.63 37.334 49.311 53.49 C 59.299 40.166 55.68 36.488 49.675 27.784 Z"/>
+        <path fill="url(#sfBody)" d="M 49.675 27.784 C 37.02 43.272 51.63 37.334 49.311 53.49 C 59.299 40.166 55.68 36.488 49.675 27.784 Z"/>
+        <path fill="url(#sfTongue)" opacity="0.92" d="M 49.6 38.4 C 43.9 46.9 51.0 44.5 49.4 53.0 C 54.5 46.1 52.6 42.9 49.6 38.4 Z"/>
+      </g>
+    </g>
+  </g>
+</svg>
