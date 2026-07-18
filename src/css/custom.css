@@ -606,8 +606,11 @@ section .container > p.text--center {
 .global-back-to-top {
   position: fixed;
   right: 1.1rem;
-  bottom: 1.15rem;
-  z-index: 1200;
+  /* Stacked directly above the same-size Ask AI bubble, which owns the
+     corner: 1.1rem (bubble bottom) + 3rem (bubble) + 0.65rem gap. Keep in
+     sync with AskAiWidget/styles.css. */
+  bottom: 4.75rem;
+  z-index: 1190;
   border: none;
   background: none;
   padding: 0;
@@ -620,8 +623,9 @@ section .container > p.text--center {
 }
 
 .global-back-to-top-icon {
-  width: 2.7rem;
-  height: 2.7rem;
+  /* Same diameter as the Ask AI bubble below it. */
+  width: 3rem;
+  height: 3rem;
   filter: drop-shadow(0 6px 16px rgba(8, 35, 66, 0.35));
   transition: transform 0.22s ease;
 }
@@ -1250,12 +1254,13 @@ thead th:empty {
 
   .global-back-to-top {
     right: 0.85rem;
-    bottom: 0.9rem;
+    /* Above the 2.6rem mobile Ask AI bubble: 0.9 + 2.6 + 0.6 gap. */
+    bottom: 4.1rem;
   }
 
   .global-back-to-top-icon {
-    width: 2.4rem;
-    height: 2.4rem;
+    width: 2.6rem;
+    height: 2.6rem;
   }
 
   .page-shell {

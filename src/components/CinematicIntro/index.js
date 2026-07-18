@@ -138,7 +138,8 @@ export default function CinematicIntro({audioSrc, fading, onDone, onSkip}) {
         <div className={styles.gate}>
           <p className={styles.gateEyebrow}>An intro experience</p>
           <p className={styles.gateTitle}>
-            Applied <span className={styles.gateTitleIn}>IN</span>telligence Lab
+            <span className={styles.gateTitleIn}>A</span>pplied{' '}
+            <span className={styles.gateTitleIn}>IN</span>telligence Lab
           </p>
           <p className={styles.gateNote}>Twenty seconds. Best with sound on.</p>
           <button type="button" className={styles.enterButton} onClick={begin} autoFocus>

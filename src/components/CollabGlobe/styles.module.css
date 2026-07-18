@@ -1,6 +1,14 @@
-/* The globe always lives on a deep-space panel, in both site themes — it is
-   the one deliberately dark surface on the page. */
+/* Outer wrapper: stage (canvas panel) + chip strip + detail sheet. */
 .globeHost {
+  position: relative;
+  width: 100%;
+}
+
+/* The globe always lives on a deep-space panel, in both site themes — it is
+   the one deliberately dark surface on the page. touch-action: pan-y keeps
+   vertical swipes scrolling the page; horizontal drags and pinches reach the
+   globe (no scroll hijacking). */
+.stage {
   position: relative;
   width: 100%;
   height: clamp(420px, 62vh, 640px);
@@ -8,13 +16,18 @@
   overflow: hidden;
   background:
     radial-gradient(ellipse at 50% 120%, rgba(24, 84, 158, 0.35) 0%, transparent 60%),
-    linear-gradient(180deg, #050d1c 0%, #04101f 100%);
+    linear-gradient(180deg, #050d1c 0%, #04070f 100%);
   touch-action: pan-y;
   cursor: grab;
 }
 
-.globeHost:active {
+.stage:active {
   cursor: grabbing;
+}
+
+.stage:focus-visible {
+  outline: 2px solid rgba(127, 216, 255, 0.7);
+  outline-offset: 2px;
 }
 
 .fallbackMap {
@@ -41,33 +54,118 @@
   opacity: 1;
 }
 
+/* ---- persistent node labels (positioned imperatively by the scene) ---- */
+.labelLayer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.nodeLabel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 0.1rem 0.45rem;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  letter-spacing: 0.05em;
+  color: rgba(199, 228, 255, 0.82);
+  background: rgba(5, 14, 28, 0.55);
+  border: 1px solid rgba(127, 216, 255, 0.18);
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  will-change: transform;
+}
+
+.nodeLabel[data-on='1'] {
+  opacity: 1;
+}
+
+.nodeLabel.nodeLabelActive {
+  color: #fff;
+  border-color: rgba(255, 182, 72, 0.6);
+  background: rgba(30, 22, 8, 0.72);
+}
+
+/* ---- corner stats (animated count-up) ---- */
+.statsOverlay {
+  position: absolute;
+  top: 0.85rem;
+  left: 1rem;
+  z-index: 2;
+  display: flex;
+  gap: 0.45rem;
+  align-items: baseline;
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  color: rgba(180, 212, 245, 0.8);
+  pointer-events: none;
+}
+
+.statsOverlay strong {
+  color: #cfe9ff;
+  font-size: 0.95rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.statsOverlay em {
+  font-style: normal;
+  margin-right: 0.45rem;
+  color: rgba(140, 180, 220, 0.5);
+}
+
+/* ---- desktop hover tooltip card ---- */
 .tooltip {
   position: absolute;
   top: 0;
   left: 0;
   z-index: 3;
   pointer-events: none;
-  display: flex;
-  flex-direction: column;
-  gap: 0.1rem;
-  padding: 0.5rem 0.75rem;
-  border-radius: 10px;
-  background: rgba(6, 18, 36, 0.88);
+  max-width: 260px;
+  padding: 0.6rem 0.8rem;
+  border-radius: 12px;
+  background: rgba(6, 18, 36, 0.9);
   border: 1px solid rgba(127, 216, 255, 0.35);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   color: #eaf4ff;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
+}
+
+.tooltipHead {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  margin-bottom: 0.3rem;
   white-space: nowrap;
 }
 
-.tooltip strong {
-  font-size: 0.92rem;
+.tooltipHead strong {
+  font-size: 0.95rem;
 }
 
-.tooltip span {
-  color: rgba(190, 220, 250, 0.85);
+.tooltipHead em {
+  font-style: normal;
+  color: #ffd9a0;
   font-size: 0.78rem;
+}
+
+.tooltip ul {
+  margin: 0;
+  padding: 0 0 0 0.9rem;
+  color: rgba(200, 226, 252, 0.85);
+  font-size: 0.76rem;
+  line-height: 1.45;
+}
+
+.tooltipMore {
+  display: block;
+  margin-top: 0.25rem;
+  color: rgba(127, 216, 255, 0.8);
+  font-size: 0.72rem;
 }
 
 .hint {
@@ -83,23 +181,212 @@
   pointer-events: none;
 }
 
+/* ---- country chip strip: swipeable, tabbable, primary mobile nav ---- */
+.chipStrip {
+  display: flex;
+  gap: 0.45rem;
+  margin-top: 0.8rem;
+  padding: 0.25rem 0.1rem 0.55rem;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
+}
+
+.chip {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 44px;
+  padding: 0.35rem 0.8rem;
+  border-radius: 999px;
+  border: 1px solid rgba(47, 130, 222, 0.35);
+  background: transparent;
+  color: var(--ifm-font-color-base);
+  font: inherit;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: border-color 0.18s ease, background 0.18s ease, transform 0.18s ease;
+}
+
+.chip:hover {
+  border-color: rgba(47, 130, 222, 0.8);
+  transform: translateY(-1px);
+}
+
+.chip.chipActive {
+  border-color: rgba(255, 182, 72, 0.85);
+  background: rgba(255, 182, 72, 0.1);
+}
+
+.chipName {
+  white-space: nowrap;
+}
+
+.chipWorks {
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  color: var(--ifm-color-primary);
+}
+
+.chip.chipActive .chipWorks {
+  color: #c77f1d;
+}
+
+/* ---- detail view: side panel (desktop) / bottom sheet (mobile) ---- */
+.sheetScrim {
+  position: fixed;
+  inset: 0;
+  z-index: 260;
+  background: rgba(2, 6, 14, 0.45);
+}
+
+.sheet {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  background: var(--ifm-background-surface-color);
+  color: var(--ifm-font-color-base);
+  box-shadow: 0 18px 60px rgba(2, 10, 24, 0.5);
+  /* Desktop: right-hand side panel. */
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(400px, 90vw);
+  padding: 1.1rem 1.25rem 1.25rem;
+  animation: sheetInSide 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes sheetInSide {
+  from {
+    transform: translateX(40px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.sheetGrab {
+  display: none;
+}
+
+.sheetHead {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  padding-bottom: 0.7rem;
+  border-bottom: 1px solid rgba(120, 160, 210, 0.2);
+}
+
+.sheetFlag {
+  font-size: 1.7rem;
+  line-height: 1.2;
+}
+
+.sheetHead h3 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.sheetHead p {
+  margin: 0.15rem 0 0;
+  font-size: 0.8rem;
+  color: var(--ifm-color-emphasis-600);
+}
+
+.sheetClose {
+  margin-left: auto;
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 50%;
+  border: 1px solid rgba(120, 160, 210, 0.35);
+  background: transparent;
+  color: inherit;
+  font-size: 1.2rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.sheetClose:hover {
+  border-color: var(--ifm-color-primary);
+}
+
+.sheetList {
+  margin: 0.8rem 0 0;
+  padding: 0 0 0 1.1rem;
+  overflow-y: auto;
+  font-size: 0.88rem;
+  line-height: 1.7;
+}
+
 @media (max-width: 768px) {
-  .globeHost {
-    height: clamp(360px, 58vh, 480px);
+  .stage {
+    height: clamp(340px, 55vh, 460px);
     border-radius: 14px;
   }
 
   .hint {
-    display: none;
+    font-size: 0.7rem;
+    bottom: 0.45rem;
+  }
+
+  .statsOverlay {
+    font-size: 0.7rem;
+    left: 0.75rem;
+    top: 0.65rem;
+  }
+
+  .nodeLabel {
+    font-size: 0.62rem;
+  }
+
+  /* Bottom sheet instead of side panel. */
+  .sheet {
+    top: auto;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    max-height: 62vh;
+    border-radius: 18px 18px 0 0;
+    padding: 0.5rem 1.1rem calc(1rem + env(safe-area-inset-bottom, 0));
+    animation: sheetInBottom 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  @keyframes sheetInBottom {
+    from {
+      transform: translateY(48px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  .sheetGrab {
+    display: block;
+    width: 42px;
+    height: 4px;
+    border-radius: 999px;
+    background: rgba(140, 170, 210, 0.4);
+    margin: 0.3rem auto 0.6rem;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .globeCanvas {
-    display: none;
+  .sheet {
+    animation: none;
   }
 
-  .fallbackMap {
-    display: block !important;
+  .globeCanvas {
+    transition: none;
+  }
+
+  .chip,
+  .chip:hover {
+    transform: none;
   }
 }

@@ -72,7 +72,8 @@ const SPIRIT_WORDS = [
   'Collaboration',
 ];
 
-// Wraps the "IN" in "Applied INtelligence Lab" in a gradient accent span.
+// Accents the letters that spell the acronym in "Applied INtelligence Lab":
+// the leading "A" of "Applied" plus the "IN" of "INtelligence" (A + IN = AIN).
 function AccentedTitle({title}) {
   const idx = title.indexOf('IN');
   if (idx === -1) {
@@ -80,7 +81,8 @@ function AccentedTitle({title}) {
   }
   return (
     <>
-      {title.slice(0, idx)}
+      <span className={styles.titleAccent}>{title.slice(0, 1)}</span>
+      {title.slice(1, idx)}
       <span className={styles.titleAccent}>IN</span>
       {title.slice(idx + 2)}
     </>
@@ -141,7 +143,7 @@ function HomepageHeader() {
     }, 800);
     window.setTimeout(() => {
       setCinematic((current) => (current === 'reveal' ? 'off' : current));
-    }, 2100);
+    }, 2500);
   }, []);
 
   const handleCinematicSkip = useCallback(() => {

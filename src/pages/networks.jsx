@@ -10,10 +10,10 @@ function flagEmoji(code) {
   return String.fromCodePoint(...[...code.toUpperCase()].map((ch) => 0x1f1a5 + ch.charCodeAt(0)));
 }
 
-// The affiliation cards show only the strongest partnerships; the globe
-// above still draws every country. collaborations.countries is pre-sorted
-// by number of co-authored works (descending).
-const TOP_COUNTRIES = 4;
+// The affiliation cards show the strongest partnerships; the globe and the
+// chip strip above still cover every country. collaborations.countries is
+// pre-sorted by number of co-authored works (descending).
+const TOP_COUNTRIES = 10;
 
 const STATS = [
   {value: collaborations.totals.countries, label: 'Countries'},
@@ -74,7 +74,11 @@ export default function Networks() {
             </p>
           </div>
 
-          <CollabGlobe home={collaborations.home} countries={collaborations.countries} />
+          <CollabGlobe
+            home={collaborations.home}
+            countries={collaborations.countries}
+            totals={collaborations.totals}
+          />
 
           <div className={styles.statRow}>
             {STATS.map((stat) => (
@@ -90,7 +94,7 @@ export default function Networks() {
             <p className={styles.affiliationsLead}>
               Our top {TOP_COUNTRIES} country partnerships by shared output, from{' '}
               {collaborations.totals.resolved} DOI-resolved works. All{' '}
-              {collaborations.totals.countries} countries appear on the globe above.
+              {collaborations.totals.countries} countries appear on the globe and chip strip above.
             </p>
             <div className={styles.countryGrid}>
               {collaborations.countries.slice(0, TOP_COUNTRIES).map((country) => (

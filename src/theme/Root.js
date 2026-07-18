@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import AskAiWidget from '@site/src/components/AskAiWidget';
 
 const BackToTopIcon = require('@site/static/img/favicon.svg').default;
 
@@ -145,6 +146,7 @@ export default function Root({children}) {
       >
         <BackToTopIcon className="global-back-to-top-icon" aria-hidden="true" />
       </button>
+      <AskAiWidget />
     </>
   );
 }
