@@ -34,14 +34,25 @@ export default function Hero3D({posterSrc, alt, onIntroPhase, introApiRef}) {
   onIntroPhaseRef.current = onIntroPhase;
 
   useEffect(() => {
+    // Whenever the intro is NOT going to play, say so ('none') — the page uses
+    // this to clear the pre-paint html.intro-pending state (set by the inline
+    // head script in docusaurus.config.js) instead of leaving the site veiled.
+    const declineIntro = () => {
+      if (onIntroPhaseRef.current) {
+        onIntroPhaseRef.current('none');
+      }
+    };
+
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) {
+      declineIntro();
       return undefined;
     }
 
     const probe = document.createElement('canvas');
     const gl = probe.getContext('webgl2') || probe.getContext('webgl');
     if (!gl) {
+      declineIntro();
       return undefined;
     }
 
@@ -97,6 +108,8 @@ export default function Hero3D({posterSrc, alt, onIntroPhase, introApiRef}) {
       // Tell the page immediately (before the async chunk resolves) so it can
       // veil the hero copy instead of flashing it for a few frames.
       relayIntroPhase('pending');
+    } else {
+      declineIntro();
     }
 
     import(/* webpackChunkName: "hero3d" */ './scene').then(({createHeroScene}) => {
@@ -153,14 +166,24 @@ export default function Hero3D({posterSrc, alt, onIntroPhase, introApiRef}) {
         handle.resize(host.clientWidth, host.clientHeight, computeQuality().dpr);
       }
     };
+    let resizeRaf = 0;
     if (typeof ResizeObserver !== 'undefined' && host) {
+      // Resizing the renderer synchronously inside the observer callback can
+      // change layout in the same frame, which the browser reports as
+      // "ResizeObserver loop completed with undelivered notifications" —
+      // defer the work to the next animation frame to break the loop.
       resizeObserver = new ResizeObserver((entries) => {
         const entry = entries[0];
-        if (!entry || !handle) {
+        if (!entry) {
           return;
         }
         const {width, height} = entry.contentRect;
-        handle.resize(width, height, computeQuality().dpr);
+        cancelAnimationFrame(resizeRaf);
+        resizeRaf = requestAnimationFrame(() => {
+          if (handle) {
+            handle.resize(width, height, computeQuality().dpr);
+          }
+        });
       });
       resizeObserver.observe(host);
     } else {
@@ -233,6 +256,7 @@ export default function Hero3D({posterSrc, alt, onIntroPhase, introApiRef}) {
       if (intersectionObserver) {
         intersectionObserver.disconnect();
       }
+      cancelAnimationFrame(resizeRaf);
       if (resizeObserver) {
         resizeObserver.disconnect();
       }

@@ -180,18 +180,70 @@ a {
   transition: box-shadow 0.25s ease, opacity 0.65s ease, transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Cinema mode: while the first-visit intro plays (html.intro-running is set
-   by the homepage header), the navbar steps out of the frame and glides back
-   in when the intro finishes or is skipped. The body backdrop goes hero-dark
-   so no light strip shows where the navbar was. */
+/* Cinema mode: while the first-visit intro plays, the navbar steps out of the
+   frame and glides back in when the intro finishes or is skipped. The body
+   backdrop goes hero-dark so no light strip shows where the navbar was.
+   Two flavors of the same state:
+   - html.intro-pending — set pre-paint by the inline head script (see
+     docusaurus.config.js headTags) so the very first frame is already the
+     dark fullscreen stage; no navbar/content flash before hydration.
+   - html.intro-running — set by HomepageHeader once the intro actually plays.
+   HomepageHeader removes intro-pending as soon as the intro's fate is known. */
+html.intro-pending .navbar,
 html.intro-running .navbar {
   opacity: 0;
   transform: translateY(-16px);
   pointer-events: none;
 }
 
+html.intro-pending body,
 html.intro-running body {
   background: #04101f;
+}
+
+/* True fullscreen during the intro: the hero swallows the navbar's row and
+   owns the whole viewport, then eases back down as the chrome returns. */
+html.intro-pending .hero,
+html.intro-running .hero {
+  min-height: 100vh;
+  min-height: 100svh;
+  margin-top: calc(-1 * var(--ifm-navbar-height, 60px));
+}
+
+/* Everything below the hero stays out of the frame until the intro resolves. */
+html.intro-pending main,
+html.intro-running main,
+html.intro-pending .footer,
+html.intro-running .footer {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Pre-hydration veil for the hero's own copy + scroll cue (React applies its
+   module-scoped heroContentHidden class only after it mounts). */
+html.intro-pending .hero .container,
+html.intro-pending .hero > a {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Safety valve: if hydration never happens (broken JS, ancient browser), the
+   pre-paint state auto-releases after 14s so the site is never left dark.
+   The intro itself runs ~9.6s and clears these classes long before that. */
+html.intro-pending .navbar,
+html.intro-pending main,
+html.intro-pending .footer,
+html.intro-pending .hero .container,
+html.intro-pending .hero > a {
+  animation: introPendingRelease 0.65s ease 14s forwards;
+}
+
+@keyframes introPendingRelease {
+  to {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
 }
 
 .navbar--scrolled {
@@ -254,6 +306,14 @@ html.intro-running body {
   position: relative;
   color: #fff;
   overflow: hidden;
+  /* Eases back out of the fullscreen intro state (cinema mode above). */
+  transition: margin-top 0.65s cubic-bezier(0.16, 1, 0.3, 1), min-height 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Smooth return of the page body once cinema mode ends. */
+main,
+.footer {
+  transition: opacity 0.9s ease;
 }
 
 .hero .container {
@@ -621,10 +681,10 @@ thead th:empty {
   padding: 1.4rem 0 2rem;
 }
 
-/* Standalone-safe wrapper for fragment pages embedded elsewhere (e.g. the
-   collaborator map, embedded in /alumni but also independently routable at
-   /colabs since it lives under src/pages). Gives the bare route reasonable
-   spacing without duplicating page-shell/page-header chrome when embedded. */
+/* Wrapper for fragment pages embedded elsewhere (e.g. the collaborator map,
+   _colabs.mdx, embedded in /alumni — underscore prefix keeps it out of the
+   route table). Gives the fragment its own spacing without duplicating
+   page-shell/page-header chrome. */
 .colabs-embed {
   max-width: 900px;
   margin: 0 auto;
@@ -746,9 +806,9 @@ thead th:empty {
   z-index: 2;
 }
 
-/* Variant 1: Applied INTelligence Lab */
+/* Variant 1: Applied INtelligence Lab */
 .bg-text--aintlab::before {
-  content: 'Applied INTelligence Lab';
+  content: 'Applied INtelligence Lab';
 }
 
 /* Variant 2: Playground for Discovery */

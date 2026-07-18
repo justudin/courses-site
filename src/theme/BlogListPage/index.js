@@ -58,8 +58,8 @@ function BlogListPageContent({metadata, items, sidebar}) {
             <h1>Updates</h1>
             <p className="page-lead">
               <em>
-                Research outputs, announcements, and highlights from the
-                AINTLab team.
+                Research outputs, announcements, and highlights from
+                our team.
               </em>
             </p>
           </div>

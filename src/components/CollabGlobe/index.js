@@ -85,11 +85,20 @@ export default function CollabGlobe({home, countries}) {
     document.addEventListener('visibilitychange', onVisibilityChange);
 
     let resizeObserver = null;
+    let resizeRaf = 0;
     if (typeof ResizeObserver !== 'undefined' && host) {
+      // Resizing the renderer synchronously inside the observer callback can
+      // change layout in the same frame, which the browser reports as
+      // "ResizeObserver loop completed with undelivered notifications" —
+      // defer the work to the next animation frame to break the loop.
       resizeObserver = new ResizeObserver((entries) => {
         const entry = entries[0];
-        if (!entry || !handle) return;
-        handle.resize(entry.contentRect.width, entry.contentRect.height, dpr());
+        if (!entry) return;
+        const {width, height} = entry.contentRect;
+        cancelAnimationFrame(resizeRaf);
+        resizeRaf = requestAnimationFrame(() => {
+          if (handle) handle.resize(width, height, dpr());
+        });
       });
       resizeObserver.observe(host);
     }
@@ -137,6 +146,7 @@ export default function CollabGlobe({home, countries}) {
         host.removeEventListener('pointerleave', onPointerUp);
       }
       if (intersectionObserver) intersectionObserver.disconnect();
+      cancelAnimationFrame(resizeRaf);
       if (resizeObserver) resizeObserver.disconnect();
       if (handle) handle.dispose();
     };
@@ -152,7 +162,7 @@ export default function CollabGlobe({home, countries}) {
       {!ready && (
         <img
           src="/team/collaboration_map.webp"
-          alt="AINTLab collaboration map"
+          alt="Applied INtelligence Lab collaboration map"
           className={styles.fallbackMap}
           loading="lazy"
         />
@@ -160,7 +170,7 @@ export default function CollabGlobe({home, countries}) {
       <canvas
         ref={canvasRef}
         className={`${styles.globeCanvas} ${ready ? styles.globeCanvasReady : ''}`}
-        aria-label="Interactive globe of AINTLab collaborations radiating from Seoul"
+        aria-label="Interactive globe of Applied INtelligence Lab collaborations radiating from Seoul"
         role="img"
       />
       {hoveredCountry && (

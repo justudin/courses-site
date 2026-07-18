@@ -59,7 +59,7 @@ const AINTLAB_PILLARS = [
 const INTRO_CAPTIONS = {
   forge: 'Every idea begins as a spark.',
   rise: 'We shape it into intelligence.',
-  ignite: 'Introducing Applied INTelligence Lab.',
+  ignite: 'Introducing Applied INtelligence Lab.',
 };
 
 const SPIRIT_WORDS = [
@@ -70,17 +70,17 @@ const SPIRIT_WORDS = [
   'Collaboration',
 ];
 
-// Wraps the "INT" in "Applied INTelligence Lab" in a gradient accent span.
+// Wraps the "IN" in "Applied INtelligence Lab" in a gradient accent span.
 function AccentedTitle({title}) {
-  const idx = title.indexOf('INT');
+  const idx = title.indexOf('IN');
   if (idx === -1) {
     return title;
   }
   return (
     <>
       {title.slice(0, idx)}
-      <span className={styles.titleAccent}>INT</span>
-      {title.slice(idx + 3)}
+      <span className={styles.titleAccent}>IN</span>
+      {title.slice(idx + 2)}
     </>
   );
 }
@@ -93,7 +93,10 @@ function HomepageHeader() {
   const introApiRef = useRef(null);
 
   const handleIntroPhase = useCallback((phase) => {
-    setIntroPhase(phase);
+    // 'none' = Hero3D decided the intro won't play (returning visitor,
+    // reduced motion, no WebGL) — jump straight to the closed state so the
+    // pre-paint intro-pending veil is lifted.
+    setIntroPhase(phase === 'none' ? 'closed' : phase);
     if (phase === 'done') {
       window.setTimeout(() => {
         setIntroPhase((current) => (current === 'done' ? 'closed' : current));
@@ -113,8 +116,16 @@ function HomepageHeader() {
   // Cinema mode: hide the navbar (and progress bar) while the intro plays —
   // the class is styled in custom.css. Scrolling away mid-intro counts as a
   // skip so the chrome is never left hidden.
+  //
+  // html.intro-pending (set pre-paint by the head script) is only cleared once
+  // introPhase is non-null — i.e. once Hero3D has decided whether the intro
+  // plays. Clearing it on the initial null would flash the navbar for a frame
+  // between hydration and the 'pending' phase arriving.
   useEffect(() => {
     const root = document.documentElement;
+    if (introPhase !== null) {
+      root.classList.remove('intro-pending');
+    }
     if (!introRunning) {
       root.classList.remove('intro-running');
       return undefined;
@@ -130,7 +141,7 @@ function HomepageHeader() {
       window.removeEventListener('scroll', onScroll);
       root.classList.remove('intro-running');
     };
-  }, [introRunning]);
+  }, [introRunning, introPhase]);
 
   return (
     <header id="hero" className={clsx('hero hero--primary', styles.heroBanner)}>
@@ -152,7 +163,7 @@ function HomepageHeader() {
             )}
             {introPhase === 'spirit' && (
               <div className={styles.introSpiritWrap}>
-                <p className={styles.introEyebrow}>The spirit of AINTLab</p>
+                <p className={styles.introEyebrow}>The spirit of Applied INtelligence Lab</p>
                 <ul className={styles.introSpirit}>
                   {SPIRIT_WORDS.map((word, i) => (
                     <li key={word} style={{animationDelay: `${0.15 + i * 0.3}s`}}>
@@ -231,7 +242,7 @@ function WhyAINTLab() {
     <section id="why-aintlab" className={`${styles.whySection} section-with-bg-text bg-text--collaboration`}>
       <div className="container">
         <p className={clsx(styles.kicker, 'text--center')}>Identity</p>
-        <h1 className="text--center">Why AINTLab.</h1>
+        <h1 className="text--center">Why Applied INtelligence Lab.</h1>
         <p className="text--center"><em>Rigor, curiosity, and impact — by design.</em></p>
         <div className={styles.pillarList}>
           {AINTLAB_PILLARS.map((pillar) => (
@@ -258,7 +269,7 @@ function JoinAINTLab() {
           </p>
           <div className={styles.ctaActions}>
             <Link className="button button--primary button--lg" to="/publications">View Publications</Link>
-            <Link className="button cta-secondary-btn button--lg" to="/prospective">Join AINTLab</Link>
+            <Link className="button cta-secondary-btn button--lg" to="/prospective">Join Applied INtelligence Lab</Link>
           </div>
         </div>
       </div>
@@ -273,11 +284,11 @@ function AcademicGenealogy() {
       <div className="container">
         <p className={clsx(styles.kicker, 'text--center')}>Lineage</p>
         <h1 className="text--center">Academic genealogy.</h1>
-        <p className="text--center"><em>The scholarly lineage behind AINTLab.</em></p>
+        <p className="text--center"><em>The scholarly lineage behind Applied INtelligence Lab.</em></p>
         <div className="row">
           <div className={clsx('col col--12')}>
             <div className={clsx(styles.genealogyFrame, 'reveal')}>
-              <Svg loading="lazy" className={styles.genealogySvg} aria-label="AINTLab academic genealogy" role="img" />
+              <Svg loading="lazy" className={styles.genealogySvg} aria-label="Applied INtelligence Lab academic genealogy" role="img" />
             </div>
           </div>
         </div>

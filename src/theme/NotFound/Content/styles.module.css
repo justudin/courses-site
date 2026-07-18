@@ -1,0 +1,135 @@
+/* Full-bleed dark stage between navbar and footer — same palette family as
+   the hero and the generated backdrop. */
+.stageWrap {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.stage {
+  position: relative;
+  min-height: clamp(480px, calc(100vh - var(--ifm-navbar-height, 60px) - 180px), 760px);
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background:
+    radial-gradient(ellipse at 50% 30%, rgba(48, 128, 220, 0.22) 0%, rgba(30, 90, 170, 0.06) 45%, transparent 70%),
+    linear-gradient(165deg, #030d1d 0%, #082140 55%, #0d3161 100%);
+  /* touch-action: pan-y keeps page scroll working while pointermove still
+     fires for the particle interaction on touch devices. */
+  touch-action: pan-y;
+}
+
+.canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  opacity: 0;
+  transition: opacity 0.9s ease;
+}
+
+/* Compound selector on purpose: the minifier merges single-class rules into
+   shared groups, which can reorder them before .canvas's opacity:0 — the
+   extra specificity keeps the ready state winning regardless of order. */
+.canvas.canvasReady {
+  opacity: 1;
+}
+
+/* Static glyph shown pre-mount and for reduced-motion / no-WebGL visitors. */
+.fallbackGlyph {
+  position: absolute;
+  left: 50%;
+  top: 38%;
+  transform: translate(-50%, -50%);
+  font-family: var(--ifm-heading-font-family);
+  font-size: clamp(7rem, 24vw, 15rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  background: linear-gradient(120deg, #58b8ff 0%, #9adcff 55%, #e8f8ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  opacity: 0.9;
+  user-select: none;
+  transition: opacity 1.1s ease;
+}
+
+/* Fades as the particle glyph converges — a hand-off, not a swap.
+   Compound selector for the same minifier-merge reason as .canvas.canvasReady. */
+.fallbackGlyph.fallbackGlyphHidden {
+  opacity: 0;
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 0 1.25rem clamp(2.6rem, 7vh, 4.5rem);
+  max-width: 720px;
+  /* Let pointer interaction pass through to the stage except on the links. */
+  pointer-events: none;
+}
+
+.content a {
+  pointer-events: auto;
+}
+
+.eyebrow {
+  margin: 0 0 0.7rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.24em;
+  color: rgba(154, 220, 255, 0.9);
+}
+
+.title {
+  margin: 0 0 0.6rem;
+  color: #f2f9ff;
+  font-size: clamp(1.7rem, 4vw, 2.7rem);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  text-shadow: 0 4px 30px rgba(2, 12, 28, 0.85);
+}
+
+.lead {
+  margin: 0 auto 1.5rem;
+  color: rgba(214, 232, 250, 0.85);
+  font-size: clamp(0.98rem, 1.6vw, 1.12rem);
+  line-height: 1.6;
+  max-width: 46ch;
+  text-shadow: 0 3px 24px rgba(2, 12, 28, 0.85);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .stage {
+    min-height: clamp(420px, calc(100svh - var(--ifm-navbar-height, 60px) - 140px), 640px);
+  }
+
+  .fallbackGlyph {
+    top: 34%;
+  }
+
+  .actions {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .actions :global(.button) {
+    width: 100%;
+  }
+}

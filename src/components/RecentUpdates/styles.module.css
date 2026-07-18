@@ -74,18 +74,52 @@
   transition-delay: 0.08s;
 }
 
-.featureSvg {
+/* Generated "blue embers" panel (replaces the old decorative video):
+   canvas fills the panel; the logo mark floats above it. */
+.pulsePanel {
+  position: relative;
+  height: 320px;
+}
+
+.pulseCanvas {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  max-width: 100%;
-  min-height: 280px;
+  height: 100%;
   border-radius: 10px;
-  object-fit: cover;
   display: block;
 }
 
+.pulseLogo {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 104px;
+  height: 104px;
+  transform: translate(-50%, -50%);
+  filter: drop-shadow(0 0 26px rgba(72, 158, 245, 0.55));
+  animation: pulseFloat 5.5s ease-in-out infinite;
+}
+
+@keyframes pulseFloat {
+  0%,
+  100% {
+    transform: translate(-50%, -50%);
+  }
+  50% {
+    transform: translate(-50%, calc(-50% - 9px));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pulseLogo {
+    animation: none;
+  }
+}
+
 @media (max-width: 1200px) {
-  .featureSvg {
-    min-height: 250px;
+  .pulsePanel {
+    height: 280px;
   }
 }
 
@@ -104,8 +138,8 @@
     border-radius: 12px;
   }
 
-  .featureSvg {
-    min-height: 220px;
+  .pulsePanel {
+    height: 230px;
   }
 }
 

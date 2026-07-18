@@ -1,92 +1,177 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { XMLParser } from 'fast-xml-parser';
+import React, { useEffect, useRef } from 'react';
+import { usePluginData } from '@docusaurus/useGlobalData';
 import styles from './styles.module.css';
 import Link from '@docusaurus/Link'
-import backgroundVideo from '../../assets/background.mp4';
-import backgroundPoster from '../../assets/background.webp';
 
-// The target RSS feed URL
-const XML_URL = `${typeof window !== 'undefined' ? window.location.origin : ''}/updates/rss.xml`;
+const LogoMark = require('@site/static/img/favicon.svg').default;
+
+const EMBER_COUNT = 44;
+
+function makeEmber(rand, width, height, seedY) {
+  const r = 1.2 + rand() * 2.6;
+  return {
+    x: rand() * width,
+    // seedY spreads the initial field across the panel; respawns start below.
+    y: seedY ? rand() * height : height + r * 6 + rand() * 40,
+    r,
+    speed: 14 + rand() * 30, // px/s upward
+    sway: 6 + rand() * 16,
+    phase: rand() * Math.PI * 2,
+    hue: 196 + rand() * 22,
+    alpha: 0.35 + rand() * 0.5,
+  };
+}
+
+function drawScene(ctx, width, height, embers, t) {
+  // Deep navy field with a soft "furnace" glow at the base — the embers'
+  // source. Matches the hero/backdrop palette.
+  const base = ctx.createLinearGradient(0, 0, 0, height);
+  base.addColorStop(0, '#04101f');
+  base.addColorStop(0.62, '#082140');
+  base.addColorStop(1, '#0d3161');
+  ctx.fillStyle = base;
+  ctx.fillRect(0, 0, width, height);
+
+  const furnace = ctx.createRadialGradient(
+    width / 2, height + 40, 10,
+    width / 2, height + 40, height * 0.85,
+  );
+  furnace.addColorStop(0, 'rgba(64, 150, 240, 0.34)');
+  furnace.addColorStop(0.5, 'rgba(38, 105, 190, 0.12)');
+  furnace.addColorStop(1, 'rgba(38, 105, 190, 0)');
+  ctx.fillStyle = furnace;
+  ctx.fillRect(0, 0, width, height);
+
+  ctx.save();
+  ctx.globalCompositeOperation = 'lighter';
+  for (const e of embers) {
+    const x = e.x + Math.sin(t * 0.8 + e.phase) * e.sway;
+    // Embers fade out as they rise toward the top third.
+    const lift = 1 - Math.max(0, Math.min(1, e.y / height));
+    const fade = lift > 0.7 ? Math.max(0, 1 - (lift - 0.7) / 0.3) : 1;
+    const a = e.alpha * fade;
+    if (a <= 0.01) continue;
+    const glow = ctx.createRadialGradient(x, e.y, 0, x, e.y, e.r * 6);
+    glow.addColorStop(0, `hsla(${e.hue}, 92%, 78%, ${a})`);
+    glow.addColorStop(0.3, `hsla(${e.hue}, 88%, 62%, ${a * 0.45})`);
+    glow.addColorStop(1, `hsla(${e.hue}, 88%, 62%, 0)`);
+    ctx.fillStyle = glow;
+    ctx.beginPath();
+    ctx.arc(x, e.y, e.r * 6, 0, Math.PI * 2);
+    ctx.fill();
+  }
+  ctx.restore();
+}
 
 function RecentUpdates() {
-  const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const videoRef = useRef(null);
+  // Latest posts are baked in at build time by plugins/blog-plugin.js,
+  // so there is no runtime fetch/parse step (previously this hit the RSS feed).
+  const { recentPosts = [] } = usePluginData('docusaurus-plugin-content-blog');
+  const canvasRef = useRef(null);
+  const panelRef = useRef(null);
 
-  // The source video is a large decorative loop (~20MB). Loading/playing it
-  // is deferred until this panel actually scrolls into view, so it never
-  // contributes to initial page weight/LCP — matching the Hero3D lazy-mount
-  // pattern used elsewhere on this page.
+  // Lightweight generated "blue embers" animation (replaces the old ~20MB
+  // decorative video): runs only while the panel is in view, honors
+  // prefers-reduced-motion with a single static frame, and defers resize
+  // work to rAF so the ResizeObserver never loops.
   useEffect(() => {
-    const videoEl = videoRef.current;
-    if (!videoEl) {
+    const canvas = canvasRef.current;
+    const panel = panelRef.current;
+    if (!canvas || !panel) {
+      return undefined;
+    }
+    const ctx = canvas.getContext('2d');
+    if (!ctx) {
       return undefined;
     }
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) {
-      return undefined;
+    const rand = Math.random;
+    let width = 0;
+    let height = 0;
+    let embers = [];
+    let running = false;
+    let inView = typeof IntersectionObserver === 'undefined';
+    let frameId = null;
+    let last = 0;
+
+    function sizeCanvas() {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      width = panel.clientWidth;
+      height = panel.clientHeight;
+      canvas.width = Math.max(1, Math.round(width * dpr));
+      canvas.height = Math.max(1, Math.round(height * dpr));
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      if (embers.length === 0) {
+        embers = Array.from({length: EMBER_COUNT}, () => makeEmber(rand, width, height, true));
+      }
+      drawScene(ctx, width, height, embers, performance.now() / 1000);
     }
 
-    if (typeof IntersectionObserver === 'undefined') {
-      videoEl.src = backgroundVideo;
-      videoEl.play().catch(() => {});
-      return undefined;
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            if (!videoEl.src) {
-              videoEl.src = backgroundVideo;
-            }
-            videoEl.play().catch(() => {});
-          } else {
-            videoEl.pause();
-          }
-        });
-      },
-      {threshold: 0.2},
-    );
-    observer.observe(videoEl);
-
-    return () => observer.disconnect();
-  }, [loading]);
-
-  useEffect(() => {
-    fetch(XML_URL)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+    function tick(now) {
+      if (!running) {
+        return;
+      }
+      const dt = Math.min((now - last) / 1000, 0.1);
+      last = now;
+      for (let i = 0; i < embers.length; i++) {
+        const e = embers[i];
+        e.y -= e.speed * dt;
+        if (e.y < -e.r * 6) {
+          embers[i] = makeEmber(rand, width, height, false);
         }
-        return response.text();
-      })
-      .then(xmlText => {
-        const parser = new XMLParser();
-        const parsedData = parser.parse(xmlText);
+      }
+      drawScene(ctx, width, height, embers, now / 1000);
+      frameId = requestAnimationFrame(tick);
+    }
 
-        // --- Crucial step: Extracting the items array ---
-        // RSS structure is typically rss -> channel -> item[].
-        const allItems = parsedData?.rss?.channel?.item || [];
-        
-        // 1. Get the 5 latest posts using .slice(0, 5)
-        const firstFivePosts = allItems.slice(0, 5);
-        
-        setPosts(firstFivePosts);
-      })
-      .catch(e => {
-        console.error('Error fetching or parsing XML:', e);
-        setError(`Failed to fetch or parse: ${e.message}`);
-      })
-      .finally(() => {
-        setLoading(false);
+    function syncRunning() {
+      const shouldRun = inView && !prefersReducedMotion;
+      if (shouldRun && !running) {
+        running = true;
+        last = performance.now();
+        frameId = requestAnimationFrame(tick);
+      } else if (!shouldRun && running) {
+        running = false;
+        if (frameId !== null) cancelAnimationFrame(frameId);
+      }
+    }
+
+    sizeCanvas();
+    syncRunning();
+
+    let resizeObserver = null;
+    let resizeRaf = 0;
+    if (typeof ResizeObserver !== 'undefined') {
+      resizeObserver = new ResizeObserver(() => {
+        cancelAnimationFrame(resizeRaf);
+        resizeRaf = requestAnimationFrame(sizeCanvas);
       });
-  }, []);
+      resizeObserver.observe(panel);
+    }
 
-  if (loading) return <p className={styles.feedback}>Loading latest updates...</p>;
-  if (error) return <p className={styles.error}>Error: {error}</p>;
+    let intersectionObserver = null;
+    if (typeof IntersectionObserver !== 'undefined') {
+      intersectionObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            inView = entry.isIntersecting;
+            syncRunning();
+          });
+        },
+        {threshold: 0.2},
+      );
+      intersectionObserver.observe(panel);
+    }
+
+    return () => {
+      running = false;
+      if (frameId !== null) cancelAnimationFrame(frameId);
+      cancelAnimationFrame(resizeRaf);
+      if (resizeObserver) resizeObserver.disconnect();
+      if (intersectionObserver) intersectionObserver.disconnect();
+    };
+  }, []);
 
   return (
     <section className={styles.features} id="recentupdated">
@@ -97,15 +182,15 @@ function RecentUpdates() {
         <div className="row">
         <div className="col col--7">
         <div className={`${styles.updatesPanel} reveal`}>
-        
-          {posts.length === 0 ? (
+
+          {recentPosts.length === 0 ? (
             <p className="text--left">No recent posts found.</p>
           ) : (
             <ul className={styles.updatesList}>
-              {posts.map((item, index) => (
-                <li key={index}>
-                  <Link to={item.link}>
-                    {item.title}
+              {recentPosts.map((post) => (
+                <li key={post.permalink}>
+                  <Link to={post.permalink}>
+                    {post.title}
                   </Link>
                 </li>
               ))}
@@ -115,21 +200,13 @@ function RecentUpdates() {
           </div>
         </div>
         <div className="col col--5">
-        <div className={`${styles.videoPanel} reveal`}>
-        <video
-          ref={videoRef}
-          poster={backgroundPoster}
-          loop
-          muted
-          playsInline
-          preload="none"
-          aria-hidden="true"
-          className={styles.featureSvg}
-        />
+        <div ref={panelRef} className={`${styles.videoPanel} ${styles.pulsePanel} reveal`}>
+          <canvas ref={canvasRef} className={styles.pulseCanvas} aria-hidden="true" />
+          <LogoMark className={styles.pulseLogo} aria-hidden="true" />
         </div>
         </div>
         </div>
-        
+
       </div>
     </section>
   );

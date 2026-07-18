@@ -7,7 +7,7 @@ import CollabMap2D from '@site/src/components/CollabMap2D'
 
 const MissionVisionList = [
   {
-    title: 'Collaborate With AINTLab',
+    title: 'Collaborate With Applied INtelligence Lab',
     description: (
       <>
         <em>We welcome research partners, visiting scholars, and industry collaborators who share our vision of advancing AI for a sustainable and connected world.</em>

@@ -193,8 +193,17 @@ export default function CollabMap2D({minWorks = 4}) {
     resizeCanvas();
 
     let resizeObserver = null;
+    let resizeRaf = 0;
     if (typeof ResizeObserver !== 'undefined') {
-      resizeObserver = new ResizeObserver(() => resizeCanvas());
+      // resizeCanvas() mutates layout, which would re-trigger the observer in
+      // the same frame ("ResizeObserver loop completed with undelivered
+      // notifications") — defer to the next animation frame instead.
+      resizeObserver = new ResizeObserver(() => {
+        cancelAnimationFrame(resizeRaf);
+        resizeRaf = requestAnimationFrame(() => {
+          if (!cancelled) resizeCanvas();
+        });
+      });
       resizeObserver.observe(host);
     }
 
@@ -216,6 +225,7 @@ export default function CollabMap2D({minWorks = 4}) {
       cancelled = true;
       running = false;
       if (frameId !== null) cancelAnimationFrame(frameId);
+      cancelAnimationFrame(resizeRaf);
       if (resizeObserver) resizeObserver.disconnect();
       if (intersectionObserver) intersectionObserver.disconnect();
     };
