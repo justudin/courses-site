@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://boxy-svg.com" viewBox="2.99 -22.87 80.96 122.67">
+  <g style="" transform="matrix(1.242923, 0, 0, 1.242923, -49.927038, -34.892869)">
+    <g id="g-7" featurekey="textGroupContainer" transform="matrix(1, 0, 0, 1, 346.794597, 33.411237)" fill="#ffffff">
+      <rect xmlns="http://www.w3.org/2000/svg" y="0" height="1" width="1" opacity="0" style="fill: rgb(14, 89, 169);" class="svg-elem-1"></rect>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, -26.402871, -134.465122)" id="object-0">
+      <circle cx="100.749" cy="199.132" r="31.371" style="stroke: rgb(14, 89, 169); fill: rgb(14, 89, 169); stroke-width: 1;" class="svg-elem-3"></circle>
+      <g fill="#fff" style="" transform="matrix(1.091433, 0, 0, 1.091433, 46.178132, 144.561757)">
+        <polygon points="44 24.289 30 70 42 70 48 54.001 52 54.001 58 70 70 70 56 24.289" class="svg-elem-4"></polygon>
+        <path d="M 49.675 27.784 C 37.02 43.272 51.63 37.334 49.311 53.49 C 59.299 40.166 55.68 36.488 49.675 27.784 Z" fill="#0e59a9" class="svg-elem-5"></path>
+      </g>
+    </g>
+  </g>
+</svg>
