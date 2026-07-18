@@ -16,7 +16,7 @@ const gratitudeConfigPath = path.join(rootDir, 'src', 'data', 'gratitude.json');
 
 const DEFAULT_GRATITUDE = {
   collaborators: [
-    'AINTLab members, alumni, and visiting researchers',
+    'Lab members, alumni, and visiting researchers',
     'Academic and industry partners supporting collaborative projects',
     'Students and community members who provide feedback and testing',
   ],
