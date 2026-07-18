@@ -25,7 +25,6 @@ const config = {
   },
 
   plugins: [
-    require.resolve('docusaurus-lunr-search'),
     [
       // Wrapped blog plugin (see plugins/blog-plugin.js) — same options as the
       // classic preset's blog, plus recent posts exposed as global data.
@@ -141,6 +140,24 @@ const config = {
   ],
 
   themeConfig:{
+    // Algolia DocSearch (rendered by @docusaurus/theme-search-algolia from the
+    // classic preset). The apiKey is the public search-only key from the
+    // DocSearch dashboard — safe to commit. contextualSearch is off because the
+    // index is a plain DocSearch crawl without docusaurus_tag facets; leaving
+    // it on would filter every result out.
+    algolia: {
+      appId: 'EL5FDZ45P0',
+      apiKey: 'aa7c0138715588bb95f31148084ec7d4',
+      indexName: 'AIN Website',
+      contextualSearch: false,
+      // Ask AI assistant (Algolia Agent Studio). The validator auto-fills
+      // appId/apiKey/indexName from the fields above. The assistant also needs
+      // `agentStudio: true`, which the theme's config validator doesn't accept
+      // yet — src/theme/SearchBar/index.js injects it at render time.
+      askAi: {
+        assistantId: '8af6b335-c3bf-4659-92cc-7d21d8221a49',
+      },
+    },
     // Declare some <meta> tags
     metadata: [
       {name: 'keywords', content: 'Applied Intelligence Lab, AI research publications, artificial intelligence papers, machine learning publications, deep learning research, IoT research, RFID in supply chain, sustainable agriculture papers, self-supervised learning, self-organizing maps, vessel detection, human action recognition, transformer models, agricultural technology research, AgriTech publications, predictive analytics papers, AI for agriculture, AI-powered innovation, scientific articles, AI in agriculture, academic publications, AI research, machine learning, deep learning, artificial intelligence lab, IoT, RFID, sustainable agriculture, satellite imagery, AI-powered solutions, food security, agricultural data analysis, AgriTech solutions, AI innovation, Applied INtelligence Lab (AINTLab), Department of Artificial Intelligence and Data Science, Sejong University, Seoul 05006, Republic of Korea'},
