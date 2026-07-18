@@ -1,0 +1,160 @@
+/* Full-viewport cinematic intro overlay. Sits above the navbar (which is
+   hidden by html.intro-running anyway) and everything else on the page. */
+.root {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  background: #02040a;
+  opacity: 1;
+  transition: opacity 1.9s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Set while the homepage settles in underneath (parent-driven). The long
+   fade overlaps the navbar/hero/main reveal transitions so the handoff reads
+   as one continuous motion instead of fade-then-pop.
+   Compound selector on purpose: cssnano can reorder single-class rules, which
+   would put this state rule before .root and lose the fade entirely. */
+.root.rootFading {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ---- Enter gate (autoplay-policy gesture) ---- */
+.gate {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  text-align: center;
+  padding: 2rem;
+  background: radial-gradient(120% 90% at 50% 30%, rgba(9, 24, 48, 0.9), rgba(2, 4, 10, 0.97));
+}
+
+.gateEyebrow {
+  margin: 0;
+  font-size: 0.72rem;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: rgba(160, 210, 255, 0.55);
+}
+
+.gateTitle {
+  margin: 0;
+  font-size: clamp(1.6rem, 4.5vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: #e8f4ff;
+}
+
+.gateTitleIn {
+  background: linear-gradient(100deg, #22d3ee, #3b82f6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.gateNote {
+  margin: 0;
+  font-size: 0.85rem;
+  font-style: italic;
+  color: rgba(180, 214, 255, 0.5);
+}
+
+.enterButton {
+  font: inherit;
+  font-size: 0.95rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #e8f4ff;
+  background: rgba(34, 211, 238, 0.08);
+  border: 1px solid rgba(34, 211, 238, 0.45);
+  border-radius: 999px;
+  padding: 0.95rem 3.4rem;
+  cursor: pointer;
+  transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.enterButton:hover {
+  background: rgba(34, 211, 238, 0.16);
+  box-shadow: 0 0 42px rgba(34, 211, 238, 0.35);
+  transform: translateY(-1px);
+}
+
+.gateSkip {
+  font: inherit;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  color: rgba(160, 200, 240, 0.45);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.gateSkip:hover {
+  color: rgba(200, 230, 255, 0.8);
+}
+
+/* ---- in-show chrome ---- */
+.skipButton {
+  position: absolute;
+  top: 1.4rem;
+  right: 1.6rem;
+  font: inherit;
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(190, 220, 250, 0.55);
+  background: rgba(4, 10, 22, 0.35);
+  border: 1px solid rgba(120, 170, 220, 0.25);
+  border-radius: 999px;
+  padding: 0.5rem 1.15rem;
+  cursor: pointer;
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.skipButton:hover {
+  color: #e8f4ff;
+  border-color: rgba(34, 211, 238, 0.6);
+}
+
+.caption {
+  position: absolute;
+  left: 50%;
+  bottom: 9vh;
+  transform: translateX(-50%);
+  width: min(88vw, 46rem);
+  text-align: center;
+  pointer-events: none;
+}
+
+.captionLine {
+  margin: 0;
+  font-size: clamp(0.95rem, 2.2vw, 1.25rem);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: rgba(214, 236, 255, 0.88);
+  text-shadow: 0 2px 24px rgba(2, 8, 20, 0.9);
+  animation: cinematicCaptionIn 0.6s ease both;
+}
+
+@keyframes cinematicCaptionIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

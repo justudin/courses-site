@@ -12,6 +12,8 @@ import backgroundImg from '../assets/background.webp';
 import collaborations from '@site/src/data/collaborations.json';
 import LogoSlider from '@site/src/components/LogoSlider';
 import Hero3D from '@site/src/components/Hero3D';
+import CinematicIntro from '@site/src/components/CinematicIntro';
+import introSound from '@site/src/assets/intro-sound.mpeg';
 
 import styles from './index.module.css';
 
@@ -91,6 +93,62 @@ function HomepageHeader() {
   // 'pending'…'spirit' = playing; 'done' = overlay fading out; 'closed' = gone.
   const [introPhase, setIntroPhase] = useState(null);
   const introApiRef = useRef(null);
+  // Cinematic first-visit intro (CinematicIntro) replaces Hero3D's forge
+  // intro. 'deciding' = pre-hydration/unknown (SSR renders this), 'show' =
+  // covering the page, 'handoff' = timeline done, overlay fading over the
+  // still-veiled page, 'reveal' = overlay still fading but the veil is
+  // dropped so navbar/hero/main transition in underneath it, 'off' = gone.
+  const [cinematic, setCinematic] = useState('deciding');
+
+  // Same gating as Hero3D's forge intro: first visit, motion allowed, WebGL
+  // available. When the cinematic plays, Hero3D stays unmounted until the
+  // handoff so the forge intro doesn't start (or mark the intro seen) early.
+  useEffect(() => {
+    let play = false;
+    try {
+      play = window.localStorage.getItem('aintlab.introSeen.v1') !== '1';
+    } catch (err) {
+      play = false;
+    }
+    if (play && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      play = false;
+    }
+    if (play) {
+      const probe = document.createElement('canvas');
+      if (!(probe.getContext('webgl2') || probe.getContext('webgl'))) {
+        play = false;
+      }
+    }
+    if (play) {
+      // Docusaurus rewrites <html>'s className during hydration, clobbering
+      // the pre-paint intro-pending veil. Re-veil synchronously in this same
+      // effects flush — waiting for the 'show' re-render's effect would leave
+      // a frame or two of raw homepage before the gate mounts.
+      document.documentElement.classList.add('intro-running');
+    }
+    setCinematic(play ? 'show' : 'off');
+  }, []);
+
+  const handleCinematicDone = useCallback(() => {
+    // CinematicIntro wrote the seen-flag before firing this, so the Hero3D
+    // that mounts now declines its forge intro. The overlay fades over ~1.9s
+    // (styles.module.css); part-way through, the veil drops ('reveal') so the
+    // navbar glide / hero resize / page fade all finish under the thinning
+    // overlay — one continuous motion into the homepage.
+    setCinematic('handoff');
+    window.setTimeout(() => {
+      setCinematic((current) => (current === 'handoff' ? 'reveal' : current));
+    }, 800);
+    window.setTimeout(() => {
+      setCinematic((current) => (current === 'reveal' ? 'off' : current));
+    }, 2100);
+  }, []);
+
+  const handleCinematicSkip = useCallback(() => {
+    // CinematicIntro wrote the seen-flag already, so the Hero3D that mounts
+    // here declines its own intro and the page reveals immediately.
+    setCinematic('off');
+  }, []);
 
   const handleIntroPhase = useCallback((phase) => {
     // 'none' = Hero3D decided the intro won't play (returning visitor,
@@ -111,26 +169,35 @@ function HomepageHeader() {
   }, []);
 
   const introRunning = introPhase !== null && introPhase !== 'done' && introPhase !== 'closed';
+  // Overlay mounted (still visible or fading)…
+  const cinematicMounted =
+    cinematic === 'show' || cinematic === 'handoff' || cinematic === 'reveal';
+  // …vs. page chrome veiled ('reveal' keeps the overlay but frees the page).
+  const cinematicVeiled = cinematic === 'show' || cinematic === 'handoff';
   const caption = INTRO_CAPTIONS[introPhase];
 
-  // Cinema mode: hide the navbar (and progress bar) while the intro plays —
-  // the class is styled in custom.css. Scrolling away mid-intro counts as a
-  // skip so the chrome is never left hidden.
+  // Cinema mode: hide the navbar (and progress bar) while either intro plays —
+  // the class is styled in custom.css. Scrolling away mid-forge-intro counts
+  // as a skip so the chrome is never left hidden (the cinematic overlay is
+  // opaque and fixed, so scrolling under it is invisible and harmless).
   //
   // html.intro-pending (set pre-paint by the head script) is only cleared once
-  // introPhase is non-null — i.e. once Hero3D has decided whether the intro
-  // plays. Clearing it on the initial null would flash the navbar for a frame
-  // between hydration and the 'pending' phase arriving.
+  // the intro's fate is known: either Hero3D reported a phase, or the
+  // cinematic decision landed. Clearing it earlier would flash the navbar for
+  // a frame between hydration and the veil class arriving.
   useEffect(() => {
     const root = document.documentElement;
-    if (introPhase !== null) {
+    // Keep the pre-paint veil up until the cinematic decision has landed —
+    // Hero3D's early 'none' relay (while suppressed) must not lift it, or the
+    // homepage flashes for a frame before the cinematic gate mounts.
+    if (cinematicMounted || (cinematic === 'off' && introPhase !== null)) {
       root.classList.remove('intro-pending');
+      root.removeAttribute('data-intro-pending');
     }
+    root.classList.toggle('intro-running', cinematicVeiled || introRunning);
     if (!introRunning) {
-      root.classList.remove('intro-running');
       return undefined;
     }
-    root.classList.add('intro-running');
     const onScroll = () => {
       if (window.scrollY > window.innerHeight * 0.5 && introApiRef.current) {
         introApiRef.current.skip();
@@ -139,18 +206,39 @@ function HomepageHeader() {
     window.addEventListener('scroll', onScroll, {passive: true});
     return () => {
       window.removeEventListener('scroll', onScroll);
-      root.classList.remove('intro-running');
     };
-  }, [introRunning, introPhase]);
+  }, [introRunning, introPhase, cinematic, cinematicMounted, cinematicVeiled]);
+
+  // Safety net: never leave the veil class behind when the header unmounts.
+  useEffect(() => {
+    return () => {
+      document.documentElement.classList.remove('intro-running');
+    };
+  }, []);
 
   return (
     <header id="hero" className={clsx('hero hero--primary', styles.heroBanner)}>
-      <Hero3D
-        posterSrc={backgroundImg}
-        alt={siteConfig.tagline}
-        onIntroPhase={handleIntroPhase}
-        introApiRef={introApiRef}
-      />
+      {/* Hero3D is unmounted while the cinematic covers the page, then
+          mounted fresh at the handoff. By then the seen-flag is set (done or
+          skipped), so it declines its own forge intro and the page reveals
+          under the fading overlay. */}
+      {cinematic !== 'show' && (
+        <Hero3D
+          posterSrc={backgroundImg}
+          alt={siteConfig.tagline}
+          onIntroPhase={handleIntroPhase}
+          introApiRef={introApiRef}
+          suppressIntro={cinematic === 'deciding'}
+        />
+      )}
+      {cinematicMounted && (
+        <CinematicIntro
+          audioSrc={introSound}
+          fading={cinematic === 'handoff' || cinematic === 'reveal'}
+          onDone={handleCinematicDone}
+          onSkip={handleCinematicSkip}
+        />
+      )}
       {introPhase !== null && introPhase !== 'closed' && (
         <div
           className={clsx(styles.introOverlay, introPhase === 'done' && styles.introOverlayDone)}

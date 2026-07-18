@@ -26,7 +26,13 @@ function getSiteTheme() {
  * gets a {skip} handle for the Skip button. The intro is marked seen once it
  * completes (or is skipped), so an abandoned intro replays next time.
  */
-export default function Hero3D({posterSrc, alt, onIntroPhase, introApiRef}) {
+/**
+ * suppressIntro: when true, the forge intro never plays regardless of the
+ * seen-flag — used while the page hasn't yet decided whether the cinematic
+ * intro (CinematicIntro) runs first. It is read once on mount; the page
+ * remounts Hero3D (conditional render) when the decision changes.
+ */
+export default function Hero3D({posterSrc, alt, onIntroPhase, introApiRef, suppressIntro = false}) {
   const hostRef = useRef(null);
   const canvasRef = useRef(null);
   // Keep the latest callback reachable from the one-shot mount effect.
@@ -86,7 +92,7 @@ export default function Hero3D({posterSrc, alt, onIntroPhase, introApiRef}) {
     // access can throw (privacy modes); treat that as "already seen".
     let playIntro = false;
     try {
-      playIntro = window.localStorage.getItem(INTRO_SEEN_KEY) !== '1';
+      playIntro = !suppressIntro && window.localStorage.getItem(INTRO_SEEN_KEY) !== '1';
     } catch (err) {
       playIntro = false;
     }

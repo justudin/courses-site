@@ -68,7 +68,7 @@ const config = {
       tagName: 'script',
       attributes: {},
       innerHTML:
-        "(function(){try{var p=location.pathname;if(p!=='/'&&p!=='/index.html')return;if(window.localStorage.getItem('aintlab.introSeen.v1')==='1')return;if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;document.documentElement.classList.add('intro-pending');}catch(e){}})();",
+        "(function(){try{var p=location.pathname;if(p!=='/'&&p!=='/index.html')return;if(window.localStorage.getItem('aintlab.introSeen.v1')==='1')return;if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;var d=document.documentElement;d.classList.add('intro-pending');d.setAttribute('data-intro-pending','1');}catch(e){}})();",
     },
     // Preload the two most-used self-hosted Inter weights (body text + bold
     // headings) so they're discovered by the browser's preload scanner

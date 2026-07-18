@@ -184,12 +184,18 @@ a {
    frame and glides back in when the intro finishes or is skipped. The body
    backdrop goes hero-dark so no light strip shows where the navbar was.
    Two flavors of the same state:
-   - html.intro-pending — set pre-paint by the inline head script (see
+   - html[data-intro-pending] — set pre-paint by the inline head script (see
      docusaurus.config.js headTags) so the very first frame is already the
-     dark fullscreen stage; no navbar/content flash before hydration.
-   - html.intro-running — set by HomepageHeader once the intro actually plays.
-   HomepageHeader removes intro-pending as soon as the intro's fate is known. */
+     dark fullscreen stage; no navbar/content flash before hydration. It is a
+     data ATTRIBUTE (not a class) because Docusaurus/react-helmet rewrites
+     <html>'s class attribute wholesale during hydration, which would strip a
+     class-based veil mid-boot. The legacy .intro-pending class selectors are
+     kept as belt-and-braces.
+   - html.intro-running — set by HomepageHeader once an intro actually plays.
+   HomepageHeader removes the pending state as soon as the intro's fate is
+   known. */
 html.intro-pending .navbar,
+html[data-intro-pending] .navbar,
 html.intro-running .navbar {
   opacity: 0;
   transform: translateY(-16px);
@@ -197,6 +203,7 @@ html.intro-running .navbar {
 }
 
 html.intro-pending body,
+html[data-intro-pending] body,
 html.intro-running body {
   background: #04101f;
 }
@@ -204,6 +211,7 @@ html.intro-running body {
 /* True fullscreen during the intro: the hero swallows the navbar's row and
    owns the whole viewport, then eases back down as the chrome returns. */
 html.intro-pending .hero,
+html[data-intro-pending] .hero,
 html.intro-running .hero {
   min-height: 100vh;
   min-height: 100svh;
@@ -212,8 +220,10 @@ html.intro-running .hero {
 
 /* Everything below the hero stays out of the frame until the intro resolves. */
 html.intro-pending main,
+html[data-intro-pending] main,
 html.intro-running main,
 html.intro-pending .footer,
+html[data-intro-pending] .footer,
 html.intro-running .footer {
   opacity: 0;
   pointer-events: none;
@@ -222,7 +232,9 @@ html.intro-running .footer {
 /* Pre-hydration veil for the hero's own copy + scroll cue (React applies its
    module-scoped heroContentHidden class only after it mounts). */
 html.intro-pending .hero .container,
-html.intro-pending .hero > a {
+html[data-intro-pending] .hero .container,
+html.intro-pending .hero > a,
+html[data-intro-pending] .hero > a {
   opacity: 0;
   pointer-events: none;
 }
@@ -231,10 +243,15 @@ html.intro-pending .hero > a {
    pre-paint state auto-releases after 14s so the site is never left dark.
    The intro itself runs ~9.6s and clears these classes long before that. */
 html.intro-pending .navbar,
+html[data-intro-pending] .navbar,
 html.intro-pending main,
+html[data-intro-pending] main,
 html.intro-pending .footer,
+html[data-intro-pending] .footer,
 html.intro-pending .hero .container,
-html.intro-pending .hero > a {
+html[data-intro-pending] .hero .container,
+html.intro-pending .hero > a,
+html[data-intro-pending] .hero > a {
   animation: introPendingRelease 0.65s ease 14s forwards;
 }
 
@@ -244,6 +261,11 @@ html.intro-pending .hero > a {
     transform: none;
     pointer-events: auto;
   }
+}
+
+/* Glide (not pop) when cinema mode releases the navbar. */
+.navbar {
+  transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .navbar--scrolled {
