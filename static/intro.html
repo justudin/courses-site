@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex" />
+<title>Applied INtelligence Lab — Intro</title>
+<style>
+  :root {
+    --cyan: #22d3ee;
+    --blue: #3b82f6;
+    --amber: #fbbf24;
+    --ink: #e8f4ff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    width: 100%; height: 100%;
+    background: #02040a;
+    overflow: hidden;
+    font-family: Inter, 'Segoe UI', system-ui, -apple-system, sans-serif;
+    color: var(--ink);
+  }
+  canvas#stage { position: fixed; inset: 0; display: block; }
+
+  /* ---- Enter overlay (autoplay-policy gate) ---- */
+  #overlay {
+    position: fixed; inset: 0; z-index: 30;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 1.6rem; text-align: center; padding: 2rem;
+    background: radial-gradient(120% 90% at 50% 30%, rgba(9, 24, 48, .92), rgba(2, 4, 10, .98));
+    transition: opacity .9s ease;
+  }
+  #overlay.hidden { opacity: 0; pointer-events: none; }
+  #overlay .eyebrow {
+    font-size: .72rem; letter-spacing: .42em; text-transform: uppercase;
+    color: rgba(160, 210, 255, .55);
+  }
+  #overlay h1 { font-size: clamp(1.6rem, 4.5vw, 3rem); font-weight: 700; letter-spacing: -.01em; }
+  #overlay h1 .in {
+    background: linear-gradient(100deg, var(--cyan), var(--blue));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  #overlay .note { font-size: .85rem; color: rgba(180, 214, 255, .5); font-style: italic; }
+  #enter-btn {
+    font: inherit; font-size: .95rem; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--ink); background: rgba(34, 211, 238, .08);
+    border: 1px solid rgba(34, 211, 238, .45); border-radius: 999px;
+    padding: .95rem 3.4rem; cursor: pointer;
+    transition: background .3s ease, box-shadow .3s ease, transform .3s ease;
+  }
+  #enter-btn:hover {
+    background: rgba(34, 211, 238, .16);
+    box-shadow: 0 0 42px rgba(34, 211, 238, .35);
+    transform: translateY(-1px);
+  }
+  #overlay .skip-link {
+    font-size: .78rem; color: rgba(160, 200, 240, .45);
+    text-decoration: none; letter-spacing: .08em;
+  }
+  #overlay .skip-link:hover { color: rgba(200, 230, 255, .8); }
+
+  /* ---- In-show chrome ---- */
+  #skip-btn {
+    position: fixed; top: 1.4rem; right: 1.6rem; z-index: 20;
+    font: inherit; font-size: .72rem; letter-spacing: .22em; text-transform: uppercase;
+    color: rgba(190, 220, 250, .55); background: rgba(4, 10, 22, .35);
+    border: 1px solid rgba(120, 170, 220, .25); border-radius: 999px;
+    padding: .5rem 1.15rem; cursor: pointer; opacity: 0; pointer-events: none;
+    transition: opacity .6s ease, color .3s ease, border-color .3s ease;
+  }
+  #skip-btn.visible { opacity: 1; pointer-events: auto; }
+  #skip-btn:hover { color: var(--ink); border-color: rgba(34, 211, 238, .6); }
+
+  #caption {
+    position: fixed; left: 50%; bottom: 9vh; transform: translateX(-50%);
+    z-index: 15; width: min(88vw, 46rem); text-align: center;
+    font-size: clamp(.95rem, 2.2vw, 1.25rem); font-weight: 500;
+    letter-spacing: .04em; color: rgba(214, 236, 255, .88);
+    text-shadow: 0 2px 24px rgba(2, 8, 20, .9);
+    opacity: 0; transition: opacity .5s ease;
+  }
+  #caption.visible { opacity: 1; }
+
+  #tagline {
+    position: fixed; left: 50%; top: 60%; transform: translateX(-50%);
+    z-index: 15; width: min(90vw, 42rem); text-align: center;
+    font-size: clamp(.85rem, 1.9vw, 1.05rem); font-style: italic;
+    color: rgba(165, 205, 245, .75); letter-spacing: .03em;
+    opacity: 0; transition: opacity 1.4s ease;
+  }
+  #tagline.visible { opacity: 1; }
+
+  #cta {
+    position: fixed; left: 50%; top: 72%; transform: translateX(-50%);
+    z-index: 20; font: inherit; font-size: .85rem; letter-spacing: .2em;
+    text-transform: uppercase; color: var(--ink);
+    background: rgba(34, 211, 238, .07); border: 1px solid rgba(34, 211, 238, .4);
+    border-radius: 999px; padding: .85rem 2.6rem; cursor: pointer;
+    opacity: 0; pointer-events: none; transition: opacity 1.2s ease, box-shadow .3s ease;
+  }
+  #cta.visible { opacity: 1; pointer-events: auto; }
+  #cta:hover { box-shadow: 0 0 38px rgba(34, 211, 238, .35); }
+
+  #fade {
+    position: fixed; inset: 0; z-index: 40; background: #02040a;
+    opacity: 0; pointer-events: none; transition: opacity .65s ease;
+  }
+  #fade.on { opacity: 1; pointer-events: auto; }
+</style>
+</head>
+<body>
+
+<canvas id="stage"></canvas>
+
+<div id="overlay">
+  <div class="eyebrow">An intro experience</div>
+  <h1>Applied <span class="in">IN</span>telligence Lab</h1>
+  <div class="note">Twenty seconds. Best with sound on.</div>
+  <button id="enter-btn" type="button">Enter</button>
+  <a class="skip-link" href="/" id="overlay-skip">Skip intro →</a>
+</div>
+
+<button id="skip-btn" type="button">Skip intro</button>
+<div id="caption"></div>
+<div id="tagline">Not just a laboratory — a playground for applied intelligence.</div>
+<button id="cta" type="button">Enter the lab →</button>
+<div id="fade"></div>
+
+<audio id="intro-audio" preload="auto">
+  <source src="/intro-sound.mpeg" type="audio/mpeg" />
+  <source src="/intro.mp3" type="audio/mpeg" />
+</audio>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+  }
+}
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
+import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
+
+/* ================================================================
+   Timeline — data-driven. Tweak timings/captions/cameras here.
+   t: [start, end] seconds (synced to audio.currentTime when audio
+   is available, wall clock otherwise). morph: seconds the particle
+   morph into this phase's shape takes. cam: [from, to] positions,
+   eased across the phase. fx: uniform/opacity targets, smoothly
+   damped so phase changes never pop.
+   ================================================================ */
+const END = 20;
+const PHASES = [
+  { name: 'welcome',      t: [0, 3],      shape: 'cloud',     morph: 0.01,
+    caption: 'Welcome to Applied INtelligence Lab',
+    cam: [[0, 2.4, 66], [0, 1.6, 50]],
+    fx: { noise: 1.5, swirl: 0.15, spin: 0.03, size: 1.0, bright: 0.55 } },
+
+  { name: 'playground',   t: [3, 7],      shape: 'network',   morph: 1.9,
+    caption: 'Not just a laboratory — a playground',
+    cam: [[5, 3, 43], [-5, 1.6, 36]],
+    fx: { noise: 0.32, swirl: 1.0, spin: 0.26, net: 1, size: 1.0, bright: 0.8 } },
+
+  { name: 'data',         t: [7, 9.2],    shape: 'stream',    morph: 1.15,
+    caption: 'From data…',
+    cam: [[0, 5, 42], [0, 2, 34]],
+    fx: { noise: 0.22, flow: 1, spin: 0, size: 0.8, bright: 0.5 } },
+
+  { name: 'intelligence', t: [9.2, 11.2], shape: 'brain',     morph: 1.1,
+    caption: '…to intelligence…',
+    cam: [[4, 2, 30], [-2.5, 1, 25]],
+    fx: { noise: 0.3, amber: 1, brainNet: 1, spin: 0.18, size: 0.95, bright: 0.7 } },
+
+  { name: 'impact',       t: [11.2, 13],  shape: 'globe',     morph: 1.15,
+    caption: '…to real-world impact',
+    cam: [[0, 4, 28], [1.5, 2.6, 24.5]],
+    fx: { noise: 0.12, globe: 1, arcs: 1, spin: 0.14, size: 0.8, bright: 0.55 } },
+
+  { name: 'connected',    t: [13, 17],    shape: 'globeHalo', morph: 1.7,
+    caption: 'A smarter, more connected world',
+    cam: [[1.5, 2.6, 24.5], [0, 5, 54]],
+    fx: { noise: 0.4, globe: 1, arcs: 1, spin: 0.1, amber: 0.3, size: 0.9, bright: 0.5 } },
+
+  { name: 'purpose',      t: [17, END],   shape: 'text',      morph: 1.9,
+    caption: 'AINTLab. Where curiosity meets purpose.',
+    cam: [[0, 3.5, 47], [0, 0.6, 34]],
+    fx: { noise: 0.1, spin: 0, size: 0.62, bright: 0.9 } },
+];
+const FX_DEFAULTS = { noise: 0.3, swirl: 0, flow: 0, spin: 0, amber: 0.12,
+                      net: 0, brainNet: 0, globe: 0, arcs: 0, size: 1, bright: 0.7 };
+
+/* ---------------- setup / capability detection ---------------- */
+const params = new URLSearchParams(location.search);
+const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const isMobile = Math.min(innerWidth, innerHeight) < 720 || /Mobi|Android/i.test(navigator.userAgent);
+const COUNT = isMobile ? 4500 : 12000;
+const PIXEL_CAP = isMobile ? 1.25 : 1.75;
+
+const canvas = document.getElementById('stage');
+const overlay = document.getElementById('overlay');
+const enterBtn = document.getElementById('enter-btn');
+const skipBtn = document.getElementById('skip-btn');
+const captionEl = document.getElementById('caption');
+const taglineEl = document.getElementById('tagline');
+const ctaEl = document.getElementById('cta');
+const fadeEl = document.getElementById('fade');
+const audio = document.getElementById('intro-audio');
+
+function exitToSite() {
+  try { localStorage.setItem('aintlab.introSeen.v1', '1'); } catch (e) {}
+  fadeEl.classList.add('on');
+  try { audio.pause(); } catch (e) {}
+  setTimeout(() => location.replace('/'), 680);
+}
+skipBtn.addEventListener('click', exitToSite);
+ctaEl.addEventListener('click', exitToSite);
+document.getElementById('overlay-skip').addEventListener('click', (e) => { e.preventDefault(); exitToSite(); });
+
+let renderer;
+try {
+  renderer = new THREE.WebGLRenderer({ canvas, antialias: false, powerPreference: 'high-performance' });
+} catch (e) { renderer = null; }
+if (!renderer || prefersReduced) {
+  // No WebGL or reduced motion: the Enter button becomes a plain door to the site.
+  enterBtn.textContent = 'Enter site';
+  document.querySelector('#overlay .note').textContent =
+    prefersReduced ? 'Motion is reduced on this device — heading straight in.' : 'WebGL unavailable — heading straight in.';
+  enterBtn.addEventListener('click', exitToSite);
+} else {
+  boot(renderer);
+}
+
+/* ============================ show ============================ */
+function boot(renderer) {
+  renderer.setClearColor(0x02040a, 1);
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(55, innerWidth / innerHeight, 0.1, 400);
+  camera.position.set(0, 2.4, 66);
+
+  const group = new THREE.Group();
+  scene.add(group);
+
+  const rand = mulberry32(1337);
+  const gauss = () => (rand() + rand() + rand() + rand() - 2) * 0.75;
+  const randDir = () => {
+    const z = rand() * 2 - 1, a = rand() * Math.PI * 2, r = Math.sqrt(1 - z * z);
+    return [Math.cos(a) * r, z, Math.sin(a) * r];
+  };
+
+  /* ---------------- shape targets (COUNT * 3 each) ---------------- */
+  const SHAPES = {};
+
+  SHAPES.cloud = (() => {
+    const a = new Float32Array(COUNT * 3);
+    for (let i = 0; i < COUNT; i++) {
+      const d = randDir(), r = 6 + 26 * Math.cbrt(rand());
+      a[i * 3] = d[0] * r * 1.35; a[i * 3 + 1] = d[1] * r * 0.85; a[i * 3 + 2] = d[2] * r * 1.2;
+    }
+    return a;
+  })();
+
+  // Neural network: particles cluster on ~150 nodes; edges connect near nodes.
+  const NET_NODES = [];
+  {
+    const NODE_N = 150;
+    for (let n = 0; n < NODE_N; n++) {
+      const d = randDir(), r = 13 * (0.62 + 0.5 * rand());
+      NET_NODES.push([d[0] * r, d[1] * r * 0.85, d[2] * r]);
+    }
+    const a = new Float32Array(COUNT * 3);
+    for (let i = 0; i < COUNT; i++) {
+      const n = NET_NODES[(i * 7919) % NODE_N];
+      a[i * 3] = n[0] + gauss() * 0.85; a[i * 3 + 1] = n[1] + gauss() * 0.85; a[i * 3 + 2] = n[2] + gauss() * 0.85;
+    }
+    SHAPES.network = a;
+  }
+
+  SHAPES.stream = (() => {
+    const a = new Float32Array(COUNT * 3);
+    for (let i = 0; i < COUNT; i++) {
+      const lane = rand() * Math.PI * 2, x = (rand() * 2 - 1) * 42;
+      a[i * 3] = x;
+      a[i * 3 + 1] = Math.sin(x * 0.09 + lane) * 4.5 + gauss() * 2.4;
+      a[i * 3 + 2] = Math.cos(x * 0.07 + lane) * 2.8 + gauss() * 2.6;
+    }
+    return a;
+  })();
+
+  const brainPoint = () => {
+    const lobe = rand() < 0.5 ? -1 : 1;
+    const d = randDir(), r = Math.pow(rand(), 0.24);
+    let x = lobe * 2.0 + d[0] * 4.4 * r;
+    if (Math.abs(x) < 0.55) x = 0.55 * Math.sign(x || lobe);           // hemisphere fissure
+    const wr = 0.38 * Math.sin(d[1] * 21 + d[2] * 17);                  // cortical wrinkle
+    return [x + wr * d[0], d[1] * 3.9 * r + wr, d[2] * 5.4 * r + wr * d[2]];
+  };
+  SHAPES.brain = (() => {
+    const a = new Float32Array(COUNT * 3);
+    for (let i = 0; i < COUNT; i++) { const p = brainPoint(); a.set(p, i * 3); }
+    return a;
+  })();
+
+  const GLOBE_R = 12;
+  SHAPES.globe = (() => {
+    const a = new Float32Array(COUNT * 3), golden = Math.PI * (3 - Math.sqrt(5));
+    for (let i = 0; i < COUNT; i++) {
+      const y = 1 - 2 * (i + 0.5) / COUNT, r = Math.sqrt(1 - y * y), th = golden * i;
+      a[i * 3] = Math.cos(th) * r * GLOBE_R;
+      a[i * 3 + 1] = y * GLOBE_R;
+      a[i * 3 + 2] = Math.sin(th) * r * GLOBE_R;
+    }
+    return a;
+  })();
+
+  SHAPES.globeHalo = (() => {
+    const a = new Float32Array(COUNT * 3);
+    for (let i = 0; i < COUNT; i++) {
+      if (rand() < 0.72) {
+        const j = (i * 4241) % COUNT;
+        a[i * 3] = SHAPES.globe[j * 3] + gauss() * 0.25;
+        a[i * 3 + 1] = SHAPES.globe[j * 3 + 1] + gauss() * 0.25;
+        a[i * 3 + 2] = SHAPES.globe[j * 3 + 2] + gauss() * 0.25;
+      } else {
+        const d = randDir(), r = 15 + 15 * Math.pow(rand(), 1.6);
+        a[i * 3] = d[0] * r; a[i * 3 + 1] = d[1] * r * 0.8; a[i * 3 + 2] = d[2] * r;
+      }
+    }
+    return a;
+  })();
+
+  SHAPES.text = sampleTextShape(COUNT);
+
+  /* ---------------- particle system ---------------- */
+  const geo = new THREE.BufferGeometry();
+  const posArr = new Float32Array(SHAPES.cloud);           // "from" buffer
+  const toArr = new Float32Array(SHAPES.cloud);            // "to" buffer
+  const seeds = new Float32Array(COUNT);
+  for (let i = 0; i < COUNT; i++) seeds[i] = rand();
+  geo.setAttribute('position', new THREE.BufferAttribute(posArr, 3));
+  geo.setAttribute('aTo', new THREE.BufferAttribute(toArr, 3));
+  geo.setAttribute('aSeed', new THREE.BufferAttribute(seeds, 1));
+
+  const uniforms = {
+    uTime: { value: 0 }, uMorph: { value: 1 },
+    uNoise: { value: 1.5 }, uSwirl: { value: 0 }, uFlow: { value: 0 },
+    uAmber: { value: 0.12 }, uSize: { value: 1 }, uOpacity: { value: 0 },
+    uBright: { value: 0.55 }, uPixelRatio: { value: 1 },
+  };
+  const particles = new THREE.Points(geo, new THREE.ShaderMaterial({
+    uniforms, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
+    vertexShader: `
+      attribute vec3 aTo;
+      attribute float aSeed;
+      uniform float uTime, uMorph, uNoise, uSwirl, uFlow, uSize, uPixelRatio;
+      varying float vSeed;
+      void main() {
+        vSeed = aSeed;
+        // Staggered eased morph: each particle departs on its own beat.
+        float m = smoothstep(0.0, 1.0, clamp((uMorph - aSeed * 0.28) / 0.72, 0.0, 1.0));
+        vec3 p = mix(position, aTo, m);
+        // Playful swirl (radius-aware, breathing)
+        float ang = uSwirl * 0.4 * sin(uTime * 0.5 + aSeed * 6.2831 + length(p.xz) * 0.14);
+        float c = cos(ang), s = sin(ang);
+        p.xz = mat2(c, -s, s, c) * p.xz;
+        // Looping stream flow along x
+        float fx = mod(p.x + uTime * (7.0 + 9.0 * aSeed) + 45.0, 90.0) - 45.0;
+        p.x = mix(p.x, fx, uFlow);
+        p.y += uFlow * sin(p.x * 0.16 + uTime * 2.2 + aSeed * 6.2831) * 1.2;
+        // Ambient drift
+        p += uNoise * 0.6 * vec3(
+          sin(uTime * 0.31 + aSeed * 17.0),
+          sin(uTime * 0.23 + aSeed * 29.0),
+          sin(uTime * 0.27 + aSeed * 41.0));
+        vec4 mv = modelViewMatrix * vec4(p, 1.0);
+        gl_Position = projectionMatrix * mv;
+        gl_PointSize = uSize * (0.45 + 0.75 * fract(aSeed * 7.13)) * uPixelRatio * (105.0 / -mv.z);
+      }`,
+    fragmentShader: `
+      uniform float uTime, uAmber, uOpacity, uBright;
+      varying float vSeed;
+      void main() {
+        float d = length(gl_PointCoord - 0.5);
+        float a = smoothstep(0.5, 0.06, d) * uBright;
+        vec3 cyan = vec3(0.13, 0.83, 0.93);
+        vec3 blue = vec3(0.23, 0.51, 0.96);
+        vec3 teal = vec3(0.08, 0.72, 0.65);
+        vec3 col = mix(blue, cyan, smoothstep(0.15, 0.85, fract(vSeed * 3.71)));
+        col = mix(col, teal, step(0.82, fract(vSeed * 5.31)) * 0.65);
+        // occasional warm amber accent pulses
+        float amberSel = step(0.965, vSeed);
+        float pulse = 0.5 + 0.5 * sin(uTime * 3.0 + vSeed * 80.0);
+        col = mix(col, vec3(1.0, 0.72, 0.28), amberSel * pulse * uAmber);
+        float tw = 0.75 + 0.25 * sin(uTime * (1.5 + vSeed * 3.0) + vSeed * 40.0);
+        gl_FragColor = vec4(col * tw, a * uOpacity);
+      }`,
+  }));
+  group.add(particles);
+
+  /* ---------------- luminous edge lines (network / brain) ---------------- */
+  function buildEdgeLines(nodes, k, maxDist, colA, colB) {
+    const edges = [], seen = new Set();
+    for (let i = 0; i < nodes.length; i++) {
+      const ds = nodes.map((n, j) => [j, dist2(nodes[i], n)]).sort((a, b) => a[1] - b[1]);
+      for (let c = 1; c <= k && c < ds.length; c++) {
+        const j = ds[c][0];
+        if (ds[c][1] > maxDist * maxDist) continue;
+        const key = i < j ? i + '_' + j : j + '_' + i;
+        if (!seen.has(key)) { seen.add(key); edges.push([i, j]); }
+      }
+    }
+    const pos = new Float32Array(edges.length * 6);
+    const along = new Float32Array(edges.length * 2);
+    const phase = new Float32Array(edges.length * 2);
+    edges.forEach((e, n) => {
+      pos.set(nodes[e[0]], n * 6); pos.set(nodes[e[1]], n * 6 + 3);
+      along[n * 2] = 0; along[n * 2 + 1] = 1;
+      const ph = rand(); phase[n * 2] = ph; phase[n * 2 + 1] = ph;
+    });
+    const g = new THREE.BufferGeometry();
+    g.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+    g.setAttribute('aAlong', new THREE.BufferAttribute(along, 1));
+    g.setAttribute('aPhase', new THREE.BufferAttribute(phase, 1));
+    const u = { uTime: { value: 0 }, uOpacity: { value: 0 },
+                uColA: { value: new THREE.Color(colA) }, uColB: { value: new THREE.Color(colB) } };
+    const m = new THREE.ShaderMaterial({
+      uniforms: u, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
+      vertexShader: `
+        attribute float aAlong; attribute float aPhase;
+        varying float vAlong; varying float vPhase;
+        void main() {
+          vAlong = aAlong; vPhase = aPhase;
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+        }`,
+      fragmentShader: `
+        uniform float uTime, uOpacity; uniform vec3 uColA, uColB;
+        varying float vAlong; varying float vPhase;
+        void main() {
+          float p = fract(uTime * 0.32 + vPhase);
+          float pulse = smoothstep(0.16, 0.0, abs(vAlong - p));
+          vec3 col = mix(uColA, uColB, pulse);
+          gl_FragColor = vec4(col, (0.15 + 0.85 * pulse) * uOpacity);
+        }`,
+    });
+    const lines = new THREE.LineSegments(g, m);
+    lines.userData.u = u;
+    return lines;
+  }
+
+  const netLines = buildEdgeLines(NET_NODES, 3, 9.5, 0x1a73b8, 0x4de8ff);
+  group.add(netLines);
+
+  const brainNodes = [];
+  for (let i = 0; i < 90; i++) brainNodes.push(brainPoint());
+  const brainLines = buildEdgeLines(brainNodes, 2, 6.5, 0x2a5f9e, 0xffb648); // attention flashes: warm tips
+  group.add(brainLines);
+
+  /* ---------------- globe: wireframe, city markers, arcs ---------------- */
+  const globeWire = new THREE.LineSegments(
+    new THREE.WireframeGeometry(new THREE.SphereGeometry(GLOBE_R * 0.995, 28, 18)),
+    new THREE.LineBasicMaterial({ color: 0x14486e, transparent: true, opacity: 0,
+                                  blending: THREE.AdditiveBlending, depthWrite: false }));
+  group.add(globeWire);
+
+  // ~30 collaborating countries (approx capitals/hubs), Seoul as the lab's hub.
+  const CITIES = [
+    [37.5, 127.0], /* Seoul */ [-6.2, 106.8], [35.7, 139.7], [39.9, 116.4], [28.6, 77.2],
+    [24.7, 46.7], [41.0, 28.9], [55.7, 37.6], [52.5, 13.4], [48.8, 2.3],
+    [51.5, -0.1], [40.4, -3.7], [41.9, 12.5], [30.0, 31.2], [6.5, 3.4],
+    [-1.3, 36.8], [-26.2, 28.0], [40.7, -74.0], [43.7, -79.4], [19.4, -99.1],
+    [-23.5, -46.6], [-34.6, -58.4], [-33.4, -70.6], [-33.9, 151.2], [-36.8, 174.8],
+    [3.1, 101.7], [13.8, 100.5], [23.8, 90.4], [35.7, 51.4], [52.2, 21.0], [38.7, -9.1],
+  ];
+  const latLng = (lat, lon, r) => {
+    const phi = (90 - lat) * Math.PI / 180, th = (lon + 180) * Math.PI / 180;
+    return [-r * Math.sin(phi) * Math.cos(th), r * Math.cos(phi), r * Math.sin(phi) * Math.sin(th)];
+  };
+  const cityGeo = new THREE.BufferGeometry();
+  cityGeo.setAttribute('position', new THREE.BufferAttribute(
+    new Float32Array(CITIES.flatMap(c => latLng(c[0], c[1], GLOBE_R * 1.01))), 3));
+  const cityMat = new THREE.PointsMaterial({ color: 0xffb45e, size: 0.4, transparent: true,
+    opacity: 0, blending: THREE.AdditiveBlending, depthWrite: false });
+  const cityPts = new THREE.Points(cityGeo, cityMat);
+  group.add(cityPts);
+
+  const arcs = (() => {
+    const SEG = 36, hub = latLng(CITIES[0][0], CITIES[0][1], GLOBE_R);
+    const nArcs = CITIES.length - 1;
+    const pos = new Float32Array(nArcs * SEG * 6);
+    const tAttr = new Float32Array(nArcs * SEG * 2);
+    const phase = new Float32Array(nArcs * SEG * 2);
+    let w = 0, wt = 0;
+    for (let a = 1; a < CITIES.length; a++) {
+      const dst = latLng(CITIES[a][0], CITIES[a][1], GLOBE_R);
+      const ph = rand();
+      const mid = norm3(add3(hub, dst));
+      const span = Math.acos(clamp(dot3(norm3(hub), norm3(dst)), -1, 1)) / Math.PI;
+      const lift = GLOBE_R * (1.12 + 0.85 * span);
+      const bez = (t) => { // quadratic bezier hub -> lifted midpoint -> dst
+        const q0 = lerp3(hub, mul3(mid, lift), t), q1 = lerp3(mul3(mid, lift), dst, t);
+        return lerp3(q0, q1, t);
+      };
+      for (let s = 0; s < SEG; s++) {
+        const t0 = s / SEG, t1 = (s + 1) / SEG;
+        pos.set(bez(t0), w); pos.set(bez(t1), w + 3); w += 6;
+        tAttr[wt] = t0; phase[wt] = ph; wt++;
+        tAttr[wt] = t1; phase[wt] = ph; wt++;
+      }
+    }
+    const g = new THREE.BufferGeometry();
+    g.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+    g.setAttribute('aT', new THREE.BufferAttribute(tAttr, 1));
+    g.setAttribute('aPhase', new THREE.BufferAttribute(phase, 1));
+    const u = { uTime: { value: 0 }, uOpacity: { value: 0 }, uDraw: { value: 0 } };
+    const m = new THREE.ShaderMaterial({
+      uniforms: u, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
+      vertexShader: `
+        attribute float aT; attribute float aPhase;
+        varying float vT; varying float vPhase;
+        void main() {
+          vT = aT; vPhase = aPhase;
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+        }`,
+      fragmentShader: `
+        uniform float uTime, uOpacity, uDraw;
+        varying float vT; varying float vPhase;
+        void main() {
+          float drawn = 1.0 - smoothstep(uDraw - 0.05, uDraw, vT + vPhase * 0.15 - 0.075);
+          float sp = fract(uTime * 0.17 + vPhase);
+          float spark = smoothstep(0.055, 0.0, abs(vT - sp));
+          vec3 col = mix(vec3(0.2, 0.75, 1.0), vec3(1.0, 0.72, 0.3), step(0.78, fract(vPhase * 5.7)));
+          col += spark * 0.9;
+          gl_FragColor = vec4(col, (0.3 + 0.7 * spark) * drawn * uOpacity);
+        }`,
+    });
+    const l = new THREE.LineSegments(g, m);
+    l.userData.u = u;
+    return l;
+  })();
+  group.add(arcs);
+
+  /* ---------------- post-processing ---------------- */
+  const composer = new EffectComposer(renderer);
+  composer.addPass(new RenderPass(scene, camera));
+  const bloom = new UnrealBloomPass(new THREE.Vector2(innerWidth, innerHeight), 0.75, 0.55, 0.28);
+  composer.addPass(bloom);
+  composer.addPass(new OutputPass());
+  const grain = new ShaderPass({
+    uniforms: { tDiffuse: { value: null }, uTime: { value: 0 } },
+    vertexShader: `
+      varying vec2 vUv;
+      void main() { vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }`,
+    fragmentShader: `
+      uniform sampler2D tDiffuse; uniform float uTime;
+      varying vec2 vUv;
+      float hash(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123); }
+      void main() {
+        vec4 c = texture2D(tDiffuse, vUv);
+        float g = (hash(vUv * vec2(1917.0, 1123.0) + fract(uTime) * 7.0) - 0.5) * 0.05; // film grain
+        float vig = smoothstep(0.85, 0.32, length(vUv - 0.5));                          // vignette
+        c.rgb = c.rgb * (0.66 + 0.34 * vig) + g;
+        gl_FragColor = c;
+      }`,
+  });
+  composer.addPass(grain);
+
+  function resize() {
+    const pr = Math.min(devicePixelRatio || 1, PIXEL_CAP);
+    renderer.setPixelRatio(pr);
+    renderer.setSize(innerWidth, innerHeight);
+    composer.setSize(innerWidth, innerHeight);
+    camera.aspect = innerWidth / innerHeight;
+    camera.updateProjectionMatrix();
+    uniforms.uPixelRatio.value = pr;
+  }
+  addEventListener('resize', resize);
+  resize();
+
+  /* ---------------- timeline state machine ---------------- */
+  const fxState = { ...FX_DEFAULTS, noise: 1.5 };
+  let fxTarget = { ...FX_DEFAULTS, ...PHASES[0].fx };
+  let phaseIdx = -1;
+  let currentTarget = SHAPES.cloud;
+  let started = false, startStamp = 0, seekOffset = 0;
+  let uT = 0, lastNow = performance.now();
+  let shownCaption = null, captionTimer = 0;
+
+  let rotationLocked = false;
+  function enterPhase(i) {
+    phaseIdx = i;
+    const ph = PHASES[i];
+    posArr.set(currentTarget);                        // bake previous target as morph origin
+    geo.attributes.position.needsUpdate = true;
+    let target = SHAPES[ph.shape];
+    if (ph.shape === 'text') {
+      // Freeze the scene rotation and counter-rotate the glyph targets so the
+      // wordmark forms upright in world space without snapping other objects.
+      rotationLocked = true;
+      const ry = group.rotation.y, c = Math.cos(-ry), s = Math.sin(-ry);
+      const rt = new Float32Array(target.length);
+      for (let n = 0; n < COUNT; n++) {
+        const x = target[n * 3], z = target[n * 3 + 2];
+        rt[n * 3] = c * x + s * z;
+        rt[n * 3 + 1] = target[n * 3 + 1];
+        rt[n * 3 + 2] = -s * x + c * z;
+      }
+      target = rt;
+    } else {
+      rotationLocked = false;
+    }
+    currentTarget = target;
+    toArr.set(currentTarget);
+    geo.attributes.aTo.needsUpdate = true;
+    fxTarget = { ...FX_DEFAULTS, ...ph.fx };
+    setCaption(ph.caption);
+  }
+
+  function setCaption(text) {
+    if (text === shownCaption) return;
+    shownCaption = text;
+    captionEl.classList.remove('visible');
+    clearTimeout(captionTimer);
+    captionTimer = setTimeout(() => {
+      captionEl.textContent = text;
+      if (started) captionEl.classList.add('visible');
+    }, 280);
+  }
+
+  const audioActive = () =>
+    started && audio.readyState >= 2 && !audio.paused && !audio.ended && audio.currentTime > 0.001;
+
+  function timelineTime() {
+    if (!started) return 0;
+    if (audioActive()) return audio.currentTime;
+    return (performance.now() - startStamp) / 1000 + seekOffset;
+  }
+
+  // Debug/tuning hook: __seek(12) jumps the show to t=12s.
+  window.__seek = (t) => {
+    seekOffset = t; startStamp = performance.now();
+    if (audio.readyState >= 2) { try { audio.currentTime = t; } catch (e) {} }
+    rotationLocked = false;
+    if (phaseIdx >= 0) { phaseIdx = -1; }            // force phase re-entry
+  };
+
+  enterBtn.addEventListener('click', () => {
+    started = true;
+    startStamp = performance.now();
+    if (!params.has('noaudio')) {
+      audio.play().catch(() => { /* missing file or blocked: clock drives the timeline */ });
+    }
+    overlay.classList.add('hidden');
+    skipBtn.classList.add('visible');
+    if (shownCaption) captionEl.classList.add('visible');
+    if (params.has('t')) window.__seek(parseFloat(params.get('t')) || 0);
+  });
+
+  /* ---------------- render loop ---------------- */
+  function frame() {
+    requestAnimationFrame(frame);
+    const now = performance.now();
+    const dt = Math.min(0.05, (now - lastNow) / 1000);
+    lastNow = now;
+    uT += dt;
+
+    const rawT = timelineTime();
+    const t = Math.min(rawT, END);                    // visuals hold at the final beat
+
+    // phase lookup + entry
+    let idx = PHASES.length - 1;
+    for (let i = 0; i < PHASES.length; i++) if (t < PHASES[i].t[1]) { idx = i; break; }
+    if (idx !== phaseIdx) enterPhase(idx);
+    const ph = PHASES[idx];
+
+    // eased morph progress for this phase
+    uniforms.uMorph.value = easeInOutCubic(clamp((t - ph.t[0]) / ph.morph, 0, 1));
+
+    // damped fx uniforms
+    const damp = 1 - Math.exp(-dt * 3.2);
+    for (const k in fxState) fxState[k] += (fxTarget[k] - fxState[k]) * damp;
+    uniforms.uTime.value = uT;
+    uniforms.uNoise.value = fxState.noise;
+    uniforms.uSwirl.value = fxState.swirl;
+    uniforms.uFlow.value = fxState.flow;
+    uniforms.uAmber.value = fxState.amber;
+    uniforms.uSize.value = fxState.size;
+    uniforms.uBright.value = fxState.bright;
+    uniforms.uOpacity.value = started ? Math.min(1, uniforms.uOpacity.value + dt * 0.8) : 0.25;
+
+    netLines.userData.u.uTime.value = uT;
+    netLines.userData.u.uOpacity.value = fxState.net * 0.85;
+    brainLines.userData.u.uTime.value = uT * 2.2;     // fast attention-style flashes
+    brainLines.userData.u.uOpacity.value = fxState.brainNet * 0.9;
+    globeWire.material.opacity = fxState.globe * 0.16;
+    cityMat.opacity = fxState.arcs * 0.9;
+    arcs.userData.u.uTime.value = uT;
+    arcs.userData.u.uOpacity.value = fxState.arcs;
+    arcs.userData.u.uDraw.value += ((fxState.arcs > 0.02 ? 1.15 : 0) - arcs.userData.u.uDraw.value) * (1 - Math.exp(-dt * 1.4));
+
+    // slow scene rotation; frozen once the text formation begins
+    if (!rotationLocked) group.rotation.y += fxState.spin * dt;
+
+    // camera: eased dolly across each phase + gentle handheld sway
+    const pProg = easeInOutCubic(clamp((t - ph.t[0]) / (ph.t[1] - ph.t[0]), 0, 1));
+    const from = ph.cam[0], to = ph.cam[1];
+    let cz = from[2] + (to[2] - from[2]) * pProg;
+    if (ph.shape === 'text') {                        // keep the wordmark inside narrow viewports
+      cz = Math.max(cz, 24.5 / (0.5206 * camera.aspect));
+    }
+    camera.position.set(
+      from[0] + (to[0] - from[0]) * pProg + Math.sin(uT * 0.5) * 0.35,
+      from[1] + (to[1] - from[1]) * pProg + Math.sin(uT * 0.4 + 2) * 0.25,
+      cz);
+    camera.lookAt(0, 0.6, 0);
+
+    // HTML beats
+    if (started) {
+      taglineEl.classList.toggle('visible', t > 18.3);
+      const finished = rawT >= END - 0.15;
+      ctaEl.classList.toggle('visible', finished);
+      if (finished) skipBtn.classList.remove('visible');
+    }
+
+    grain.uniforms.uTime.value = uT;
+    composer.render();
+  }
+  frame();
+}
+
+/* ---------------- text shape sampling ---------------- */
+function sampleTextShape(count) {
+  const W = 2048, H = 320;
+  const c = document.createElement('canvas');
+  c.width = W; c.height = H;
+  const g = c.getContext('2d');
+  g.fillStyle = '#000'; g.fillRect(0, 0, W, H);
+  g.fillStyle = '#fff';
+  g.font = '700 148px Inter, "Segoe UI", Arial, sans-serif';
+  g.textAlign = 'center'; g.textBaseline = 'middle';
+  g.fillText('Applied INtelligence Lab', W / 2, H / 2, W - 96);
+  const data = g.getImageData(0, 0, W, H).data;
+  const pts = [];
+  for (let y = 0; y < H; y += 2) {
+    for (let x = 0; x < W; x += 2) {
+      if (data[(y * W + x) * 4] > 120) pts.push([x, y]);
+    }
+  }
+  const arr = new Float32Array(count * 3);
+  const scale = 46 / W;
+  for (let i = 0; i < count; i++) {
+    const p = pts[(Math.random() * pts.length) | 0];
+    arr[i * 3] = (p[0] - W / 2) * scale + (Math.random() - 0.5) * 0.14;
+    arr[i * 3 + 1] = -(p[1] - H / 2) * scale + (Math.random() - 0.5) * 0.14 + 1.2;
+    arr[i * 3 + 2] = (Math.random() - 0.5) * 0.35;
+  }
+  return arr;
+}
+
+/* ---------------- tiny math helpers ---------------- */
+function mulberry32(a) {
+  return function () {
+    a |= 0; a = a + 0x6D2B79F5 | 0;
+    let t = Math.imul(a ^ a >>> 15, 1 | a);
+    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+  };
+}
+/* function declarations (hoisted — boot() runs before this point) */
+function clamp(v, a, b) { return Math.min(b, Math.max(a, v)); }
+function easeInOutCubic(x) { return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; }
+function dist2(a, b) { return (a[0] - b[0]) ** 2 + (a[1] - b[1]) ** 2 + (a[2] - b[2]) ** 2; }
+function add3(a, b) { return [a[0] + b[0], a[1] + b[1], a[2] + b[2]]; }
+function mul3(a, s) { return [a[0] * s, a[1] * s, a[2] * s]; }
+function dot3(a, b) { return a[0] * b[0] + a[1] * b[1] + a[2] * b[2]; }
+function norm3(a) { const l = Math.hypot(a[0], a[1], a[2]) || 1; return [a[0] / l, a[1] / l, a[2] / l]; }
+function lerp3(a, b, t) { return [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t]; }
+</script>
+</body>
+</html>
