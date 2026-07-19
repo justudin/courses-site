@@ -263,6 +263,31 @@ html[data-intro-pending] .hero > a {
   }
 }
 
+/* DocSearch attribution (keyword-search modal + Ask AINBot panel): fine
+   print — smaller, receding, the Algolia logo SVG replaced by plain text.
+   The href's utm params are stripped at runtime (src/theme/SearchBar and
+   AskAiWidget/panel.js). Sidepanel-scoped variants live in
+   AskAiWidget/styles.css; these cover the modal and any other footer. */
+.DocSearch-Logo {
+  opacity: 0.55;
+}
+
+.DocSearch-Logo .DocSearch-Label {
+  font-size: 0.58rem;
+}
+
+.DocSearch-Logo svg {
+  display: none;
+}
+
+.DocSearch-Logo a::after {
+  content: 'Algolia';
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  margin-left: 0.25em;
+}
+
 /* Glide (not pop) when cinema mode releases the navbar. */
 .navbar {
   transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);

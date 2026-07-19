@@ -57,6 +57,86 @@ button.DocSearch-SidepanelButton.floating:focus-visible {
   z-index: 1195;
 }
 
+/* ---- AINBot brand pass (panel gets id="docsearch-sidepanel" at runtime,
+        see panel.js useBrandFixups) ---- */
+
+/* AIN Lab mark as a faint watermark behind the conversation. */
+#docsearch-sidepanel {
+  position: relative;
+}
+
+#docsearch-sidepanel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('/img/favicon-static.svg') no-repeat center 34% / 52%;
+  opacity: 0.05;
+  pointer-events: none;
+}
+
+/* Chat-style transcript: speaker labels + bubbles. */
+#docsearch-sidepanel .DocSearch-AskAiScreen-Message--user::before,
+#docsearch-sidepanel .DocSearch-AskAiScreen-Message--assistant::before {
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0.5rem 0 0.25rem;
+  opacity: 0.75;
+}
+
+#docsearch-sidepanel .DocSearch-AskAiScreen-Message--user::before {
+  content: 'You';
+  text-align: right;
+  color: #2f82de;
+}
+
+#docsearch-sidepanel .DocSearch-AskAiScreen-Message--assistant::before {
+  content: 'AINBot';
+  color: #22b8d4;
+}
+
+#docsearch-sidepanel .DocSearch-AskAiScreen-Message--user .DocSearch-AskAiScreen-Query {
+  background: rgba(47, 130, 222, 0.12);
+  border-radius: 14px 14px 3px 14px;
+  padding: 0.5rem 0.8rem;
+  margin-left: 15%;
+  text-align: left;
+}
+
+#docsearch-sidepanel .DocSearch-AskAiScreen-Response-Container {
+  background: rgba(127, 170, 220, 0.09);
+  /*
+  border-radius: 14px 14px 14px 3px;
+  padding: 0.55rem 0.8rem;
+  margin-right: 8%;
+  */
+}
+
+/* No raw tool-result dumps inside replies (search progress shimmer stays). */
+#docsearch-sidepanel .DocSearch-AskAiScreen-MessageContent-Tool.Tool--Result,
+#docsearch-sidepanel .DocSearch-AskAiScreen-MessageContent-Tool.Tool--AggregatedResult {
+  display: none;
+}
+
+/* Footer: fine print. Attribution stays (text link, clean URL) but recedes. */
+#docsearch-sidepanel .DocSearch-Sidepanel-Footer {
+  font-size: 0.58rem;
+  opacity: 0.55;
+}
+
+#docsearch-sidepanel .DocSearch-Sidepanel-Footer .DocSearch-Logo svg {
+  display: none;
+}
+
+#docsearch-sidepanel .DocSearch-Sidepanel--powered-by a::after {
+  content: 'Algolia';
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
 /* The panel already collapses to full width on small screens; make sure it
    never hides behind mobile browser chrome. */
 @media (max-width: 480px) {
