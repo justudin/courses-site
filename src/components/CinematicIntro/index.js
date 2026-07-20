@@ -20,9 +20,16 @@ export default function CinematicIntro({audioSrc, fading, onDone, onSkip}) {
   const canvasRef = useRef(null);
   const audioRef = useRef(null);
   const handleRef = useRef(null);
+  const rootRef = useRef(null);
+  const auraRef = useRef(null);
+  const gyroCleanupRef = useRef(null);
+  const hotspotRef = useRef(null);
+  const scrubberRef = useRef(null);
+  const progressFillRef = useRef(null);
+  const durationRef = useRef(20);
   const [stage, setStage] = useState('gate');         // 'gate' | 'running'
-  // Caption text streamed from the scene's voice-synced caption track
-  // (scene.js CAPTIONS — word timings measured from intro-sound.mpeg).
+  // Caption streamed from the scene's voice-synced track as {text, wordIdx};
+  // wordIdx karaoke-highlights spoken words (scene.js CAPTIONS timings).
   const [caption, setCaption] = useState(null);
   const onDoneRef = useRef(onDone);
   onDoneRef.current = onDone;
@@ -41,13 +48,44 @@ export default function CinematicIntro({audioSrc, fading, onDone, onSkip}) {
           : 12000,
     };
 
+    // Optional personalization for shared invite links: ?to=Alex sculpts a
+    // "Welcome, Alex" line into the final wordmark. Sanitized to plain text.
+    let greeting = null;
+    try {
+      const to = new URLSearchParams(window.location.search).get('to');
+      if (to) greeting = to.replace(/[^\p{L}\p{N} .,'’-]/gu, '').trim().slice(0, 24) || null;
+    } catch (err) {
+      greeting = null;
+    }
+
     import(/* webpackChunkName: "cinematic-intro" */ './scene').then(({createCinematicScene}) => {
       if (cancelled || !canvasRef.current) {
         return;
       }
       const handle = createCinematicScene(canvasRef.current, {
         quality,
-        onCaption: (text) => setCaption(text),
+        greeting,
+        onCaption: (text, wordIdx, emphasis) =>
+          setCaption(text ? {text, wordIdx, emphasis: emphasis || []} : null),
+        // Live timeline position drives the scrubber fill (via ref, no re-render).
+        onProgress: (t, dur) => {
+          durationRef.current = dur;
+          const fill = progressFillRef.current;
+          if (fill) fill.style.width = `${Math.min(100, (t / dur) * 100)}%`;
+        },
+        // Hovered globe hub: move + label a DOM chip directly (no re-render).
+        onHotspot: (hs) => {
+          const label = hotspotRef.current;
+          if (!label) return;
+          if (hs) {
+            if (label.textContent !== hs.name) label.textContent = hs.name;
+            label.style.left = `${hs.x * 100}%`;
+            label.style.top = `${hs.y * 100}%`;
+            label.style.opacity = '1';
+          } else {
+            label.style.opacity = '0';
+          }
+        },
         onEnded: () => {
           // The show IS the whole intro now — mark it seen so the Hero3D that
           // mounts during the handoff goes straight to its idle hero instead
@@ -77,6 +115,10 @@ export default function CinematicIntro({audioSrc, fading, onDone, onSkip}) {
       cancelled = true;
       window.removeEventListener('resize', onResize);
       delete window.__aintlabIntroSeek;
+      if (gyroCleanupRef.current) {
+        gyroCleanupRef.current();
+        gyroCleanupRef.current = null;
+      }
       if (audioRef.current) {
         audioRef.current.pause();
       }
@@ -85,6 +127,98 @@ export default function CinematicIntro({audioSrc, fading, onDone, onSkip}) {
         handleRef.current = null;
       }
     };
+  }, []);
+
+  // Feed the scene a smoothed pointer position (NDC) and move the cursor aura.
+  const emitPointer = useCallback((clientX, clientY, active) => {
+    const root = rootRef.current;
+    if (!root) return;
+    const r = root.getBoundingClientRect();
+    if (!r.width || !r.height) return;
+    const nx = ((clientX - r.left) / r.width) * 2 - 1;
+    const ny = -(((clientY - r.top) / r.height) * 2 - 1);
+    if (handleRef.current) {
+      handleRef.current.setPointer(nx, ny, active);
+    }
+    const aura = auraRef.current;
+    if (aura) {
+      aura.style.transform = `translate(${clientX - r.left}px, ${clientY - r.top}px)`;
+      aura.style.opacity = active ? '1' : '0';
+    }
+    return {nx, ny};
+  }, []);
+
+  const onPointerMove = useCallback((e) => emitPointer(e.clientX, e.clientY, true), [emitPointer]);
+
+  const onPointerDown = useCallback(
+    (e) => {
+      const p = emitPointer(e.clientX, e.clientY, true);
+      if (p && handleRef.current) {
+        handleRef.current.pulse(p.nx, p.ny);          // shockwave from the tap
+      }
+    },
+    [emitPointer],
+  );
+
+  const onPointerLeave = useCallback(() => {
+    if (handleRef.current) {
+      handleRef.current.setPointer(0, 0, false);
+    }
+    if (auraRef.current) {
+      auraRef.current.style.opacity = '0';
+    }
+  }, []);
+
+  // Scrubber: click/drag the timeline to jump through beats (seeks audio too).
+  // stopPropagation keeps these gestures from also firing the field ripple.
+  const seekFromEvent = useCallback((e) => {
+    const el = scrubberRef.current;
+    if (!el || !handleRef.current) return;
+    const r = el.getBoundingClientRect();
+    const frac = Math.max(0, Math.min(1, (e.clientX - r.left) / r.width));
+    handleRef.current.seek(frac * (durationRef.current || 20));
+  }, []);
+
+  const onScrubDown = useCallback(
+    (e) => {
+      e.stopPropagation();
+      if (e.currentTarget.setPointerCapture) {
+        try { e.currentTarget.setPointerCapture(e.pointerId); } catch (err) { /* noop */ }
+      }
+      seekFromEvent(e);
+    },
+    [seekFromEvent],
+  );
+
+  const onScrubMove = useCallback(
+    (e) => {
+      if (e.buttons !== 1) return;
+      e.stopPropagation();
+      seekFromEvent(e);
+    },
+    [seekFromEvent],
+  );
+
+  // On phones the "Enter" tap is our one user gesture — the moment iOS lets us
+  // ask for motion access, so device tilt can drive the same pointer field.
+  const enableTilt = useCallback(() => {
+    if (gyroCleanupRef.current || typeof window === 'undefined') return;
+    const onOrient = (e) => {
+      if (e.gamma == null || e.beta == null || !handleRef.current) return;
+      const nx = Math.max(-1, Math.min(1, e.gamma / 40));         // left/right tilt
+      const ny = Math.max(-1, Math.min(1, (e.beta - 90) / 40));   // front/back tilt
+      handleRef.current.setPointer(nx, -ny, true);
+    };
+    const DOE = window.DeviceOrientationEvent;
+    const attach = () => {
+      window.addEventListener('deviceorientation', onOrient);
+      gyroCleanupRef.current = () => window.removeEventListener('deviceorientation', onOrient);
+    };
+    if (DOE && typeof DOE.requestPermission === 'function') {
+      DOE.requestPermission().then((s) => { if (s === 'granted') attach(); }).catch(() => {});
+    } else if (DOE) {
+      attach();
+    }
   }, []);
 
   // Fade the soundtrack alongside the visual fade-out.
@@ -105,6 +239,7 @@ export default function CinematicIntro({audioSrc, fading, onDone, onSkip}) {
 
   const begin = useCallback(() => {
     setStage('running');
+    enableTilt();
     const audio = audioRef.current;
     if (audio) {
       audio.play().catch(() => {
@@ -115,7 +250,7 @@ export default function CinematicIntro({audioSrc, fading, onDone, onSkip}) {
     if (handleRef.current) {
       handleRef.current.start(audio);
     }
-  }, []);
+  }, [enableTilt]);
 
   const skip = useCallback(() => {
     try {
@@ -130,9 +265,22 @@ export default function CinematicIntro({audioSrc, fading, onDone, onSkip}) {
   }, [onSkip]);
 
   return (
-    <div className={clsx(styles.root, fading && styles.rootFading)}>
+    <div
+      ref={rootRef}
+      className={clsx(styles.root, fading && styles.rootFading)}
+      onPointerMove={onPointerMove}
+      onPointerDown={onPointerDown}
+      onPointerLeave={onPointerLeave}>
       <canvas ref={canvasRef} className={styles.canvas} aria-hidden="true" />
       <audio ref={audioRef} src={audioSrc} preload="auto" />
+
+      {stage === 'running' && !fading && (
+        <div ref={auraRef} className={styles.aura} aria-hidden="true" />
+      )}
+
+      {stage === 'running' && !fading && (
+        <div ref={hotspotRef} className={styles.hotspot} aria-hidden="true" />
+      )}
 
       {stage === 'gate' && (
         <div className={styles.gate}>
@@ -141,7 +289,7 @@ export default function CinematicIntro({audioSrc, fading, onDone, onSkip}) {
             <span className={styles.gateTitleIn}>A</span>pplied{' '}
             <span className={styles.gateTitleIn}>IN</span>telligence Lab
           </p>
-          <p className={styles.gateNote}>Twenty seconds. Best with sound on.</p>
+          <p className={styles.gateNote}>Twenty seconds, best with sound on — move to touch the light.</p>
           <button type="button" className={styles.enterButton} onClick={begin} autoFocus>
             Enter
           </button>
@@ -159,11 +307,36 @@ export default function CinematicIntro({audioSrc, fading, onDone, onSkip}) {
 
       <div className={styles.caption} aria-live="polite">
         {stage === 'running' && caption && (
-          <p key={caption} className={styles.captionLine}>
-            {caption}
+          <p key={caption.text} className={styles.captionLine}>
+            {caption.text.split(' ').map((w, i) => (
+              <span
+                key={i}
+                className={clsx(
+                  styles.capWord,
+                  i < caption.wordIdx && styles.capWordOn,
+                  caption.emphasis.includes(i) && styles.capWordKey,
+                )}>
+                {w}{' '}
+              </span>
+            ))}
           </p>
         )}
       </div>
+
+      {stage === 'running' && !fading && (
+        <div
+          ref={scrubberRef}
+          className={styles.scrubber}
+          onPointerDown={onScrubDown}
+          onPointerMove={onScrubMove}
+          role="slider"
+          aria-label="Scrub intro"
+          aria-valuemin={0}
+          aria-valuemax={100}
+          tabIndex={-1}>
+          <div ref={progressFillRef} className={styles.scrubberFill} />
+        </div>
+      )}
     </div>
   );
 }

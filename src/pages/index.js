@@ -152,6 +152,20 @@ function HomepageHeader() {
     setCinematic('off');
   }, []);
 
+  const replayIntro = useCallback(() => {
+    // Re-arm and re-mount the cinematic on demand so it isn't a one-time-only
+    // experience. Clearing the seen-flag lets it run its full course again;
+    // 'show' unmounts Hero3D and re-veils the chrome while the gate is up.
+    try {
+      window.localStorage.removeItem('aintlab.introSeen.v1');
+    } catch (err) {
+      // Best effort.
+    }
+    document.documentElement.classList.add('intro-running');
+    window.scrollTo({top: 0, behavior: 'auto'});
+    setCinematic('show');
+  }, []);
+
   const handleIntroPhase = useCallback((phase) => {
     // 'none' = Hero3D decided the intro won't play (returning visitor,
     // reduced motion, no WebGL) — jump straight to the closed state so the
@@ -300,6 +314,15 @@ function HomepageHeader() {
       >
         <span className={styles.scrollCueChevron} aria-hidden="true" />
       </a>
+      {cinematic === 'off' && !introRunning && (
+        <button
+          type="button"
+          className={clsx(styles.replayIntro, introRunning && styles.heroContentHidden)}
+          onClick={replayIntro}
+        >
+          ▶ Replay intro
+        </button>
+      )}
     </header>
   );
 }

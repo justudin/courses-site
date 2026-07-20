@@ -27,6 +27,39 @@
   display: block;
 }
 
+/* Soft light that trails the cursor/finger while the show runs, reinforcing
+   the sense that the particle field is reacting to touch. Positioned from the
+   top-left origin and moved with a transform by the pointer handler. */
+.aura {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 300px;
+  height: 300px;
+  margin: -150px 0 0 -150px;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 2;
+  background: radial-gradient(
+    circle,
+    rgba(34, 211, 238, 0.28),
+    rgba(59, 130, 246, 0.1) 45%,
+    transparent 70%
+  );
+  mix-blend-mode: screen;
+  filter: blur(6px);
+  transition: opacity 0.45s ease;
+  will-change: transform, opacity;
+}
+
+@media (hover: none) {
+  /* Touch devices: the aura would lag a tap, so let the ripple speak instead. */
+  .aura {
+    display: none;
+  }
+}
+
 /* ---- Enter gate (autoplay-policy gesture) ---- */
 .gate {
   position: absolute;
@@ -156,5 +189,93 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* Karaoke highlight: unspoken words sit dim, each word brightens (with a soft
+   cyan glow) as the voiceover reaches it. */
+.capWord {
+  color: rgba(150, 180, 214, 0.42);
+  transition: color 0.28s ease, text-shadow 0.28s ease;
+}
+
+.capWordOn {
+  color: #eaf6ff;
+  text-shadow: 0 0 18px rgba(34, 211, 238, 0.55);
+}
+
+/* Load-bearing words: heavier and slightly brighter even before they're
+   spoken, then a stronger cyan bloom once the voiceover reaches them. */
+.capWordKey {
+  font-weight: 700;
+  color: rgba(196, 220, 246, 0.6);
+}
+
+.capWordKey.capWordOn {
+  color: #7ff0ff;
+  text-shadow: 0 0 26px rgba(34, 211, 238, 0.75), 0 0 8px rgba(34, 211, 238, 0.5);
+}
+
+/* Hovered-hub label during the globe beat (positioned by the scene handler). */
+.hotspot {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: translate(-50%, -180%);
+  padding: 0.28rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: #f4fbff;
+  background: rgba(6, 16, 32, 0.62);
+  border: 1px solid rgba(120, 200, 255, 0.45);
+  box-shadow: 0 0 24px rgba(34, 211, 238, 0.28);
+  pointer-events: none;
+  opacity: 0;
+  z-index: 3;
+  transition: opacity 0.25s ease;
+  will-change: left, top, opacity;
+}
+
+/* Timeline scrubber: a thin base line that thickens on hover; click/drag seeks. */
+.scrubber {
+  position: absolute;
+  left: 50%;
+  bottom: 3.4vh;
+  transform: translateX(-50%);
+  width: min(70vw, 40rem);
+  height: 3px;
+  border-radius: 999px;
+  background: rgba(150, 190, 230, 0.18);
+  cursor: pointer;
+  z-index: 3;
+  opacity: 0.5;
+  padding: 10px 0;                 /* enlarge the hit target without moving the line */
+  background-clip: content-box;
+  transition: opacity 0.3s ease, height 0.2s ease;
+}
+
+.scrubber:hover {
+  opacity: 1;
+  height: 5px;
+}
+
+.scrubberFill {
+  height: 100%;
+  width: 0;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #22d3ee, #3b82f6);
+  box-shadow: 0 0 14px rgba(34, 211, 238, 0.5);
+  background-clip: content-box;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .capWord,
+  .hotspot,
+  .scrubber,
+  .scrubberFill {
+    transition: none;
   }
 }

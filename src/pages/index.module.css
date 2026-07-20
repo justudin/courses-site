@@ -214,6 +214,38 @@
   }
 }
 
+/* Subtle control to replay the first-visit cinematic on demand. */
+.replayIntro {
+  position: absolute;
+  bottom: 1.5rem;
+  right: 1.6rem;
+  z-index: 2;
+  font: inherit;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(200, 224, 250, 0.55);
+  background: rgba(8, 22, 44, 0.28);
+  border: 1px solid rgba(160, 200, 240, 0.28);
+  border-radius: 999px;
+  padding: 0.45rem 1.05rem;
+  cursor: pointer;
+  transition: color 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+}
+
+.replayIntro:hover {
+  color: #eaf6ff;
+  border-color: rgba(34, 211, 238, 0.6);
+  background: rgba(34, 211, 238, 0.12);
+}
+
+@media (max-width: 768px) {
+  .replayIntro {
+    bottom: 1rem;
+    right: 1rem;
+  }
+}
+
 
 .academic {
   display: flex;
