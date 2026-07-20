@@ -12,7 +12,7 @@ const MissionVisionList = [
       <>
         <em>We welcome research partners, visiting scholars, and industry collaborators who share our vision of advancing AI for a sustainable and connected world.</em>
 
-        <br/><br/>At AINTLab, <b>collaboration is at the heart of everything we do.</b> We work across disciplines—from ML and intelligent systems to sustainability and DS—to build AI solutions that matter.
+        <br/><br/>At AIN Lab, <b>collaboration is at the heart of everything we do.</b> We work across disciplines—from ML and intelligent systems to sustainability and DS—to build AI solutions that matter.
         <br/><br/>
         We actively collaborate with:
         <ul>
