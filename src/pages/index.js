@@ -359,7 +359,7 @@ function JoinAINTLab() {
           </p>
           <div className={styles.ctaActions}>
             <Link className="button button--primary button--lg" to="/publications">View Publications</Link>
-            <Link className="button cta-secondary-btn button--lg" to="/prospective">Join Applied INtelligence Lab</Link>
+            <Link className="button cta-secondary-btn button--lg" to="/prospective">Join The Lab</Link>
           </div>
         </div>
       </div>
