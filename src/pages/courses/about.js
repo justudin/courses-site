@@ -5,21 +5,24 @@ import styles from './about.module.css';
 export default function AboutPage() {
   return (
     <Layout title="About" description="About courses and learning philosophy">
-      <main className={styles.page}>
-        <section className={styles.hero}>
-          <div className="container">
-            <p className={styles.eyebrow}>Learning Philosophy</p>
+      {/* container--fluid + page-shell matches the JSX-page pattern used by
+          networks.jsx, so the courses pages get the same gutters as MDX pages. */}
+      <main className="container container--fluid margin-vert--lg">
+        <section className="section-with-bg-logo">
+          <div className="page-shell">
+          <div className="page-header">
+            <p className="page-kicker">Learning Philosophy</p>
             <h1>About</h1>
-            <p className={styles.subtitle}>
-              We prioritize practical, human-centered learning where students build
-              skills by solving real problems together.
+            <p className="page-lead">
+              <em>
+                We prioritize practical, human-centered learning where students build
+                skills by solving real problems together.
+              </em>
             </p>
           </div>
-        </section>
 
-        <section className={styles.section}>
-          <div className="container">
-            <h2 className={styles.sectionTitle}>What We Believe</h2>
+          <div className="page-content">
+            <h2>What We Believe</h2>
             <p className={styles.sectionIntro}>
               In memory of Professor Yong-Han Lee (1965-2017), this page reflects the
               values guiding every course.
@@ -64,26 +67,16 @@ export default function AboutPage() {
                 </p>
               </article>
             </div>
-          </div>
-        </section>
 
-        <section className={styles.section}>
-          <div className="container">
-            <h2 className={styles.sectionTitle}>Motto</h2>
+            <h2>Motto</h2>
             <div className={styles.mottoGrid}>
-              <div className={`${styles.mottoItem} ${styles.passion}`}>Passion for Research</div>
-              <div className={`${styles.mottoItem} ${styles.compassion}`}>Compassion for People</div>
-              <div className={`${styles.mottoItem} ${styles.collegiality}`}>
-                Collegiality with Colleagues
-              </div>
-              <div className={`${styles.mottoItem} ${styles.balance}`}>Balance in Life</div>
+              <div className={styles.mottoItem}>Passion for Research</div>
+              <div className={styles.mottoItem}>Compassion for People</div>
+              <div className={styles.mottoItem}>Collegiality with Colleagues</div>
+              <div className={styles.mottoItem}>Balance in Life</div>
             </div>
-          </div>
-        </section>
 
-        <section className={styles.section}>
-          <div className="container">
-            <h2 className={styles.sectionTitle}>Community and Partners</h2>
+            <h2>Community and Partners</h2>
             <div className={styles.communityWrap}>
               <p>
                 Muhammad Syafrudin is a member of the Oracle Academy Program, and
@@ -104,6 +97,7 @@ export default function AboutPage() {
             </div>
 
             <p className={styles.footnote}>In memory of Professor Yong-Han Lee (1965-2017)</p>
+          </div>
           </div>
         </section>
       </main>

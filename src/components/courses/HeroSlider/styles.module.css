@@ -45,9 +45,9 @@
   width: 100%;
   height: 100%;
   background:
-    radial-gradient(circle at 10% 20%, rgba(10, 98, 194, 0.92), transparent 55%),
-    radial-gradient(circle at 90% 80%, rgba(14, 138, 136, 0.7), transparent 50%),
-    linear-gradient(135deg, rgba(9, 33, 58, 0.88) 0%, rgba(10, 51, 91, 0.85) 50%, rgba(14, 89, 169, 0.8) 100%);
+    radial-gradient(circle at 10% 20%, color-mix(in srgb, var(--ifm-color-primary) 92%, transparent), transparent 55%),
+    radial-gradient(circle at 90% 80%, color-mix(in srgb, var(--ifm-color-primary-light) 70%, transparent), transparent 50%),
+    linear-gradient(135deg, rgba(15, 45, 82, 0.88) 0%, rgba(10, 51, 91, 0.85) 50%, rgba(14, 89, 169, 0.8) 100%);
   z-index: 2;
 }
 
@@ -70,7 +70,7 @@
   margin-bottom: 1.25rem;
   line-height: 1.05;
   letter-spacing: -0.02em;
-  font-family: Sora, "Noto Sans KR", "Segoe UI", sans-serif;
+  letter-spacing: -0.02em;
   text-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
 }
 
@@ -93,7 +93,7 @@
 .primaryButton {
   background: white !important;
   border: 2px solid white !important;
-  color: #0a335b !important;
+  color: var(--ifm-font-color-base) !important;
   font-weight: 700 !important;
   border-radius: 999px !important;
   padding: 0.7rem 1.8rem !important;
@@ -135,8 +135,8 @@
 /* Dark Mode */
 [data-theme='dark'] .slideOverlay {
   background:
-    radial-gradient(circle at 10% 20%, rgba(56, 125, 220, 0.85), transparent 55%),
-    radial-gradient(circle at 90% 80%, rgba(17, 138, 134, 0.6), transparent 50%),
+    radial-gradient(circle at 10% 20%, color-mix(in srgb, var(--ifm-color-primary) 85%, transparent), transparent 55%),
+    radial-gradient(circle at 90% 80%, color-mix(in srgb, var(--ifm-color-primary-light) 60%, transparent), transparent 50%),
     linear-gradient(135deg, rgba(13, 20, 33, 0.92) 0%, rgba(15, 22, 36, 0.9) 50%, rgba(18, 116, 220, 0.7) 100%);
 }
 
@@ -148,7 +148,7 @@
 
 [data-theme='dark'] .primaryButton:hover {
   background: white !important;
-  color: #0a335b !important;
+  color: var(--ifm-font-color-base) !important;
   border-color: white !important;
 }
 

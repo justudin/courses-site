@@ -64,37 +64,40 @@ export default function ReviewsPage() {
     <Layout
       title="Reviews"
       description="Student testimonials from courses taught by Muhammad Syafrudin">
-      <main className={styles.page}>
-        <section className={styles.hero}>
-          <div className="container">
-            <p className={styles.eyebrow}>Student Voiceboard</p>
+      {/* container--fluid + page-shell matches the JSX-page pattern used by
+          networks.jsx, so the courses pages get the same gutters as MDX pages. */}
+      <main className="container container--fluid margin-vert--lg">
+        <section className="section-with-bg-logo">
+          <div className="page-shell">
+          <div className="page-header">
+            <p className="page-kicker">Student Voiceboard</p>
             <h1>Reviews</h1>
-            <p className={styles.subtitle}>
-              A curated collection of student feedback across semesters, focused on
-              practical learning, mentorship quality, and course impact.
+            <p className="page-lead">
+              <em>
+                A curated collection of student feedback across semesters, focused on
+                practical learning, mentorship quality, and course impact.
+              </em>
             </p>
+          </div>
 
-            <div className={styles.statsGrid}>
-              <article className={styles.statCard}>
-                <span>Total Reviews</span>
-                <strong>{stats.total}</strong>
-              </article>
-              <article className={styles.statCard}>
-                <span>Korean / English</span>
-                <strong>
-                  {stats.korean} / {stats.english}
-                </strong>
-              </article>
-              <article className={styles.statCard}>
-                <span>Project + Practice Mentions</span>
-                <strong>{stats.projectMentions}</strong>
-              </article>
+          <div className="page-quickfacts">
+            <div className="page-quickfact reveal">
+              <p className="page-quickfact-label">Total Reviews</p>
+              <p className="page-quickfact-value">{stats.total}</p>
+            </div>
+            <div className="page-quickfact reveal">
+              <p className="page-quickfact-label">Korean / English</p>
+              <p className="page-quickfact-value">
+                {stats.korean} / {stats.english}
+              </p>
+            </div>
+            <div className="page-quickfact reveal">
+              <p className="page-quickfact-label">Project + Practice Mentions</p>
+              <p className="page-quickfact-value">{stats.projectMentions}</p>
             </div>
           </div>
-        </section>
 
-        <section className={styles.filtersSection}>
-          <div className="container">
+          <div className="page-content">
             <div className={styles.controls}>
               <label className={styles.searchWrap}>
                 <span>Search</span>
@@ -167,6 +170,7 @@ export default function ReviewsPage() {
                 </article>
               ))}
             </div>
+          </div>
           </div>
         </section>
       </main>

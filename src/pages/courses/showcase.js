@@ -54,35 +54,38 @@ export default function ShowcasePage() {
     <Layout
       title="Showcase"
       description="Student project showcase from courses taught by Muhammad Syafrudin">
-      <main className={styles.page}>
-        <section className={styles.hero}>
-          <div className="container">
-            <p className={styles.eyebrow}>Student Projects</p>
+      {/* container--fluid + page-shell matches the JSX-page pattern used by
+          networks.jsx, so the courses pages get the same gutters as MDX pages. */}
+      <main className="container container--fluid margin-vert--lg">
+        <section className="section-with-bg-logo">
+          <div className="page-shell">
+          <div className="page-header">
+            <p className="page-kicker">Student Projects</p>
             <h1>Showcase</h1>
-            <p className={styles.subtitle}>
-              Explore outstanding projects built by students across semesters — from web apps
-              and dashboards to deep learning models and data pipelines.
+            <p className="page-lead">
+              <em>
+                Explore outstanding projects built by students across semesters — from web
+                apps and dashboards to deep learning models and data pipelines.
+              </em>
             </p>
+          </div>
 
-            <div className={styles.statsGrid}>
-              <article className={styles.statCard}>
-                <span>Total Projects</span>
-                <strong>{stats.totalProjects}</strong>
-              </article>
-              <article className={styles.statCard}>
-                <span>Courses</span>
-                <strong>{stats.totalCourses}</strong>
-              </article>
-              <article className={styles.statCard}>
-                <span>Tools &amp; Technologies</span>
-                <strong>{stats.totalTools}</strong>
-              </article>
+          <div className="page-quickfacts">
+            <div className="page-quickfact reveal">
+              <p className="page-quickfact-label">Total Projects</p>
+              <p className="page-quickfact-value">{stats.totalProjects}</p>
+            </div>
+            <div className="page-quickfact reveal">
+              <p className="page-quickfact-label">Courses</p>
+              <p className="page-quickfact-value">{stats.totalCourses}</p>
+            </div>
+            <div className="page-quickfact reveal">
+              <p className="page-quickfact-label">Tools &amp; Technologies</p>
+              <p className="page-quickfact-value">{stats.totalTools}</p>
             </div>
           </div>
-        </section>
 
-        <section className={styles.filtersSection}>
-          <div className="container">
+          <div className="page-content">
             <div className={styles.controls}>
               <label className={styles.searchWrap}>
                 <span>Search</span>
@@ -188,6 +191,7 @@ export default function ShowcasePage() {
                 </article>
               ))}
             </div>
+          </div>
           </div>
         </section>
       </main>

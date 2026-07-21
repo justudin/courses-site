@@ -1,87 +1,19 @@
-.page {
-  background:
-    radial-gradient(circle at 10% 10%, rgba(12, 89, 174, 0.18), transparent 35%),
-    radial-gradient(circle at 90% 0%, rgba(13, 122, 109, 0.12), transparent 40%),
-    linear-gradient(180deg, #f7fbff 0%, #f2f6f9 100%);
-}
-
-.hero {
-  padding: 5rem 0 2.5rem;
-}
-
-.eyebrow {
-  width: fit-content;
-  margin: 0 auto 0.85rem;
-  padding: 0.35rem 0.75rem;
-  border-radius: 999px;
-  background: rgba(12, 89, 174, 0.12);
-  color: #074288;
-  font-size: 0.8rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  font-weight: 700;
-}
-
-.hero h1 {
-  margin: 0;
-  text-align: center;
-  font-size: clamp(2.3rem, 6vw, 4.2rem);
-  line-height: 0.95;
-  font-family: Sora, "Noto Sans KR", "Segoe UI", sans-serif;
-  font-weight: 800;
-  color: #09213a;
-}
-
-.subtitle {
-  margin: 1.25rem auto 0;
-  text-align: center;
-  max-width: 760px;
-  font-size: clamp(1rem, 2.2vw, 1.2rem);
-  line-height: 1.6;
-  color: #36506c;
-}
-
-.statsGrid {
-  margin-top: 2.4rem;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1rem;
-}
-
-.statCard {
-  padding: 1.1rem 1.2rem;
-  border-radius: 16px;
-  border: 1px solid rgba(7, 66, 136, 0.13);
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.68));
-  backdrop-filter: blur(4px);
-  box-shadow: 0 10px 28px rgba(17, 35, 57, 0.06);
-}
-
-.statCard span {
-  display: block;
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: #4f6783;
-}
-
-.statCard strong {
-  display: block;
-  margin-top: 0.35rem;
-  font-size: 1.55rem;
-  line-height: 1;
-  color: #0a335b;
-}
-
-.filtersSection {
-  padding: 1rem 0 5rem;
-}
+/**
+ * Reviews page. Page chrome (background, header, quick facts) comes from the
+ * global .section-with-bg-logo / .page-shell / .page-header / .page-quickfacts
+ * classes in src/css/custom.css, so only the filter controls and the review
+ * grid are styled here.
+ *
+ * Every colour is derived from the Infima tokens the rest of the site uses,
+ * which is what makes light/dark work without a separate dark palette.
+ */
 
 .controls {
   display: grid;
   grid-template-columns: 1.6fr 1fr 0.8fr;
   gap: 0.9rem;
   align-items: end;
+  margin-bottom: 1rem;
 }
 
 .searchWrap,
@@ -92,27 +24,28 @@
 
 .searchWrap span,
 .sortWrap span {
-  font-size: 0.8rem;
+  font-size: 0.72rem;
   font-weight: 700;
-  letter-spacing: 0.07em;
-  color: #4b6380;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
+  color: var(--ifm-color-primary);
 }
 
 .searchWrap input,
 .sortWrap select {
   height: 2.85rem;
   border-radius: 10px;
-  border: 1px solid rgba(11, 65, 123, 0.2);
-  background: #fff;
+  border: 1px solid var(--ifm-border-color);
+  background: var(--ifm-background-surface-color);
   padding: 0 0.9rem;
   font-size: 0.95rem;
-  color: #123251;
+  font-family: inherit;
+  color: var(--ifm-font-color-base);
 }
 
-.searchWrap input:focus,
-.sortWrap select:focus {
-  outline: 2px solid rgba(11, 95, 189, 0.24);
+.searchWrap input:focus-visible,
+.sortWrap select:focus-visible {
+  outline: 2px solid var(--ifm-color-primary);
   outline-offset: 1px;
 }
 
@@ -122,8 +55,8 @@
   gap: 0.4rem;
   padding: 0.35rem;
   border-radius: 12px;
-  border: 1px solid rgba(11, 65, 123, 0.18);
-  background: rgba(255, 255, 255, 0.86);
+  border: 1px solid var(--ifm-border-color);
+  background: var(--ifm-background-surface-color);
 }
 
 .languageToggle button {
@@ -131,24 +64,30 @@
   border-radius: 8px;
   border: 0;
   background: transparent;
-  color: #37516d;
+  color: var(--ifm-font-color-secondary);
+  font-family: inherit;
   font-weight: 700;
   cursor: pointer;
   transition: background 180ms ease, color 180ms ease;
 }
 
 .languageToggle button:hover {
-  background: rgba(11, 95, 189, 0.1);
+  background: color-mix(in srgb, var(--ifm-color-primary) 10%, transparent);
+}
+
+.languageToggle button:focus-visible {
+  outline: 2px solid var(--ifm-color-primary);
+  outline-offset: 1px;
 }
 
 .languageToggle .activeButton {
-  background: linear-gradient(90deg, #0a62c2, #0e8a88);
-  color: #fff;
+  background: var(--ifm-color-primary);
+  color: var(--ifm-background-surface-color);
 }
 
 .resultInfo {
-  margin: 1rem 0 1.1rem;
-  color: #49617f;
+  margin: 0 0 1.1rem;
+  color: var(--ifm-font-color-secondary);
   font-size: 0.95rem;
 }
 
@@ -158,17 +97,15 @@
   gap: 1rem;
 }
 
+/* Card surface matches the parent's card language: hairline border, flat
+   surface colour, and the shared shadow token — no glass or gradient wash. */
 .reviewCard {
   position: relative;
   padding: 1.05rem;
-  border-radius: 16px;
-  border: 1px solid rgba(12, 70, 132, 0.16);
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.97), rgba(255, 255, 255, 0.88)),
-    radial-gradient(circle at 100% 0%, rgba(10, 98, 194, 0.15), transparent 36%);
-  box-shadow:
-    0 8px 18px rgba(9, 35, 66, 0.06),
-    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  border-radius: 12px;
+  border: 1px solid var(--ifm-border-color);
+  background: var(--ifm-card-background-color);
+  box-shadow: var(--ifm-global-shadow-lw);
   transform: translateY(12px);
   opacity: 0;
   animation: riseIn 480ms ease forwards;
@@ -194,26 +131,27 @@
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.04em;
-  color: #34506f;
+  color: var(--ifm-font-color-secondary);
 }
 
 .languageBadge {
   padding: 0.22rem 0.48rem;
   border-radius: 999px;
-  border: 1px solid rgba(12, 89, 174, 0.2);
-  background: rgba(12, 89, 174, 0.08);
+  border: 1px solid color-mix(in srgb, var(--ifm-color-primary) 25%, transparent);
+  background: color-mix(in srgb, var(--ifm-color-primary) 8%, transparent);
+  color: var(--ifm-color-primary);
 }
 
 .quoteMark {
   margin: 0;
   line-height: 0.8;
   font-size: 2.5rem;
-  color: #0d69c4;
+  color: var(--ifm-color-primary);
 }
 
 .quote {
   margin: 0.2rem 0 0;
-  color: #1d3c5f;
+  color: var(--ifm-font-color-base);
   line-height: 1.6;
   font-size: 0.95rem;
 }
@@ -229,9 +167,9 @@
   font-size: 0.72rem;
   padding: 0.2rem 0.5rem;
   border-radius: 999px;
-  background: rgba(17, 138, 134, 0.11);
-  border: 1px solid rgba(17, 138, 134, 0.23);
-  color: #165a68;
+  background: color-mix(in srgb, var(--ifm-color-primary) 7%, transparent);
+  border: 1px solid color-mix(in srgb, var(--ifm-color-primary) 20%, transparent);
+  color: var(--ifm-font-color-secondary);
   font-weight: 700;
 }
 
@@ -243,10 +181,6 @@
 }
 
 @media (max-width: 996px) {
-  .statsGrid {
-    grid-template-columns: 1fr;
-  }
-
   .controls {
     grid-template-columns: 1fr;
   }
@@ -257,76 +191,15 @@
 }
 
 @media (max-width: 576px) {
-  .hero {
-    padding-top: 4rem;
-  }
-
   .reviewCard {
     padding: 0.95rem;
   }
 }
 
-:global([data-theme='dark']) .page {
-  background:
-    radial-gradient(circle at 10% 10%, rgba(56, 125, 220, 0.25), transparent 38%),
-    radial-gradient(circle at 90% 0%, rgba(17, 138, 134, 0.2), transparent 42%),
-    linear-gradient(180deg, #0d1421 0%, #0f1624 100%);
-}
-
-:global([data-theme='dark']) .eyebrow {
-  background: rgba(67, 141, 240, 0.22);
-  color: #a8d0ff;
-}
-
-:global([data-theme='dark']) .hero h1 {
-  color: #eff5ff;
-}
-
-:global([data-theme='dark']) .subtitle,
-:global([data-theme='dark']) .resultInfo,
-:global([data-theme='dark']) .searchWrap span,
-:global([data-theme='dark']) .sortWrap span {
-  color: #bdd0e6;
-}
-
-:global([data-theme='dark']) .statCard,
-:global([data-theme='dark']) .reviewCard,
-:global([data-theme='dark']) .languageToggle {
-  border-color: rgba(118, 174, 247, 0.26);
-  background: linear-gradient(180deg, rgba(19, 29, 46, 0.92), rgba(14, 22, 35, 0.9));
-  box-shadow: 0 12px 24px rgba(3, 8, 17, 0.46);
-}
-
-:global([data-theme='dark']) .statCard span,
-:global([data-theme='dark']) .languageBadge,
-:global([data-theme='dark']) .idBadge,
-:global([data-theme='dark']) .languageToggle button {
-  color: #bdd0e6;
-}
-
-:global([data-theme='dark']) .statCard strong,
-:global([data-theme='dark']) .quote {
-  color: #e7eef8;
-}
-
-:global([data-theme='dark']) .searchWrap input,
-:global([data-theme='dark']) .sortWrap select {
-  border-color: rgba(118, 174, 247, 0.28);
-  background: rgba(12, 20, 32, 0.9);
-  color: #e7eef8;
-}
-
-:global([data-theme='dark']) .languageToggle button:hover {
-  background: rgba(111, 179, 255, 0.16);
-}
-
-:global([data-theme='dark']) .languageBadge,
-:global([data-theme='dark']) .focusTag {
-  border-color: rgba(120, 196, 186, 0.35);
-  background: rgba(17, 138, 134, 0.24);
-  color: #b5efe3;
-}
-
-:global([data-theme='dark']) .quoteMark {
-  color: #7ab8ff;
+@media (prefers-reduced-motion: reduce) {
+  .reviewCard {
+    transform: none;
+    opacity: 1;
+    animation: none;
+  }
 }
