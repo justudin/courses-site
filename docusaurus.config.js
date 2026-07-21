@@ -26,6 +26,40 @@ const config = {
 
   plugins: [
     [
+      // Safety net for links that used to live on the courses subdomain. If
+      // courses.muhammadsyafrudin.com is 301'd to this site preserving the
+      // path, these catch the result and move it under /courses.
+      //
+      // The old courses root (/) is deliberately NOT redirected here — that
+      // path is this site's own homepage. Mapping the subdomain root to
+      // /courses has to happen at the host level (see README).
+      '@docusaurus/plugin-client-redirects',
+      {
+        redirects: [
+          {
+            // The courses site had its own auto-generated credits page. After
+            // the merge both sites share one dependency tree, so /credits is
+            // the single source of truth.
+            from: '/courses/credits',
+            to: '/credits',
+          },
+        ],
+        createRedirects(existingPath) {
+          if (existingPath.startsWith('/courses/learn')) {
+            return [existingPath.replace('/courses/learn', '/learn')];
+          }
+          if (
+            existingPath === '/courses/reviews' ||
+            existingPath === '/courses/showcase' ||
+            existingPath === '/courses/about'
+          ) {
+            return [existingPath.replace('/courses', '')];
+          }
+          return undefined;
+        },
+      },
+    ],
+    [
       // Course catalog, merged in from the former courses.muhammadsyafrudin.com
       // site. A dedicated docs instance (rather than a second sidebar on a
       // shared instance) keeps the catalog on its own content root, so it can
