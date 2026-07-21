@@ -62,11 +62,18 @@ docker run --rm -p 3000:80 aintlab:latest
 ```
 src/
   pages/          # MDX pages (team, projects, publications, contact, alumni…)
+    courses/      # Courses section pages (landing, about, reviews, showcase)
   components/     # Shared React components (PublicationsList, etc.)
+    courses/      # Components used only by the courses section
+  data/
+    courses/      # Reviews, showcase projects, teaching stats
   css/            # Global styles (custom.css)
   theme/          # Swizzled Docusaurus components (Root.js)
 static/           # Static assets (images, icons)
+  courses/        # Courses assets, namespaced (welcome.mp4, images)
 blog/             # Updates / research posts (served at /updates)
+courses-docs/     # Course catalog (served at /courses/learn)
+sidebarsCourses.js
 docusaurus.config.js
 ```
 
@@ -83,6 +90,47 @@ docusaurus.config.js
 | `/updates` | Blog / research news |
 | `/alumni` | Past lab members |
 | `/contact` | Contact information and directions to Sejong University |
+| `/courses` | Courses landing page |
+| `/courses/learn` | Course catalog (own docs instance, see below) |
+| `/courses/reviews` | Student reviews |
+| `/courses/showcase` | Student project showcase |
+| `/courses/about` | Teaching philosophy |
+
+---
+
+## Courses Section
+
+The former `courses.muhammadsyafrudin.com` site was merged into this repo and is
+served under `/courses`.
+
+The course catalog is a **separate `@docusaurus/plugin-content-docs` instance**
+(`id: 'courses'`, content in `courses-docs/`, sidebar in `sidebarsCourses.js`),
+not a second sidebar on a shared instance. That keeps the catalog on its own
+content root so it can be reorganised or versioned without touching the research
+site. If it is ever versioned, its files will be `courses_versions.json`,
+`courses_versioned_docs/`, and `courses_versioned_sidebars/`.
+
+The classic preset's default `docs` instance stays disabled (`docs: false`), so
+the courses instance is currently the only docs instance on the site.
+
+Courses assets are namespaced under `static/courses/` because `favicon.png` and
+the `undraw_*_learning.svg` files differ between the two original repos and would
+otherwise silently overwrite the research site's copies.
+
+`@docusaurus/plugin-client-redirects` maps the old subdomain paths (`/learn/*`,
+`/reviews`, `/showcase`, `/about`) to their `/courses/…` equivalents, and points
+`/courses/credits` at the single shared `/credits` page.
+
+### Manual steps not handled by the build
+
+- **DNS / hosting.** `CNAME` is now `ain.my.id`. Point that record at the host
+  before deploying.
+- **Subdomain 301.** Redirect `courses.muhammadsyafrudin.com/*` to
+  `https://ain.my.id/courses/*` at the host level. The client-redirects plugin
+  cannot map the old site's root (`/`), because that path is this site's own
+  homepage.
+- **Algolia.** The DocSearch crawler must be re-run for `/courses/*` to become
+  searchable, and its allowed domains updated for `ain.my.id`.
 
 ---
 
