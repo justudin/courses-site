@@ -26,6 +26,20 @@ const config = {
 
   plugins: [
     [
+      // Course catalog, merged in from the former courses.muhammadsyafrudin.com
+      // site. A dedicated docs instance (rather than a second sidebar on a
+      // shared instance) keeps the catalog on its own content root, so it can
+      // be reorganised or versioned independently of the research site.
+      // The classic preset's default docs instance stays disabled.
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'courses',
+        path: 'courses-docs',
+        routeBasePath: 'courses/learn',
+        sidebarPath: require.resolve('./sidebarsCourses.js'),
+      },
+    ],
+    [
       // Wrapped blog plugin (see plugins/blog-plugin.js) — same options as the
       // classic preset's blog, plus recent posts exposed as global data.
       require.resolve('./plugins/blog-plugin'),
@@ -208,9 +222,38 @@ const config = {
             label: 'Contact',
           },
           {
-            href: 'https://courses.muhammadsyafrudin.com',
+            // Formerly an external link to courses.muhammadsyafrudin.com; the
+            // courses site now lives under /courses. The dropdown carries the
+            // old site's own nav (All Courses / Reviews / Showcase / About)
+            // without adding top-level items to the main navbar.
+            type: 'dropdown',
             position: 'right',
             label: 'Courses',
+            to: '/courses',
+            items: [
+              {
+                to: '/courses',
+                label: 'Overview',
+              },
+              {
+                type: 'docSidebar',
+                docsPluginId: 'courses',
+                sidebarId: 'coursesSidebar',
+                label: 'All Courses',
+              },
+              {
+                to: '/courses/reviews',
+                label: 'Reviews',
+              },
+              {
+                to: '/courses/showcase',
+                label: 'Showcase',
+              },
+              {
+                to: '/courses/about',
+                label: 'About',
+              },
+            ],
           }
         ],
       },
@@ -224,6 +267,7 @@ const config = {
             <a href="/publications">Publications</a>
             <a href="/gallery">Gallery</a>
             <a href="/updates">Updates</a>
+            <a href="/courses">Courses</a>
             <a href="/contact">Contact</a>
             <a href="/email-policy">Email Policy</a>
           </div>
@@ -236,6 +280,14 @@ const config = {
               </svg>
             </a></p>
         </div>`,
+      },
+      // Applies to the `courses` docs instance — the only docs instance on the
+      // site. Carried over from the former courses site's themeConfig.
+      docs: {
+        sidebar: {
+          hideable: true,
+          autoCollapseCategories: true,
+        },
       },
       prism: {
         theme: prismThemes.github,
