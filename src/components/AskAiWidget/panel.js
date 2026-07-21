@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {DocSearchSidepanel} from '@docsearch/react/sidepanel';
+import AskAiNudge from './nudge';
 // Import the stylesheets from @docsearch/css directly: @docsearch/react
 // declares `sideEffects: false`, so importing its style re-export
 // ('@docsearch/react/style/sidepanel') gets tree-shaken to nothing in
@@ -131,6 +132,7 @@ export default function AskAiPanel() {
           },
         }}
       />
+      <AskAiNudge />
     </div>
   );
 }

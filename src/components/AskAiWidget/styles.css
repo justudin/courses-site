@@ -145,10 +145,161 @@ button.DocSearch-SidepanelButton.floating:focus-visible {
   }
 }
 
+/* ---- Attention nudge (see nudge.js) ----------------------------------
+   Speech bubble to the LEFT of the floating trigger, pointing at it. Shares
+   the trigger's corner offsets and circle diameter so the two line up
+   exactly; keep these in sync with the .DocSearch-SidepanelButton.floating
+   block above (desktop 3rem @ right 1.1rem, mobile 2.6rem @ right 0.85rem).
+   Sits one below the bubble's z-index so an open panel still covers it. */
+.askai-nudge {
+  position: fixed;
+  z-index: 1189;
+  right: calc(1.1rem + 3rem + 0.65rem);
+  bottom: 1.1rem;
+  /* Exactly the trigger's height, with the bubble centred inside it and free
+     to overflow. A min-height would let a two-line bubble grow upward only,
+     pulling the tail off the trigger's centre. */
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  max-width: min(17rem, calc(100vw - 6.5rem));
+  animation: askaiNudgeIn 380ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.askai-nudge[data-leaving] {
+  animation: askaiNudgeOut 280ms ease forwards;
+}
+
+/* Separate element so the idle float can run without fighting the
+   enter/leave transform on the positioned wrapper. */
+.askai-nudge-float {
+  display: flex;
+  align-items: stretch;
+  border-radius: 999px;
+  background: var(--ifm-card-background-color);
+  border: 1px solid var(--ifm-border-color);
+  box-shadow: var(--ifm-global-shadow-md);
+  animation: askaiNudgeFloat 3.4s ease-in-out infinite;
+  position: relative;
+}
+
+/* Tail pointing at the bubble. */
+.askai-nudge-float::after {
+  content: '';
+  position: absolute;
+  right: -5px;
+  top: 50%;
+  width: 9px;
+  height: 9px;
+  transform: translateY(-50%) rotate(45deg);
+  background: var(--ifm-card-background-color);
+  border-right: 1px solid var(--ifm-border-color);
+  border-top: 1px solid var(--ifm-border-color);
+}
+
+.askai-nudge-body {
+  border: 0;
+  background: transparent;
+  padding: 0.6rem 0.25rem 0.6rem 0.95rem;
+  font-family: inherit;
+  font-size: 0.83rem;
+  font-weight: 600;
+  line-height: 1.35;
+  text-align: left;
+  color: var(--ifm-font-color-base);
+  cursor: pointer;
+  border-radius: 999px 0 0 999px;
+}
+
+.askai-nudge-body:hover {
+  color: var(--ifm-color-primary);
+}
+
+.askai-nudge-close {
+  border: 0;
+  background: transparent;
+  padding: 0 0.7rem 0 0.4rem;
+  display: flex;
+  align-items: center;
+  color: var(--ifm-font-color-secondary);
+  cursor: pointer;
+  border-radius: 0 999px 999px 0;
+  opacity: 0.65;
+}
+
+.askai-nudge-close:hover {
+  opacity: 1;
+  color: var(--ifm-font-color-base);
+}
+
+.askai-nudge-close svg {
+  width: 0.8rem;
+  height: 0.8rem;
+}
+
+.askai-nudge-body:focus-visible,
+.askai-nudge-close:focus-visible {
+  outline: 2px solid var(--ifm-color-primary);
+  outline-offset: -2px;
+}
+
+@keyframes askaiNudgeIn {
+  from {
+    opacity: 0;
+    transform: translateX(10px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes askaiNudgeOut {
+  to {
+    opacity: 0;
+    transform: translateX(8px) scale(0.97);
+  }
+}
+
+@keyframes askaiNudgeFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@media (max-width: 768px) {
+  .askai-nudge {
+    right: calc(0.85rem + 2.6rem + 0.5rem);
+    bottom: 0.9rem;
+    height: 2.6rem;
+    max-width: calc(100vw - 5.2rem);
+  }
+
+  .askai-nudge-body {
+    font-size: 0.78rem;
+    padding: 0.5rem 0.2rem 0.5rem 0.8rem;
+  }
+}
+
+/* The float is decoration; the message is not. Keep the bubble, drop the
+   motion. */
+@media (prefers-reduced-motion: reduce) {
+  .askai-nudge,
+  .askai-nudge[data-leaving],
+  .askai-nudge-float {
+    animation: none;
+  }
+}
+
 /* Chat is pointless on paper (the button portals outside .askai-widget, so
    hide it and the panel by their own classes). */
 @media print {
   .askai-widget,
+  .askai-nudge,
   .DocSearch-SidepanelButton,
   .DocSearch-Sidepanel {
     display: none;
