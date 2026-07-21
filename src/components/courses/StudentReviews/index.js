@@ -98,12 +98,13 @@ export default function StudentReviews() {
   return (
     <section className={styles.reviewsSection}>
       <div className="container">
+        {/* Same kicker / period-terminated h1 / italic lead as every other
+            section on this page and on the research homepage. */}
         <div className={styles.reviewsHeader}>
-          <p className={styles.reviewsEyebrow}>Student Voices</p>
-          <h2>What Students Say</h2>
-          <p className={styles.reviewsSubtitle}>
-            Discover how our courses have transformed careers and opened new opportunities
-            for students across different disciplines and backgrounds.
+          <p className={clsx(styles.reviewsEyebrow, 'text--center')}>Student voices</p>
+          <h1 className="text--center">What students say.</h1>
+          <p className="text--center">
+            <em>Feedback from across semesters, in the students&rsquo; own words.</em>
           </p>
         </div>
 

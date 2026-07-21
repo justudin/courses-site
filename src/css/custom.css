@@ -887,6 +887,21 @@ thead th:empty {
   content: 'Shaping the Future';
 }
 
+/* Variants 7-9 carry the courses section. These are the phrases the old
+   courses site scrolled through as marquee strips between sections; as
+   watermarks they say the same thing in this site's own voice. */
+.bg-text--teaching::before {
+  content: 'Teaching Excellence';
+}
+
+.bg-text--learning::before {
+  content: 'Learning Together';
+}
+
+.bg-text--success::before {
+  content: 'Student Success';
+}
+
 /* Adjust opacity for dark theme */
 [data-theme='dark'] .section-with-bg-text::before {
   opacity: 0.06;

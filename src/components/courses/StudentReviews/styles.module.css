@@ -1,12 +1,9 @@
 ﻿/* Student Reviews Section - Review-page style */
+/* Flat, like every other section on this page — the watermark supplied by the
+   wrapping .section-with-bg-text is the only background treatment. */
 .reviewsSection {
   padding: 4rem 0 5rem;
-  background:
-    radial-gradient(circle at 90% 85%, color-mix(in srgb, var(--ifm-color-primary) 14%, transparent), transparent 35%),
-    radial-gradient(circle at 10% 95%, rgba(13, 122, 109, 0.1), transparent 38%),
-    linear-gradient(180deg, var(--ifm-background-color) 0%, var(--ifm-background-color) 100%);
   position: relative;
-  overflow: hidden;
 }
 
 .reviewsHeader {
@@ -17,35 +14,16 @@
   margin-right: auto;
 }
 
+/* Quiet uppercase eyebrow, matching .kicker on the landing page and the
+   research homepage — letterspaced, no pill chrome. */
 .reviewsEyebrow {
+  margin: 0 auto 0.55rem;
   width: fit-content;
-  margin: 0 auto 0.85rem;
-  padding: 0.35rem 0.75rem;
-  border-radius: 999px;
-  background: color-mix(in srgb, var(--ifm-color-primary) 12%, transparent);
-  color: var(--ifm-color-primary);
   font-size: 0.8rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
   font-weight: 700;
-}
-
-.reviewsHeader h2 {
-  margin: 0;
-  font-size: clamp(2rem, 5vw, 3rem);
-  line-height: 1;
-  letter-spacing: -0.02em;
-  font-weight: 800;
-  color: var(--ifm-font-color-base);
-}
-
-.reviewsSubtitle {
-  margin: 1rem auto 0;
-  text-align: center;
-  max-width: 700px;
-  font-size: clamp(1rem, 2.2vw, 1.15rem);
-  line-height: 1.6;
-  color: var(--ifm-font-color-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--ifm-color-primary);
 }
 
 /* Slider Container */

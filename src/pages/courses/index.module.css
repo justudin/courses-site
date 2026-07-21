@@ -1,10 +1,13 @@
 /**
- * CSS files with the .module.css suffix will be treated as CSS modules
- * and scoped locally.
+ * Courses landing page. Mirrors src/pages/index.module.css so the section
+ * rhythm — full-bleed hero, quiet kicker, gradient stat numerals, border-bar
+ * pillars, rule-topped CTA — matches the research homepage exactly. The
+ * global .hero, .section-with-bg-text and .reveal rules in custom.css do the
+ * rest; nothing here re-declares them.
  */
 
 .heroBanner {
-  padding: 4rem 0;
+  padding: 2rem 0 1rem;
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -12,12 +15,272 @@
 
 @media screen and (max-width: 996px) {
   .heroBanner {
-    padding: 2rem;
+    padding: 1.25rem 0.75rem;
   }
+}
+
+/* Fills the frame behind the global .hero::before scrim, the way the 3D
+   canvas does on the research homepage. */
+.heroVideo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+/* The clip carries burned-in titles along its lower edge, exactly where the
+   global .hero anchors the headline. This deepens the bottom of the frame so
+   the two don't compete; it sits above the video but below .heroContent. */
+.heroBanner::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 62%;
+  background: linear-gradient(to top, rgba(2, 12, 26, 0.94) 12%, rgba(2, 12, 26, 0.6) 48%, transparent 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 2;
 }
 
 .buttons {
   display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
   align-items: center;
   justify-content: center;
+  margin-top: 1.55rem;
+}
+
+/* Quiet uppercase eyebrow — small, letterspaced, no pill chrome. */
+.kicker {
+  margin: 0 auto 0.55rem;
+  width: fit-content;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--ifm-color-primary);
+}
+
+.scrollCue {
+  position: absolute;
+  bottom: 1.3rem;
+  left: calc(50% - 1.25rem);
+  z-index: 2;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  background: rgba(8, 22, 44, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.9s ease, border-color 0.2s ease;
+  animation: cueFloat 2.8s ease-in-out infinite;
+}
+
+.scrollCue:hover {
+  border-color: rgba(255, 255, 255, 0.65);
+}
+
+.scrollCueChevron {
+  width: 0.6rem;
+  height: 0.6rem;
+  border-right: 2px solid rgba(255, 255, 255, 0.85);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.85);
+  transform: rotate(45deg);
+  margin-top: -0.25rem;
+}
+
+@keyframes cueFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(6px);
+  }
+}
+
+/* ---- Sections ---- */
+
+.numbersSection,
+.whySection {
+  padding: 4rem 0 2rem;
+}
+
+.statMetrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2.5rem 2rem;
+  padding: 2rem 0 1rem;
+}
+
+.statMetric {
+  text-align: center;
+  position: relative;
+}
+
+/* Stats are links to their source pages — quiet until hovered. */
+.statLink {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  border-radius: 12px;
+  padding: 0.6rem 0.4rem;
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), background 0.22s ease;
+}
+
+.statLink:hover,
+.statLink:focus-visible {
+  text-decoration: none;
+  color: inherit;
+  transform: translateY(-4px);
+  background: color-mix(in srgb, var(--ifm-color-primary) 5%, transparent);
+}
+
+.statMetric:nth-child(2) {
+  transition-delay: 0.08s;
+}
+
+.statMetric:nth-child(3) {
+  transition-delay: 0.16s;
+}
+
+.statMetric:nth-child(4) {
+  transition-delay: 0.24s;
+}
+
+/* Apple-spec-style numbers: huge gradient figure, small quiet label. */
+.statValue {
+  font-family: var(--ifm-heading-font-family);
+  font-size: clamp(2.8rem, 6vw, 4.4rem);
+  line-height: 1;
+  margin-bottom: 0.55rem;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  background: linear-gradient(120deg, var(--ifm-color-primary-light), #6fc3ff 80%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.statLabel {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+  color: var(--ifm-font-color-base);
+}
+
+.statDetail {
+  font-size: 0.92rem;
+  color: var(--ifm-font-color-secondary);
+  line-height: 1.5;
+  max-width: 30ch;
+  margin: 0 auto;
+}
+
+.statsFootnote {
+  margin: 0;
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--ifm-font-color-secondary);
+  opacity: 0.8;
+}
+
+.whySection {
+  background: linear-gradient(180deg, transparent, color-mix(in srgb, var(--ifm-color-primary) 5%, transparent));
+}
+
+.pillarList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.8rem;
+  padding: 1.5rem 0;
+}
+
+.pillarItem {
+  padding: 1.4rem;
+  border-left: 4px solid var(--ifm-color-primary);
+  background: transparent;
+  border-radius: 0;
+}
+
+.pillarItem:nth-child(2) {
+  transition-delay: 0.08s;
+}
+
+.pillarItem:nth-child(3) {
+  transition-delay: 0.16s;
+}
+
+.pillarItem h2 {
+  font-size: 1.15rem;
+  margin-bottom: 0.65rem;
+  color: var(--ifm-color-primary);
+}
+
+.pillarItem p {
+  color: var(--ifm-font-color-secondary);
+  margin-bottom: 0;
+  font-size: 0.98rem;
+  line-height: 1.6;
+}
+
+.ctaSection {
+  padding: 1.6rem 0 3rem;
+}
+
+.ctaCard {
+  border: none;
+  border-radius: 0;
+  padding: clamp(1.2rem, 4vw, 2rem);
+  background: transparent;
+  box-shadow: none;
+  border-top: 2px solid var(--ifm-color-primary);
+}
+
+.ctaCard h1 {
+  margin-bottom: 0.55rem;
+  font-size: clamp(1.8rem, 3.8vw, 3rem);
+  letter-spacing: -0.025em;
+}
+
+.ctaCard p {
+  max-width: 760px;
+  color: var(--ifm-font-color-secondary);
+}
+
+.ctaActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+
+@media (max-width: 1200px) {
+  .statMetrics {
+    gap: 2rem 1.5rem;
+  }
+
+  .pillarItem {
+    padding: 1.2rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scrollCue {
+    animation: none;
+  }
+
+  .statLink:hover,
+  .statLink:focus-visible {
+    transform: none;
+  }
 }
