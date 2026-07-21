@@ -1,0 +1,314 @@
+/* ─── Page background ─── */
+.page {
+  background:
+    radial-gradient(circle at 10% 10%, rgba(12, 89, 174, 0.18), transparent 35%),
+    radial-gradient(circle at 90% 0%, rgba(13, 122, 109, 0.12), transparent 40%),
+    linear-gradient(180deg, #f7fbff 0%, #f2f6f9 100%);
+  padding-bottom: 4rem;
+}
+
+/* ─── Hero ─── */
+.hero {
+  padding: 5rem 0 2.5rem;
+}
+
+.eyebrow {
+  width: fit-content;
+  margin: 0 auto 0.85rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(12, 89, 174, 0.12);
+  color: #074288;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.hero h1 {
+  margin: 0;
+  text-align: center;
+  font-size: clamp(2.3rem, 6vw, 4.2rem);
+  line-height: 0.95;
+  font-family: Sora, "Noto Sans KR", "Segoe UI", sans-serif;
+  font-weight: 800;
+  color: #09213a;
+}
+
+.subtitle {
+  margin: 1.25rem auto 0;
+  text-align: center;
+  max-width: 760px;
+  font-size: clamp(1rem, 2.2vw, 1.2rem);
+  line-height: 1.6;
+  color: #36506c;
+}
+
+/* ─── Sections ─── */
+.section {
+  margin-top: 2.5rem;
+}
+
+.sectionTitle {
+  margin-bottom: 0.9rem;
+  font-size: clamp(1.45rem, 3.1vw, 2rem);
+  font-family: Sora, "Noto Sans KR", "Segoe UI", sans-serif;
+  font-weight: 800;
+  color: #0a335b;
+}
+
+.sectionIntro {
+  margin: 0;
+  color: #4c6784;
+  line-height: 1.65;
+}
+
+/* ─── Belief Grid ─── */
+.beliefGrid {
+  margin-top: 1.1rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.9rem;
+}
+
+.beliefCard {
+  position: relative;
+  padding: 1.05rem;
+  border-radius: 16px;
+  border: 1px solid rgba(12, 70, 132, 0.16);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.97), rgba(255, 255, 255, 0.88)),
+    radial-gradient(circle at 100% 0%, rgba(10, 98, 194, 0.15), transparent 36%);
+  box-shadow:
+    0 8px 18px rgba(9, 35, 66, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  transform: translateY(12px);
+  opacity: 0;
+  animation: riseIn 480ms ease forwards;
+}
+
+.beliefCard:nth-child(2n) {
+  animation-delay: 70ms;
+}
+
+.beliefCard:nth-child(3n) {
+  animation-delay: 130ms;
+}
+
+.beliefCard p {
+  margin: 0;
+  color: #1d3c5f;
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+.highlight {
+  color: #0e59a9;
+  font-weight: 700;
+}
+
+/* ─── Motto Grid ─── */
+.mottoGrid {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.7rem;
+}
+
+.mottoItem {
+  border-radius: 999px;
+  padding: 0.55rem 0.8rem;
+  text-align: center;
+  font-weight: 700;
+  font-size: 0.93rem;
+  border: 1px solid transparent;
+}
+
+.passion {
+  background: rgba(223, 59, 38, 0.12);
+  border-color: rgba(223, 59, 38, 0.22);
+  color: #a22a1b;
+}
+
+.compassion {
+  background: rgba(239, 117, 34, 0.12);
+  border-color: rgba(239, 117, 34, 0.24);
+  color: #a75011;
+}
+
+.collegiality {
+  background: rgba(24, 119, 242, 0.12);
+  border-color: rgba(24, 119, 242, 0.22);
+  color: #134f9f;
+}
+
+.balance {
+  background: rgba(55, 163, 58, 0.12);
+  border-color: rgba(55, 163, 58, 0.22);
+  color: #2d6e2f;
+}
+
+/* ─── Community ─── */
+.communityWrap {
+  margin-top: 1rem;
+  border-radius: 16px;
+  border: 1px solid rgba(12, 70, 132, 0.16);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.97), rgba(255, 255, 255, 0.88)),
+    radial-gradient(circle at 100% 0%, rgba(10, 98, 194, 0.15), transparent 36%);
+  box-shadow:
+    0 8px 18px rgba(9, 35, 66, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  padding: 1.1rem 1.2rem;
+}
+
+.communityWrap p {
+  margin: 0;
+  color: #1d3c5f;
+  line-height: 1.65;
+  font-size: 0.95rem;
+}
+
+.logoRow {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  align-items: center;
+}
+
+.logoCard {
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(7, 66, 136, 0.13);
+  padding: 0.8rem;
+  min-height: 130px;
+  display: grid;
+  place-items: center;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 10px 28px rgba(17, 35, 57, 0.06);
+}
+
+.logoCard img {
+  max-width: 100%;
+  max-height: 80px;
+  object-fit: contain;
+}
+
+.footnote {
+  margin-top: 1.5rem;
+  text-align: center;
+  color: #49617f;
+  font-style: italic;
+  font-size: 0.95rem;
+}
+
+/* ─── Animation ─── */
+@keyframes riseIn {
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 996px) {
+  .beliefGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .mottoGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .logoRow {
+    grid-template-columns: 1fr;
+  }
+
+  .logoCard {
+    min-height: 110px;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero {
+    padding-top: 4rem;
+  }
+
+  .mottoGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ─── Dark mode ─── */
+:global([data-theme='dark']) .page {
+  background:
+    radial-gradient(circle at 10% 10%, rgba(56, 125, 220, 0.25), transparent 38%),
+    radial-gradient(circle at 90% 0%, rgba(17, 138, 134, 0.2), transparent 42%),
+    linear-gradient(180deg, #0d1421 0%, #0f1624 100%);
+}
+
+:global([data-theme='dark']) .eyebrow {
+  background: rgba(67, 141, 240, 0.22);
+  color: #a8d0ff;
+}
+
+:global([data-theme='dark']) .hero h1 {
+  color: #eff5ff;
+}
+
+:global([data-theme='dark']) .subtitle,
+:global([data-theme='dark']) .sectionIntro,
+:global([data-theme='dark']) .footnote {
+  color: #bdd0e6;
+}
+
+:global([data-theme='dark']) .sectionTitle {
+  color: #f0f5ff;
+}
+
+:global([data-theme='dark']) .beliefCard,
+:global([data-theme='dark']) .communityWrap {
+  border-color: rgba(118, 174, 247, 0.26);
+  background: linear-gradient(180deg, rgba(19, 29, 46, 0.92), rgba(14, 22, 35, 0.9));
+  box-shadow: 0 12px 24px rgba(3, 8, 17, 0.46);
+}
+
+:global([data-theme='dark']) .beliefCard p,
+:global([data-theme='dark']) .communityWrap p {
+  color: #e7eef8;
+}
+
+:global([data-theme='dark']) .highlight {
+  color: #6fb3ff;
+}
+
+:global([data-theme='dark']) .logoCard {
+  border-color: rgba(118, 174, 247, 0.26);
+  background: linear-gradient(180deg, rgba(19, 29, 46, 0.92), rgba(14, 22, 35, 0.9));
+  box-shadow: 0 12px 24px rgba(3, 8, 17, 0.46);
+}
+
+:global([data-theme='dark']) .passion {
+  background: rgba(223, 59, 38, 0.2);
+  border-color: rgba(223, 59, 38, 0.35);
+  color: #f87171;
+}
+
+:global([data-theme='dark']) .compassion {
+  background: rgba(239, 117, 34, 0.2);
+  border-color: rgba(239, 117, 34, 0.35);
+  color: #fb923c;
+}
+
+:global([data-theme='dark']) .collegiality {
+  background: rgba(24, 119, 242, 0.2);
+  border-color: rgba(24, 119, 242, 0.35);
+  color: #93bbfd;
+}
+
+:global([data-theme='dark']) .balance {
+  background: rgba(55, 163, 58, 0.2);
+  border-color: rgba(55, 163, 58, 0.35);
+  color: #6ee7b7;
+}

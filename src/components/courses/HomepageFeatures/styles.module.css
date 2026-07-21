@@ -1,0 +1,403 @@
+﻿/* Homepage Features Section - Review-page style */
+.features {
+  padding: 4rem 0 5rem;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(12, 89, 174, 0.1), transparent 50%),
+    linear-gradient(180deg, #f2f6f9 0%, #f7fbff 50%, #f2f6f9 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.featuresHeader {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.featuresEyebrow {
+  width: fit-content;
+  margin: 0 auto 0.85rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(17, 138, 134, 0.12);
+  color: #0d6e66;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.featuresHeader h2 {
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 1;
+  font-family: Sora, "Noto Sans KR", "Segoe UI", sans-serif;
+  font-weight: 800;
+  color: #09213a;
+}
+
+.featuresSubtitle {
+  margin: 1rem auto 0;
+  text-align: center;
+  max-width: 700px;
+  font-size: clamp(1rem, 2.2vw, 1.15rem);
+  line-height: 1.6;
+  color: #36506c;
+}
+
+/* Main Features Grid */
+.mainFeaturesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.1rem;
+  margin-bottom: 2.5rem;
+}
+
+.mainFeature {
+  display: flex;
+  flex-direction: column;
+  padding: 1.3rem;
+  border-radius: 16px;
+  border: 1px solid rgba(12, 70, 132, 0.16);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.97), rgba(255, 255, 255, 0.88)),
+    radial-gradient(circle at 100% 0%, rgba(10, 98, 194, 0.15), transparent 36%);
+  box-shadow:
+    0 8px 18px rgba(9, 35, 66, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  text-align: center;
+  transform: translateY(12px);
+  opacity: 0;
+  animation: riseIn 480ms ease forwards;
+  transition: box-shadow 220ms ease, transform 220ms ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.mainFeature:nth-child(2) { animation-delay: 70ms; }
+.mainFeature:nth-child(3) { animation-delay: 130ms; }
+
+.mainFeature:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 14px 32px rgba(9, 35, 66, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+.featureVisual {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.featureIconLarge {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(10, 98, 194, 0.12), rgba(17, 138, 134, 0.1));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 280ms ease;
+}
+
+.mainFeature:hover .featureIconLarge {
+  background: linear-gradient(135deg, rgba(10, 98, 194, 0.2), rgba(17, 138, 134, 0.18));
+}
+
+.featureSvgLarge {
+  width: 48px;
+  height: 48px;
+  color: #0a62c2;
+  transition: all 280ms ease;
+}
+
+.mainFeature:hover .featureSvgLarge {
+  transform: scale(1.08);
+}
+
+.featureMetric {
+  background: linear-gradient(90deg, #0a62c2, #0e8a88);
+  color: white;
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(10, 98, 194, 0.25);
+  margin-top: 0.5rem;
+}
+
+.featureContent {
+  display: flex;
+  flex-direction: column;
+}
+
+.featureTitle {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #0a335b;
+  margin: 0 0 0.5rem 0;
+  line-height: 1.25;
+  font-family: Sora, "Noto Sans KR", "Segoe UI", sans-serif;
+}
+
+.featureShortDesc {
+  font-size: 0.92rem;
+  color: #36506c;
+  margin-bottom: 0.8rem;
+  line-height: 1.55;
+}
+
+.featureDetail {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 400ms ease, opacity 400ms ease;
+  opacity: 0;
+}
+
+.featureDetail.expanded {
+  max-height: 300px;
+  opacity: 1;
+}
+
+.featureDescription {
+  font-size: 0.92rem;
+  color: #1d3c5f;
+  line-height: 1.65;
+  margin-bottom: 0.8rem;
+  text-align: left;
+}
+
+.featureBenefits {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 0.8rem 0;
+  text-align: left;
+}
+
+.featureBenefits li {
+  padding: 0.3rem 0;
+  color: #1d3c5f;
+  position: relative;
+  padding-left: 1.3rem;
+  font-size: 0.88rem;
+}
+
+.featureBenefits li::before {
+  content: '\2713';
+  position: absolute;
+  left: 0;
+  color: #0e8a88;
+  font-weight: bold;
+}
+
+.expandButton {
+  background: none;
+  border: 1px solid rgba(12, 89, 174, 0.2);
+  color: #0e59a9;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  transition: all 220ms ease;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  align-self: center;
+  margin-top: auto;
+}
+
+.expandButton:hover {
+  background: linear-gradient(135deg, #0a62c2, #0e8a88);
+  color: white;
+  border-color: transparent;
+}
+
+.expandIcon {
+  width: 16px;
+  height: 16px;
+  transition: transform 280ms ease;
+}
+
+.expandIcon.rotated {
+  transform: rotate(180deg);
+}
+
+/* CTA Footer */
+.featuresFooter {
+  text-align: center;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.ctaButton {
+  min-width: 200px;
+  font-weight: 700;
+  font-size: 0.92rem;
+  border-radius: 999px;
+  transition: all 220ms ease;
+  box-shadow: 0 4px 12px rgba(10, 98, 194, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.ctaButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(10, 98, 194, 0.25);
+}
+
+.buttonIcon {
+  width: 18px;
+  height: 18px;
+  transition: transform 220ms ease;
+}
+
+.ctaButton:hover .buttonIcon {
+  transform: translateX(3px);
+}
+
+@keyframes riseIn {
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Dark mode */
+:global([data-theme='dark']) .features {
+  background:
+    radial-gradient(circle at 50% 50%, rgba(56, 125, 220, 0.15), transparent 50%),
+    linear-gradient(180deg, #0f1624 0%, #0d1421 50%, #0f1624 100%);
+}
+
+:global([data-theme='dark']) .featuresEyebrow {
+  background: rgba(17, 138, 134, 0.22);
+  color: #b5efe3;
+}
+
+:global([data-theme='dark']) .featuresHeader h2 {
+  color: #eff5ff;
+}
+
+:global([data-theme='dark']) .featuresSubtitle {
+  color: #bdd0e6;
+}
+
+:global([data-theme='dark']) .mainFeature {
+  border-color: rgba(118, 174, 247, 0.26);
+  background: linear-gradient(180deg, rgba(19, 29, 46, 0.92), rgba(14, 22, 35, 0.9));
+  box-shadow: 0 12px 24px rgba(3, 8, 17, 0.46);
+}
+
+:global([data-theme='dark']) .mainFeature:hover {
+  box-shadow: 0 16px 36px rgba(3, 8, 17, 0.6);
+}
+
+:global([data-theme='dark']) .featureTitle {
+  color: #f0f5ff;
+}
+
+:global([data-theme='dark']) .featureShortDesc,
+:global([data-theme='dark']) .featureDescription {
+  color: #bdd0e6;
+}
+
+:global([data-theme='dark']) .featureBenefits li {
+  color: #d8e5f6;
+}
+
+:global([data-theme='dark']) .featureBenefits li::before {
+  color: #b5efe3;
+}
+
+:global([data-theme='dark']) .featureIconLarge {
+  background: linear-gradient(135deg, rgba(56, 125, 220, 0.2), rgba(17, 138, 134, 0.18));
+}
+
+:global([data-theme='dark']) .featureSvgLarge {
+  color: #7ab8ff;
+}
+
+:global([data-theme='dark']) .expandButton {
+  border-color: rgba(118, 174, 247, 0.26);
+  color: #7ab8ff;
+}
+
+:global([data-theme='dark']) .expandButton:hover {
+  background: linear-gradient(135deg, #387ddc, #118a86);
+  color: white;
+  border-color: transparent;
+}
+
+:global([data-theme='dark']) .ctaButton {
+  box-shadow: 0 4px 12px rgba(3, 8, 17, 0.4);
+}
+
+:global([data-theme='dark']) .featuresFooter {
+  border-top-color: rgba(118, 174, 247, 0.2);
+}
+
+/* Responsive */
+@media (max-width: 996px) {
+  .features {
+    padding: 3.5rem 0 4rem;
+  }
+
+  .mainFeaturesGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .featuresFooter {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .ctaButton {
+    width: 100%;
+    max-width: 280px;
+  }
+}
+
+@media (max-width: 576px) {
+  .features {
+    padding: 3rem 0;
+  }
+
+  .mainFeature {
+    padding: 1.1rem;
+  }
+
+  .featureIconLarge {
+    width: 80px;
+    height: 80px;
+  }
+
+  .featureSvgLarge {
+    width: 42px;
+    height: 42px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mainFeature {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}

@@ -1,0 +1,134 @@
+[
+  {
+    "id": 1,
+    "quote": "수업내용이 매우 알찼습니다. 다양한정보를 알려주셨습니다.",
+    "language": "ko",
+    "focus": ["content", "insight"]
+  },
+  {
+    "id": 2,
+    "quote": "여러가지 빅데이터 기술들을 실습해볼 수 있어서 좋았다.",
+    "language": "ko",
+    "focus": ["big data", "hands-on"]
+  },
+  {
+    "id": 3,
+    "quote": "The final project was a great experience. I was able to develop an actual deep learning model for the first time.",
+    "language": "en",
+    "focus": ["project", "deep learning"]
+  },
+  {
+    "id": 4,
+    "quote": "자료 구성과 실습이 도움이 많이 되었습니다. thank you!",
+    "language": "ko",
+    "focus": ["materials", "practice"]
+  },
+  {
+    "id": 5,
+    "quote": "I felt that the professor was sincere in the class. Good to practice many things (python, web app, apache superset, html, etc).",
+    "language": "en",
+    "focus": ["practice", "tools"]
+  },
+  {
+    "id": 6,
+    "quote": "과제에 대한 설명을 항상 친절하게 해주시고 수업도 유튜브에 올려서 다시 볼 수 있게 해주셨다.",
+    "language": "ko",
+    "focus": ["assignment", "support"]
+  },
+  {
+    "id": 7,
+    "quote": "설명을 정말 상세히 잘 해주시고 실습 때도 열심히 잘 봐주셨습니다.",
+    "language": "ko",
+    "focus": ["explanation", "practice"]
+  },
+  {
+    "id": 8,
+    "quote": "교수님이 친정하게 하나하나 알려주셨다",
+    "language": "ko",
+    "focus": ["guidance", "support"]
+  },
+  {
+    "id": 9,
+    "quote": "강의 내용이 재미있고 유익합니다. 그리고 강의내용이 이해가 잘 되어서 좋습니다.",
+    "language": "ko",
+    "focus": ["engagement", "clarity"]
+  },
+  {
+    "id": 10,
+    "quote": "교수님이 직접 오픈채팅방도 파주시며 소통에 되게 신경을 써주고 계신다. 매우 친절하시다.",
+    "language": "ko",
+    "focus": ["communication", "support"]
+  },
+  {
+    "id": 11,
+    "quote": "설명도 잘해주시고 실강때 실습 설명도 잘 해주셔서 공부하는데 전혀 어려움이 없었습니다.",
+    "language": "ko",
+    "focus": ["clarity", "hands-on"]
+  },
+  {
+    "id": 12,
+    "quote": "빅데이터에 관하여 많은 정보를 알게 되고 실제 쓰이는 것들이나 실습을 자주 해보게 되어서 좋은 것 같습니다.",
+    "language": "ko",
+    "focus": ["big data", "real-world"]
+  },
+  {
+    "id": 13,
+    "quote": "Course followed syllabus and was well organized. Professor gave good attention to students. Everybody received feedback on weaknesses they should work on.",
+    "language": "en",
+    "focus": ["organization", "feedback"]
+  },
+  {
+    "id": 14,
+    "quote": "Thanks for teaching us with such high quality classes. I learned so much big data and experienced the full flow of big data.",
+    "language": "en",
+    "focus": ["big data", "quality"]
+  },
+  {
+    "id": 15,
+    "quote": "Thank you for this great semester professor!",
+    "language": "en",
+    "focus": ["overall satisfaction"]
+  },
+  {
+    "id": 16,
+    "quote": "Overall the course was designed really well. I am happy that I gained knowledge from this course. It was really helpful.",
+    "language": "en",
+    "focus": ["course design", "knowledge gain"]
+  },
+  {
+    "id": 17,
+    "quote": "I really like your class, especially having a chance to work on final project was fantastic!",
+    "language": "en",
+    "focus": ["project", "engagement"]
+  },
+  {
+    "id": 18,
+    "quote": "I liked the practice session. It was helpful and I was able to learn various big data material such as apache superset. I also like that we used Oracle Cloud VM.",
+    "language": "en",
+    "focus": ["practice", "cloud"]
+  },
+  {
+    "id": 19,
+    "quote": "He always did his best at preparing the class. After class, he stayed in the ERP room to address students' issues and questions.",
+    "language": "en",
+    "focus": ["preparation", "support"]
+  },
+  {
+    "id": 20,
+    "quote": "It is a difficult subject to understand, but with the material provided by professor, I could understand it more easily. Even during weekends, professor responded quickly to emails.",
+    "language": "en",
+    "focus": ["clarity", "responsiveness"]
+  },
+  {
+    "id": 21,
+    "quote": "The best part of this lecture was that the professor really put a lot of effort into class material.",
+    "language": "en",
+    "focus": ["effort", "materials"]
+  },
+  {
+    "id": 22,
+    "quote": "He even made recorded videos for difficult parts, so it really helped my understanding.",
+    "language": "en",
+    "focus": ["recordings", "clarity"]
+  }
+]

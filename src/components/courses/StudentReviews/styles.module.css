@@ -1,0 +1,446 @@
+﻿/* Student Reviews Section - Review-page style */
+.reviewsSection {
+  padding: 4rem 0 5rem;
+  background:
+    radial-gradient(circle at 90% 85%, rgba(12, 89, 174, 0.14), transparent 35%),
+    radial-gradient(circle at 10% 95%, rgba(13, 122, 109, 0.1), transparent 38%),
+    linear-gradient(180deg, #f2f6f9 0%, #f7fbff 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.reviewsHeader {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.reviewsEyebrow {
+  width: fit-content;
+  margin: 0 auto 0.85rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(12, 89, 174, 0.12);
+  color: #074288;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.reviewsHeader h2 {
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 1;
+  font-family: Sora, "Noto Sans KR", "Segoe UI", sans-serif;
+  font-weight: 800;
+  color: #09213a;
+}
+
+.reviewsSubtitle {
+  margin: 1rem auto 0;
+  text-align: center;
+  max-width: 700px;
+  font-size: clamp(1rem, 2.2vw, 1.15rem);
+  line-height: 1.6;
+  color: #36506c;
+}
+
+/* Slider Container */
+.reviewsSlider {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.reviewsContainer {
+  flex: 1;
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  border-radius: 16px;
+  border: 1px solid rgba(12, 70, 132, 0.16);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.97), rgba(255, 255, 255, 0.88)),
+    radial-gradient(circle at 100% 0%, rgba(10, 98, 194, 0.15), transparent 36%);
+  box-shadow:
+    0 8px 18px rgba(9, 35, 66, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  position: relative;
+}
+
+.reviewsTrack {
+  display: flex;
+  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+/* Review Card */
+.reviewCard {
+  min-width: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 2.2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.active {}
+
+.quoteIcon {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  width: 44px;
+  height: 44px;
+  background: linear-gradient(135deg, #0a62c2, #0e8a88);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(10, 98, 194, 0.25);
+}
+
+.quoteIcon svg {
+  width: 22px;
+  height: 22px;
+  color: white;
+}
+
+.reviewContent {
+  position: relative;
+  z-index: 1;
+}
+
+.reviewText {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #1d3c5f;
+  margin-bottom: 1.5rem;
+  font-style: italic;
+  position: relative;
+  padding-left: 1.2rem;
+  overflow-wrap: anywhere;
+}
+
+.reviewText::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, #0a62c2, #0e8a88);
+  border-radius: 2px;
+}
+
+/* Review Meta */
+.reviewMeta {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.courseInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.courseName {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #0a335b;
+}
+
+.semester {
+  font-size: 0.82rem;
+  color: #4f6783;
+  font-weight: 600;
+}
+
+.studentName {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid rgba(12, 89, 174, 0.2);
+  background: rgba(12, 89, 174, 0.08);
+  color: #34506f;
+}
+
+/* Navigation Buttons */
+.navButton {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.97), rgba(255, 255, 255, 0.88));
+  border: 1px solid rgba(12, 70, 132, 0.16);
+  color: #0a335b;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 18px rgba(9, 35, 66, 0.06);
+  transition: all 220ms ease;
+  flex-shrink: 0;
+}
+
+.navButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(9, 35, 66, 0.1);
+  background: linear-gradient(135deg, #0a62c2, #0e8a88);
+  color: white;
+  border-color: transparent;
+}
+
+.navButton svg {
+  width: 22px;
+  height: 22px;
+}
+
+.prevButton {}
+.nextButton {}
+
+/* Navigation Dots */
+.navigationDots {
+  display: flex;
+  justify-content: center;
+  gap: 0.55rem;
+  margin-bottom: 1.2rem;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  border: 2px solid rgba(12, 89, 174, 0.3);
+  background: transparent;
+  cursor: pointer;
+  transition: all 280ms ease;
+  padding: 0;
+}
+
+.dot:hover {
+  border-color: #0a62c2;
+  background: rgba(10, 98, 194, 0.15);
+}
+
+.activeDot {
+  border-color: #0a62c2;
+  background: linear-gradient(135deg, #0a62c2, #0e8a88);
+  width: 26px;
+}
+
+/* Auto Play Indicator */
+.autoPlayIndicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  opacity: 0.65;
+  transition: opacity 220ms ease;
+}
+
+.autoPlayIndicator:hover {
+  opacity: 1;
+}
+
+.playIcon {
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  background: rgba(12, 89, 174, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 220ms ease;
+}
+
+.playIcon.playing {
+  background: rgba(17, 138, 134, 0.18);
+}
+
+.playIcon svg {
+  width: 12px;
+  height: 12px;
+  color: #0a335b;
+}
+
+.playIcon.playing svg {
+  color: #0e8a88;
+}
+
+.autoPlayText {
+  font-size: 0.78rem;
+  color: #49617f;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+/* Dark Mode */
+:global([data-theme='dark']) .reviewsSection {
+  background:
+    radial-gradient(circle at 90% 85%, rgba(56, 125, 220, 0.2), transparent 38%),
+    radial-gradient(circle at 10% 95%, rgba(17, 138, 134, 0.16), transparent 40%),
+    linear-gradient(180deg, #0f1624 0%, #0d1421 100%);
+}
+
+:global([data-theme='dark']) .reviewsEyebrow {
+  background: rgba(67, 141, 240, 0.22);
+  color: #a8d0ff;
+}
+
+:global([data-theme='dark']) .reviewsHeader h2 {
+  color: #eff5ff;
+}
+
+:global([data-theme='dark']) .reviewsSubtitle {
+  color: #bdd0e6;
+}
+
+:global([data-theme='dark']) .reviewsContainer {
+  border-color: rgba(118, 174, 247, 0.26);
+  background: linear-gradient(180deg, rgba(19, 29, 46, 0.92), rgba(14, 22, 35, 0.9));
+  box-shadow: 0 12px 24px rgba(3, 8, 17, 0.46);
+}
+
+:global([data-theme='dark']) .reviewText {
+  color: #e7eef8;
+}
+
+:global([data-theme='dark']) .courseName {
+  color: #e7eef8;
+}
+
+:global([data-theme='dark']) .semester {
+  color: #bdd0e6;
+}
+
+:global([data-theme='dark']) .studentName {
+  color: #b5efe3;
+  border-color: rgba(120, 196, 186, 0.35);
+  background: rgba(17, 138, 134, 0.24);
+}
+
+:global([data-theme='dark']) .navButton {
+  border-color: rgba(118, 174, 247, 0.26);
+  background: linear-gradient(180deg, rgba(19, 29, 46, 0.92), rgba(14, 22, 35, 0.9));
+  box-shadow: 0 8px 18px rgba(3, 8, 17, 0.35);
+  color: #bdd0e6;
+}
+
+:global([data-theme='dark']) .navButton:hover {
+  background: linear-gradient(135deg, #0a62c2, #0e8a88);
+  color: white;
+  border-color: transparent;
+}
+
+:global([data-theme='dark']) .dot {
+  border-color: rgba(118, 174, 247, 0.4);
+}
+
+:global([data-theme='dark']) .activeDot {
+  border-color: #7ab8ff;
+  background: linear-gradient(135deg, #387ddc, #118a86);
+}
+
+:global([data-theme='dark']) .autoPlayText {
+  color: #8aa3bf;
+}
+
+:global([data-theme='dark']) .playIcon {
+  background: rgba(118, 174, 247, 0.16);
+}
+
+:global([data-theme='dark']) .playIcon svg {
+  color: #bdd0e6;
+}
+
+:global([data-theme='dark']) .playIcon.playing {
+  background: rgba(17, 138, 134, 0.28);
+}
+
+:global([data-theme='dark']) .playIcon.playing svg {
+  color: #b5efe3;
+}
+
+:global([data-theme='dark']) .quoteIcon {
+  box-shadow: 0 4px 12px rgba(10, 98, 194, 0.4);
+}
+
+:global([data-theme='dark']) .reviewText::before {
+  background: linear-gradient(180deg, #387ddc, #118a86);
+}
+
+/* Responsive */
+@media (max-width: 996px) {
+  .reviewsSection {
+    padding: 3.5rem 0 4rem;
+  }
+
+  .reviewCard {
+    padding: 1.8rem 1.5rem;
+  }
+
+  .reviewText {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .reviewsSlider {
+    gap: 0;
+  }
+
+  .reviewCard {
+    padding: 1.5rem 1.2rem;
+  }
+
+  .quoteIcon {
+    width: 36px;
+    height: 36px;
+    top: 0.8rem;
+    right: 1rem;
+  }
+
+  .quoteIcon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .reviewMeta {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 576px) {
+  .reviewsSection {
+    padding: 3rem 0;
+  }
+
+  .reviewText {
+    font-size: 0.95rem;
+    padding-left: 0.9rem;
+  }
+
+  .reviewCard {
+    padding: 1.2rem 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reviewsTrack {
+    transition: none;
+  }
+}

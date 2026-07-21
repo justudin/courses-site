@@ -1,0 +1,71 @@
+.runningText {
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 0.85rem 0;
+  background: linear-gradient(135deg, #0a335b 0%, #0a62c2 50%, #0e8a88 100%);
+  color: rgba(255, 255, 255, 0.25);
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-family: Sora, "Noto Sans KR", "Segoe UI", sans-serif;
+  user-select: none;
+  position: relative;
+}
+
+.track {
+  display: inline-flex;
+  animation: marquee 40s linear infinite;
+  will-change: transform;
+}
+
+.content {
+  flex-shrink: 0;
+}
+
+/* Variant: subtle (lighter, for between light sections) */
+.subtle {
+  background: linear-gradient(135deg, rgba(10, 51, 91, 0.06) 0%, rgba(10, 98, 194, 0.08) 50%, rgba(14, 138, 136, 0.06) 100%);
+  color: rgba(10, 51, 91, 0.12);
+  font-size: 0.8rem;
+  padding: 0.7rem 0;
+}
+
+/* Variant: accent (uses brand gradient, bolder) */
+.accent {
+  background: linear-gradient(135deg, #09213a 0%, #0e59a9 50%, #0e8a88 100%);
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 0.9rem;
+  padding: 1rem 0;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Dark mode */
+:global([data-theme='dark']) .runningText {
+  background: linear-gradient(135deg, #0d1421 0%, #1a2a42 50%, #0f2a3a 100%);
+  color: rgba(255, 255, 255, 0.12);
+}
+
+:global([data-theme='dark']) .subtle {
+  background: linear-gradient(135deg, rgba(56, 125, 220, 0.06) 0%, rgba(17, 138, 134, 0.06) 50%, rgba(56, 125, 220, 0.04) 100%);
+  color: rgba(255, 255, 255, 0.06);
+}
+
+:global([data-theme='dark']) .accent {
+  background: linear-gradient(135deg, #0d1421 0%, #1a3a5c 50%, #0f2a3a 100%);
+  color: rgba(255, 255, 255, 0.15);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .track {
+    animation: none;
+  }
+}
